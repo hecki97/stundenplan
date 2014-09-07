@@ -1,0 +1,40 @@
+	@font-face {
+    	font-family: 'fonts';
+    	src: url('../font/walkway.ttf');
+    	font-style: normal;
+	}
+
+	#container {
+		vertical-align: middle;
+		text-align: center;
+	}
+	#links{
+		float: left;
+	}
+	#rechts{
+		float: right;
+	}
+	#center{
+		padding-top: 13px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#footer {
+		clear:left;
+		margin-top:1em;
+		background:#efefef;
+		text-align:center;
+		width: 100%;
+		padding:10px;
+		bottom: 0px;
+	}
+	#deactivated {
+       pointer-events: none;
+       cursor: default;
+    }
+    #text { 
+		text-align: center; 
+		font-size: 25;
+		font-family: fonts;
+		text-shadow: 1px 1px 1px #555;
+	}
