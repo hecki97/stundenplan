@@ -1,6 +1,6 @@
 <?php
 	// Browsersprache ermitteln
-	function lang_getfrombrowser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
+	function lang_getFromBrowser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
         // $_SERVER['HTTP_ACCEPT_LANGUAGE'] verwenden, wenn keine Sprachvariable mitgegeben wurde
         if ($lang_variable === null) {
             $lang_variable = $_SERVER['HTTP_ACCEPT_LANGUAGE'];

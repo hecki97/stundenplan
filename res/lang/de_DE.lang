@@ -1,0 +1,50 @@
+{
+	"global": {
+		"mysql.connect.error": "Verbindung zur Datenbank konnte nicht hergestellt werden",
+		"mysql.select.db.error": "Datenbank konnte nicht ausgewählt werden",
+		"javascript.alert.login.failed": "Bitte Benutzername und/oder Passwort überprüfen!",
+		"javascript.alert.felder": "Bitte alle Felder ausfüllen!",
+		"menu.login": "Zum Login!",
+		"button.submit.plan": "Zum Plan!",
+		"button.submit.edit": "Bearbeiten!",
+		"button.submit.auswahl": "Zur Auswahl!",
+		"button.submit.register": "Registrieren"
+	},
+	"register": {
+		"registrierung": "Account erstellen:",
+		"daten": "Anmeldeinformationen eingeben:",
+		"username": "Benutzername:",
+		"password": "Passwort:",
+		"password.wdh": "Passwort(wdh):",
+		"einladungscode": "Einladungscode:",
+		"alert.succes": "Benutzername ",
+		"alert.succes.2": " wurde erstellt.",
+		"javascript.alert.felder": "Eingabefehler. Bitte alle Felder korekt ausfüllen.",
+		"javascript.alert.einladungscode": "Der eingegebene Einladungscode ist nicht korrekt!",
+		"javascript.alert.speicherfehler": "Fehler beim Speichern des Benutzernames. Bitte erneut versuchen!",
+		"javascript.alert.bereits.vorhanden": "Benutzername schon vorhanden. Bitte erneut versuchen!"
+	},
+	"login": {
+		"ueberschrift": "Login Informationen eingeben:",
+		"username": "Benutzername:",
+		"password": "Passwort:",
+		"button.submit.anmelden": "Anmelden!",
+		"button.submit.registrieren": "Account erstellen!"
+	},
+	"plan": {
+		"javascript.confirm.logout": "Wollen Sie sich wirklich ausloggen?",
+		"button.submit.logout": "Ausloggen!"
+	},
+	"authfailed": {
+		"auth.failed": "Sie besitzen derzeit keine Rechte auf diese Seite zuzugreifen!",
+		"relogin": "Bitte loggen Sie sich erneut ein!"
+	},
+	"info": {
+		"info": "Info",
+		"website": "MLK-Website:",
+		"source.code": "Source Code(Github)",
+		"powered.by": "Powered by:",
+		"c": "© 2014 - hecki97",
+		"version": "Version:"
+	}
+}
