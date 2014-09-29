@@ -1,14 +1,12 @@
 <?php
 	$host = $_SERVER['SERVER_NAME'];
-	include(dirname(__FILE__)."/_checkDataBase.php");
-	include(dirname(__FILE__)."/_loadLangFiles.php");
-	include(dirname(__FILE__)."/_getVersionScript.php");
-	include(dirname(__FILE__)."/_buttonScript.php");
+	include(dirname(__FILE__)."/../../../res/php/_checkDataBase.php");
+	include(dirname(__FILE__)."/../../../res/php/_loadLangFiles.php");
+	include(dirname(__FILE__)."/../../../res/php/_getVersionScript.php");
+	include(dirname(__FILE__)."/../../../res/php/_buttonScript.php");
 
-	//Registrieren
-	Button("register", "stundenplan/registration.php");
 	//Zum Plan
-	Button("fback", "stundenplan/index.php");
+	Button("register", "stundenplan/mobile/register.php");
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	    if (!empty($_POST["username"]) && !empty($_POST["password"]))
@@ -25,7 +23,7 @@
 	      if($row->password == $passwort) 
 	      { 
 	        $_SESSION["username"] = $username; 
-	        header("Location: http://$host/stundenplan/plan.php");
+	        header("Location: http://$host/stundenplan/mobile/index.php");
 	      } 
 	      else 
 	      { 

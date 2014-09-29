@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <?php $host = $_SERVER['SERVER_NAME']; ?>
-<?php include(dirname(__FILE__)."/res/php/_eintragen.php"); ?>
+<?php include(dirname(__FILE__)."/res/php/_edit.php"); ?>
 <?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Stundenplan</title>
+		<title>Bearbeiten</title>
     <head>
 	</head>
 	<body class="metro" style="text-align: center;">
@@ -30,9 +30,10 @@
             </nav>
           </nav>
         </header>
-        <h1><?=$string['global']['stundenplan']; ?></h1><br/>
-        <form action="eintragen.php" method="post">
-          <table align="center" border="1">
+        <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
+          <form action="edit.php" method="post">
+            <?php $arArray = json_decode(file_get_contents(dirname(__FILE__)."/res/data/".$_SESSION['username'].".data"), true); ?>
+            <table align="center" border="1">
             <tr>
               <td>/</td>
               <td><?=$string['stundenplan']['montag']; ?></td>
@@ -47,7 +48,8 @@
                 $zeile  = "<tr>";
                 $zeile .= "<td>".$stunde.":</td>";
                 for ($j = 0; $j < 5; $j++) { 
-                    $zeile .= "<td><input type='text' size='30' maxlength='30' name='".$i."'></td>";
+                    $text = str_replace('/', '', $arArray[$i]);
+                    $zeile .= "<td><input type='text' size='30' maxlength='30' name='".$i."' value='".$text."'></td>";
                     if ($j < 4)
                       $i++;
                 }
@@ -59,7 +61,7 @@
           </table>
           <br/><input type="submit" name="save" value="<?=$string['global']['button.submit.speichern']; ?>">
         </form>
-          
+        
           <?php if ($_SERVER['REQUEST_METHOD'] == 'POST')
           {
               ?><h2><?=$string['stundenplan']['preview']; ?></h2><?php
@@ -101,8 +103,7 @@
             }
           ?>
           </table>
-          </div>
-        <form>
+        <form action="">
           <br/><input type="submit" name="fback" value="<?=$string['global']['button.submit.plan']; ?>">
         </form>
   </body>

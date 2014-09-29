@@ -1,11 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $root = realpath($_SERVER["DOCUMENT_ROOT"]); ?>
 <?php $host = $_SERVER['SERVER_NAME']; ?>
-<?php include("$root/stundenplan/res/html/htmlHead.html"); ?>
-<?php include("$root/stundenplan/res/php/_info.php"); ?>
+<?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
+<?php include(dirname(__FILE__)."/res/php/_index.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Index</title>
+		<script type="text/javascript"><!--
+		    if (screen.width < 480) {
+		      if (confirm('Wollen sie zu der mobilen Seite weitergeleitet werden?') == true)
+		        window.location.href = "./mobile/index.php";
+		    }  
+		    //-->
+	    </script>
 	</head>
 	<body class="metro" style="text-align: center;">
 		<header>
@@ -40,9 +46,9 @@
 				<h3>|</h3>
 			</tr>
 			<tr>
-				<form action="login.php" method="post">
-					<input type="submit" value="<?=$string['login']['button.submit.anmelden']; ?>" />
-					<br/><input type="submit" value="<?=$string['login']['button.submit.registrieren']; ?>" />
+				<form action="index.php" method="post">
+					<input type="submit" name="blogin" value="<?=$string['login']['button.submit.anmelden']; ?>" />
+					<br/><input type="submit" name="bregister" value="<?=$string['login']['button.submit.registrieren']; ?>" />
 				</form>
 			</tr>
 		</table>

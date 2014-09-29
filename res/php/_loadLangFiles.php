@@ -1,15 +1,13 @@
 <?php
-	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-
-	include_once("$root/stundenplan/res/php/_checkBrowserLang.php");
+	include_once(dirname(__FILE__)."/_checkBrowserLang.php");
 
 	$allowed_langs = array ('de', 'en', 'la');
 	$lang = lang_getFromBrowser ($allowed_langs, 'de', null, false);
 
 	if ($lang == 'de')
-		$string = json_decode(file_get_contents("$root/stundenplan/res/lang/de_DE.lang"), true);
+		$string = json_decode(file_get_contents(dirname(__FILE__)."/../lang/de_DE.lang"), true);
 	else if ($lang == 'en')
-		$string = json_decode(file_get_contents("$root/stundenplan/res/lang/en_US.lang"), true);
+		$string = json_decode(file_get_contents(dirname(__FILE__)."/../lang/en_US.lang"), true);
 	else
-		$string = json_decode(file_get_contents("$root/stundenplan/res/lang/la_LA.lang"), true);
+		$string = json_decode(file_get_contents(dirname(__FILE__)."/../lang/la_LA.lang"), true);
 ?>

@@ -5,10 +5,21 @@
 		"javascript.alert.login.failed": "Bitte Benutzername und/oder Passwort überprüfen!",
 		"javascript.alert.felder": "Bitte alle Felder ausfüllen!",
 		"menu.login": "Zum Login!",
+		"stundenplan": "Stundenplan:",
 		"button.submit.plan": "Zum Plan!",
 		"button.submit.edit": "Bearbeiten!",
+		"button.submit.create": "Erstellen!",
 		"button.submit.auswahl": "Zur Auswahl!",
-		"button.submit.register": "Registrieren"
+		"button.submit.register": "Registrieren",
+		"button.submit.speichern": "Speichern!"
+	},
+	"stundenplan": {
+		"preview": "Vorschau:",
+		"montag": "Montag:",
+		"dienstag": "Dienstag:",
+		"mittwoch": "Mittwoch:",
+		"donnerstag": "Donnerstag:",
+		"freitag": "Freitag:"
 	},
 	"register": {
 		"registrierung": "Account erstellen:",
@@ -25,7 +36,7 @@
 		"javascript.alert.bereits.vorhanden": "Benutzername schon vorhanden. Bitte erneut versuchen!"
 	},
 	"login": {
-		"ueberschrift": "Login Informationen eingeben:",
+		"ueberschrift": "Login:",
 		"username": "Benutzername:",
 		"password": "Passwort:",
 		"button.submit.anmelden": "Anmelden!",
@@ -41,10 +52,22 @@
 	},
 	"info": {
 		"info": "Info",
-		"website": "MLK-Website:",
 		"source.code": "Source Code(Github)",
 		"powered.by": "Powered by:",
 		"c": "© 2014 - hecki97",
 		"version": "Version:"
+	},
+	"mobile": {
+		"index": {
+			"a.heute": "Heute",
+			"a.stundenplan": "Stundenplan",
+			"a.erstellen": "Neu erstellen",
+			"a.bearbeiten": "Bearbeiten",
+			"a.info": "Info",
+			"a.logout": "Logout",
+			"header.heute": "Heute:",
+			"header.erstellen": "Stundenplan erstellen:",
+			"header.bearbeiten": "Stundenplan bearbeiten:"
+		}
 	}
 }

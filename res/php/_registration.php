@@ -1,11 +1,9 @@
 <?php
-	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-
-	include("$root/stundenplan/res/php/_checkDataBase.php");
-	include("$root/stundenplan/res/php/_loadLangFiles.php");
-	include("$root/stundenplan/res/php/_getVersionScript.php");
-	include("$root/stundenplan/res/php/_buttonScript.php");
+	include(dirname(__FILE__)."/_checkDataBase.php");
+	include(dirname(__FILE__)."/_loadLangFiles.php");
+	include(dirname(__FILE__)."/_getVersionScript.php");
+	include(dirname(__FILE__)."/_buttonScript.php");
 
 	//Zum Plan
-	Button("plan", "stundenplan/plan.php");
+	Button("plan", "stundenplan/index.php");
 ?>

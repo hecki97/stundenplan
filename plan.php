@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $root = realpath($_SERVER["DOCUMENT_ROOT"]); ?>
 <?php $host = $_SERVER['SERVER_NAME']; ?>
-<?php include("$root/stundenplan/res/php/_plan.php"); ?>
-<?php include("$root/stundenplan/res/html/htmlHead.html"); ?>
+<?php include(dirname(__FILE__)."/res/php/_plan.php"); ?>
+<?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Stundenplan</title>
@@ -31,16 +30,16 @@
             </nav>
           </nav>
         </header>
-        <h1>Stundenplan:</h1><br/>  
-          <?php $arArray = json_decode(file_get_contents("$root/stundenplan/res/data/".$_SESSION['username'].".data"), true); ?>
+        <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
+          <?php $arArray = json_decode(file_get_contents(dirname(__FILE__)."/res/data/".$_SESSION['username'].".data"), true); ?>
           <table align="center" border="1">
             <tr>
               <td>/</td>
-              <td>Montag:</td>
-              <td>Dienstag:</td>
-              <td>Mittwoch:</td>
-              <td>Donnerstag:</td>
-              <td>Freitag:</td>
+              <td><?=$string['stundenplan']['montag']; ?></td>
+              <td><?=$string['stundenplan']['dienstag']; ?></td>
+              <td><?=$string['stundenplan']['mittwoch']; ?></td>
+              <td><?=$string['stundenplan']['donnerstag']; ?></td>
+              <td><?=$string['stundenplan']['freitag']; ?></td>
             </tr>
           <?php
               $stunde = 1;
@@ -61,6 +60,7 @@
           </div>
         <form>
           <br/><input type="submit" name="fedit" value="<?=$string['global']['button.submit.edit']; ?>">
+          <br/><input type="submit" name="fnew" value="<?=$string['global']['button.submit.create']; ?>">
         </form>
         <form action=<?="http://$host/stundenplan/res/php/_logout.php"; ?> method="post">
           <script>
