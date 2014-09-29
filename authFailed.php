@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $host = $_SERVER['SERVER_NAME']; ?>
-<?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
 <?php include(dirname(__FILE__)."/res/php/_loadLangFiles.php"); ?>
 <?php include(dirname(__FILE__)."/res/php/_getVersionScript.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
         <title>Authentication failed</title>
     </head>
     <body class="metro">
@@ -31,11 +30,11 @@
           </nav>
         </header>
 
-        <div class="container" style="text-align: center;">
+        <div class="container">
             <h1><?=$string['authfailed']['auth.failed']; ?></h1>
             <h2><?=$string['authfailed']['relogin']; ?></h2>
             <form action="login.php">
-                <input type="submit" name="zumLogin" value="<?=$string['global']['menu.login']; ?>"><br />
+                <input type="submit" name="zumLogin" value="<?=$string['global']['menu.login']; ?>"><br/>
             </form>
         </div>
     </body>

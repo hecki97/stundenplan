@@ -1,48 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $host = $_SERVER['SERVER_NAME']; ?>
 <?php include(dirname(__FILE__)."/res/php/_edit.php"); ?>
-<?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Bearbeiten</title>
+    <?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
+		<title>Edit</title>
     <head>
 	</head>
 	<body class="metro" style="text-align: center;">
 		<header>
           <nav class="navigation-bar dark fixed-top">
             <nav class="navigation-bar-content">
-                <a href="http://<?=$host; ?>/stundenplan/plan.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan-online<sup><?=$lang; ?></sup></a>
+              <a href="./plan.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan-online<sup><?=$lang; ?></sup></a>
          
-                <span class="element-divider"></span>
-                <button class="element brand no-phone no-tablet" onclick="window.location.reload();"><span class="icon-spin"></span></button>
-                <span class="element-divider"></span>
+              <span class="element-divider"></span>
+              <button class="element brand no-phone no-tablet" onclick="window.location.reload();"><span class="icon-spin"></span></button>
+              <span class="element-divider"></span>
 
-                <a href="./info.php" class="element brand place-right no-phone no-tablet"><span class="icon-cog"></span></a>
-                <span class="element-divider place-right"></span>
-                <a class="element place-right no-phone no-tablet">
-                  <?=$version; ?>
-                </a>
-                <span class="element-divider place-right"></span>
-                <a class="element place-right no-phone no-tablet">
-                  <span class="icon-unlocked"></span> <?=$_SESSION['username']; ?>
-                </a>
-                <span class="element-divider place-right"></span>
+              <a href="./info.php" class="element brand place-right no-phone no-tablet"><span class="icon-cog"></span></a>
+              <span class="element-divider place-right"></span>
+              <a class="element place-right no-phone no-tablet">
+                <?=$version; ?>
+              </a>
+              <span class="element-divider place-right"></span>
+              <a class="element place-right no-phone no-tablet">
+                <span class="icon-unlocked"></span> <?=$_SESSION['username']; ?>
+              </a>
+              <span class="element-divider place-right"></span>
             </nav>
           </nav>
-        </header>
-        <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
-          <form action="edit.php" method="post">
-            <?php $arArray = json_decode(file_get_contents(dirname(__FILE__)."/res/data/".$_SESSION['username'].".data"), true); ?>
-            <table align="center" border="1">
-            <tr>
-              <td>/</td>
-              <td><?=$string['stundenplan']['montag']; ?></td>
-              <td><?=$string['stundenplan']['dienstag']; ?></td>
-              <td><?=$string['stundenplan']['mittwoch']; ?></td>
-              <td><?=$string['stundenplan']['donnerstag']; ?></td>
-              <td><?=$string['stundenplan']['freitag']; ?></td>
-            </tr>
-            <?php
+    </header>
+    <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
+      <form action="edit.php" method="post">
+        <table align="center" border="1">
+          <tr>
+            <td>/</td>
+            <td><?=$string['stundenplan']['montag']; ?></td>
+            <td><?=$string['stundenplan']['dienstag']; ?></td>
+            <td><?=$string['stundenplan']['mittwoch']; ?></td>
+            <td><?=$string['stundenplan']['donnerstag']; ?></td>
+            <td><?=$string['stundenplan']['freitag']; ?></td>
+          </tr>
+          <?php
               $stunde = 1;
               for($i = 0; $i < 40; $i++){
                 $zeile  = "<tr>";
@@ -98,7 +96,6 @@
                 $zeile .= "</tr>";
                 $stunde++;
                 echo $zeile;
-                $div_style = "block";
               }
             }
           ?>
