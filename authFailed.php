@@ -18,13 +18,9 @@
 
                 <a href="./info.php" class="element brand place-right no-phone no-tablet"><span class="icon-cog"></span></a>
                 <span class="element-divider place-right"></span>
-                <a class="element place-right no-phone no-tablet">
-                  <?=$version; ?>
-                </a>
+                <a class="element place-right no-phone no-tablet"><?=$version; ?></a>
                 <span class="element-divider place-right"></span>
-                <a href="./login.php" class="element place-right no-phone">
-                  <span class="icon-locked"></span> <?=$string['global']['menu.login']; ?>
-                </a>
+                <a href="./login.php" class="element place-right no-phone"><span class="icon-locked"></span> <?=$string['global']['menu.login']; ?></a>
                 <span class="element-divider place-right"></span>
             </nav>
           </nav>
@@ -33,8 +29,8 @@
         <div class="container">
             <h1><?=$string['authfailed']['auth.failed']; ?></h1>
             <h2><?=$string['authfailed']['relogin']; ?></h2>
-            <form action="login.php">
-                <input type="submit" name="zumLogin" value="<?=$string['global']['menu.login']; ?>"><br/>
+            <form action="./login.php">
+                <input type="submit" name="zumLogin" value="<?=$string['global']['menu.login']; ?>">
             </form>
         </div>
     </body>

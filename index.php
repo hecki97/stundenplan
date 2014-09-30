@@ -13,7 +13,7 @@
 		    //-->
 	    </script>
 	</head>
-	<body class="metro" style="text-align: center;">
+	<body class="metro">
 		<header>
           <nav class="navigation-bar dark fixed-top">
             <nav class="navigation-bar-content">
