@@ -3,12 +3,6 @@
 	include(dirname(__FILE__)."/_checkDataBase.php");
 	include(dirname(__FILE__)."/_loadLangFiles.php");
 	include(dirname(__FILE__)."/_getVersionScript.php");
-	include(dirname(__FILE__)."/_buttonScript.php");
-
-	//Registrieren
-	Button("register", "stundenplan/registration.php");
-	//Zum Plan
-	Button("fback", "stundenplan/index.php");
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	    if (!empty($_POST["username"]) && !empty($_POST["password"]))
