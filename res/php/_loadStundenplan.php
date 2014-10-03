@@ -22,7 +22,7 @@
            	$zeile .= "<td>".$stunde.":</td>";
            	for ($k = 0; $k < 5; $k++)
            	{ 
-                $text = str_replace('/', '', $arArray[$j]);
+                $text = $arArray[$j];
                 $zeile .= "<td><input type='text' size='30' maxlength='30' name='".$j."' value='".$text."'></td>";
                 if ($k < 4)
                     $j++;
@@ -52,34 +52,10 @@
             $zeile .= "<td>".$stunde.":</td>";
             for ($k = 0; $k < 5; $k++)
             { 
-                $zeile .= "<td width='250px' height='25px'>".$arArray[$j]."</td>";
-                if ($k < 4)
-            	    $j++;
-            }
-            $zeile .= "</tr>";
-            $stunde++;
-        }
-       	$zeile .= "</table>";
-       	return $zeile;
-	}
+                if (empty($arArray[$j]))
+            		$arArray[$j] = "/";
 
-	function loadStundenplanTextFields($wArray)
-	{
-		$stunde = 1;
-		$zeile  = "<table align='center' border='1'>";
-        $zeile .= "<tr>";
-        for ($i = 0; $i <= 5; $i++)
-	    {
-	        $zeile .= "<td>".$wArray[$i]."</td>";
-	    }
-	    $zeile .= "</tr>";
-        for($j = 0; $j < 40; $j++)
-        {
-            $zeile .= "<tr>";
-            $zeile .= "<td>".$stunde.":</td>";
-            for ($k = 0; $k < 5; $k++)
-            { 
-                $zeile .= "<td><input type='text' size='30' maxlength='30' name='".$j."'></td>";
+                $zeile .= "<td width='250px' height='25px'>".$arArray[$j]."</td>";
                 if ($k < 4)
             	    $j++;
             }

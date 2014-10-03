@@ -33,7 +33,6 @@
 
     <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
     <?=loadStundenplan($wochentagArray); ?>  
-    <br/><form action="./edit.php" style="display: inline;"><input type="submit" name="fedit" value="<?=$string['global']['button.submit.edit']; ?>"></form>
-    <form action="./create.php" style="display: inline;"><input type="submit" name="fnew" value="<?=$string['global']['button.submit.create']; ?>"></form>
+    <br/><form action="./edit.php" style="display: inline;"><input type="submit" value="<?=$string['global']['button.submit.edit']; ?>"></form>
   </body>
 </html>

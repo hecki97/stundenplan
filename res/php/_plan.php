@@ -5,5 +5,5 @@
 	include(dirname(__FILE__)."/_loadStundenplan.php");
 
 	if (!file_exists(dirname(__FILE__)."/../data/".$_SESSION['username'].".data"))
-		header("Location: http://$host/stundenplan/create.php");
+		header("Location: http://$host/stundenplan/edit.php?do=create");
 ?>

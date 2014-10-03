@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $host = $_SERVER['SERVER_NAME']; ?>
 <?php include(dirname(__FILE__)."/res/php/_login.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
  <head>
@@ -10,35 +9,27 @@
   <header>
     <nav class="navigation-bar dark fixed-top">
       <nav class="navigation-bar-content" style="text-align: center;">
-        <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan<sup>online</sup></a>
+        <a class="element"><span class="icon-home"></span> Stundenplan<sup>online</sup></a>
       </nav>
     </nav>
   </header>
 
-  <div class="container" style="text-align: center;">
+  <div class="container">
     <h1><?=$string['login']['ueberschrift']; ?></h1>
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" style="display: inline;">
       <table cellpadding="2" align="center">
         <tr>
-          <th>
-            <span style ='font-size:15px'><?=$string['login']['username']; ?></span>
-          </th>
-          <th>
-            <span style ='font-size:15px'><input type="text" name="username" /></span>
-          </th>
+          <th><?=$string['login']['username']; ?></th>
+          <th><input type="text" name="username" /></th>
         </tr>
         <tr>
-          <th>
-            <span style ='font-size:15px'><?=$string['login']['password']; ?></span>
-          </th>
-          <th>
-            <span style ='font-size:15px'><input type="password" name="password" /></span>
-          </th>
+          <th><?=$string['login']['password']; ?></th>
+          <th><input type="password" name="password" /></th>
         </tr>
       </table>
       <br/><input type="submit" value="<?=$string['login']['button.submit.anmelden']; ?>" />
-      <br/><input type="submit" name="register" value="<?=$string['login']['button.submit.registrieren']; ?>" />
     </form>
+    <form action="./register.php" style="display: inline;"><input type="submit" name="register" value="<?=$string['login']['button.submit.registrieren']; ?>" /></form>
   </div>
  </body>
 </html>
