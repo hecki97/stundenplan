@@ -32,7 +32,7 @@
     </header>
 
     <h1><?=$string['global']['stundenplan']; ?></h1><br/>  
-    <?=loadStundenplan($wochentagArray); ?>  
+    <?=loadStundenplan($wochentagArray); ?>
     <br/><form action="./edit.php" style="display: inline;"><input type="submit" value="<?=$string['global']['button.submit.edit']; ?>"></form>
   </body>
 </html>

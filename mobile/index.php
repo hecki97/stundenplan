@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php $host = $_SERVER['SERVER_NAME']; ?>
 <?php include(dirname(__FILE__)."/res/php/_index.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
  <head>
@@ -37,7 +36,7 @@
             font-size: 25px;
         }
     </style>
-     <script>
+    <script type="text/javascript">
         function show_confirm_logout()
         {
             return confirm("<?=$string['plan']['javascript.confirm.logout']; ?>");
@@ -58,17 +57,17 @@
                 <br/><li class="title style_li " style="font-size: 65px;"><?=date("d.m.y"); ?></li>
                 <li class="style_li" style="top: 5px;"><h1 style="font-size: 25px;"><?=$tag ?></h1></li>
             </a><br/>
+            <h1>Willkommen <?=$_SESSION['username']; ?>!</h1><br/>
             <div style="text-align: left;">
-                <li><a href="./today.php"><span class="li_font">► <?=$string['mobile']['index']['a.heute']; ?></span></a></li>
-                <li><a href="./plan.php"><span class="li_font">► <?=$string['mobile']['index']['a.stundenplan']; ?></span></a></li>
+                <li><a href="./today.php"><h1>► <?=$string['mobile']['index']['a.heute']; ?></h1></a></li>
+                <li><a href="./plan.php"><h1>► <?=$string['mobile']['index']['a.stundenplan']; ?></h1></a></li>
                 <br/>
-                <li><a href="./create.php"><h1>► <?=$string['mobile']['index']['a.erstellen']; ?></h1></a></li>
                 <li><a href="./edit.php"><h1>► <?=$string['mobile']['index']['a.bearbeiten']; ?></h1></a></li>
                 <li><a href="./info.php"><h1>► <?=$string['mobile']['index']['a.info']; ?></h1></a></li>
-                <br/>
+                <br/><br/>
                 <li><a href='./res/php/_logout.php' onclick="return show_confirm_logout();"><h1>► <?=$string['mobile']['index']['a.logout']; ?></h1></a></li>
             </div>
-            <li class="style_li">Version: <?=$version ?></li>
+            <br/><h2>Version: <?=$version ?></h2>
         </ul>
     </nav>
  </body>
