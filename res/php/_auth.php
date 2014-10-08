@@ -4,7 +4,7 @@
 
     if(!isset($_SESSION["username"])) 
    { 
-        header("Location: http://$host/stundenplan/authFailed.php");
+        header("Location: http://$host/stundenplan/login.php");
         exit;
    } 
 ?>

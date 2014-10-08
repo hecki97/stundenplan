@@ -1,74 +1,55 @@
 {
-	"global": {
-		"mysql.connect.error": "connection to the database could not be established", 
-		"mysql.select.db.error": "Database could not be selected", 
-		"javascript.alert.login.failed": "Please check username and/or password!",
-		"javascript.alert.felder": "Please fill out all fields!", 
-		"menu.login": "Login!",
-		"timetable": "Schedule", 
-		"button.submit.plan": "The plan!", 
-		"button.submit.edit": "Edit", 
-		"button.submit.create": "Create!", 
-		"button.submit.auswahl": "to choose from!", 
-		"button.submit.register": "Sign up", 
-		"button.submit.speichern": "Save!"
+	"javascript.alerts": {
+		"j.fields": "Error! Please fill all fields", 
+		"j.error": "Failed to save user name! Please try again!", 
+		"j.already.exists": "Username already exists! Please try again!", 
+		"j.login.failed": "Please check username and/or password!",
+		"j.logout": "Do you really want to logout?",
+		"j.reset": "Do you really want to clear all fields?"
 	},
-	"timetable": {
-		"preview": "Preview", 
-		"montag": "Monday:",
-		"dienstag": "Tuesday", 
-		"mittwoch": "Wednesday", 
-		"donnerstag": "Thursday", 
-		"freitag": "Friday"
+	"buttons": {
+		"b.edit": "Edit!",
+		"b.register": "Sign Up!", 
+		"b.save": "Save!",
+		"b.login": "Log in!",
+		"b.reset": "Reset!"
 	},
-	"register": {
-		"registration": "Create an account", 
-		"data": "Enter credentials", 
-		"username": "Username:", 
-		"password": "Password:", 
-		"password.wdh": "Password (rep):", 
-		"invitation code": "Referral code", 
-		"alert.succes": "Username", 
-		"alert.succes.2": "created succesfully.",
-		"javascript.alert.felder": "Error! Please fill all the form fields.",
-		"javascript.alert.einladungscode": "The invitation code you entered is incorrect!",
-		"javascript.alert.speicherfehler": "Error while trying to save the user name. Please try again!",
-		"javascript.alert.bereits.vorhanden": "Username already exists. Please try again."
+	"weekdays": {
+		"w.monday": "Monday", 
+		"w.tuesday": "Tuesday", 
+		"w.wednesday": "Wednesday", 
+		"w.thursday": "Thursday", 
+		"w.friday": "Friday" 
 	},
-	"login": {
-		"ueberschrift": "Login:", 
-		"username": "Username",
-		"password": "Password:",
-		"button.submit.anmelden": "Log in!",
-		"button.submit.registrieren": "Create an account!" 
+	"labels": {
+		"l.username": "Username:", 
+		"l.password": "Password:", 
+		"l.password.rep": "Password (rep):", 
+		"l.today": "Today:", 
+		"l.edit": "Edit timetable:",
+		"l.preview": "Preview:",
+		"l.timetable": "Timetable:", 
+		"l.login": "Login:",
+		"l.registration": "Create an account:", 
+		"l.data": "Enter credentials", 
+		"l.info": "Info", 
+		"l.source.code": "Source Code (Github)",
+		"l.powered.by": "Powered by", 
+		"l.c": "© 2014 - hecki97",
+		"l.version": "Version:", 
+		"l.registration.succes": "User", 
+		"l.registration.succes.2": "has been successfully created!" 
 	},
-	"plan": {
-		"javascript.confirm.logout": "Do you want to really logout?", 
-		"button.submit.logout": "Logout!"
+	"mysql": {
+		"m.connect.error": "Connection to the database could not be established", 
+		"m.select.db.error": "Database could not be selected" 
 	},
-	"authfailed": {
-		"auth.failed": "You currently do not have permission to access this page!",
-		"relogin": "Please log in again!"
-	},
-	"info": {
-		"info": "Info", 
-		"website": "MLK site:",
-		"source.code": "Source Code (Github)", 
-		"powered.by": "Powered by",
-		"c": "© 2014 - hecki97",
-		"version": "Version:"
-	},
-	"mobile": {
-		"index": {
-			"a.heute": "Today:" 
-			"a.stundenplan": "Timetable:" 
-			"a.erstellen": "Create New", 
-			"a.bearbeiten", "Edit", 
-			"a.info", "Info", 
-			"a.logout": "Logout" 
-			"header.heute", "Today", 
-			"header.erstellen": "Create Timetable:", 
-			"header.bearbeiten": "Edit Timetable:"
-		}
-	}
+	"links": {
+		"a.login": "Login!",
+		"a.today": "Today",
+		"a.timetable": "Timetable",
+		"a.edit": "Edit", 
+		"a.info": "Info", 
+		"a.logout": "Logout" 
+	} 
 }

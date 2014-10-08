@@ -19,16 +19,16 @@
 	      if($row->password == $passwort) 
 	      { 
 	        $_SESSION["username"] = $username; 
-	        header("Location: http://$host/stundenplan/plan.php");
+	        header("Location: http://$host/stundenplan/index.php");
 	      } 
 	      else 
 	      { 
-	        ?><script type="text/javascript">alert("<?php echo $string['global']['javascript.alert.login.failed']; ?>");</script><?php
+	        ?><script type="text/javascript">alert("<?=$string['javascript.alerts']['j.login.failed']; ?>");</script><?php
 	      }
 	    }
 	    else
 	    {
-	      ?><script type="text/javascript">alert("<?php echo $string['global']['javascript.alert.felder']; ?>");</script><?php
+	      ?><script type="text/javascript">alert("<?=$string['javascript.alerts']['j.fields']; ?>");</script><?php
 	    }
 	}
 ?>

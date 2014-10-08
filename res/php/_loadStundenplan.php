@@ -2,7 +2,7 @@
 	include(dirname(__FILE__)."/_loadLangFiles.php");
 	
 	//Erstelle ein Array mit allen Wochentagen von Mo-Fr
-	$wochentagArray = array("/", $string['stundenplan']['montag'], $string['stundenplan']['dienstag'], $string['stundenplan']['mittwoch'], $string['stundenplan']['donnerstag'], $string['stundenplan']['freitag']);
+	$wochentagArray = array("/", $string['weekdays']['w.monday'], $string['weekdays']['w.tuesday'], $string['weekdays']['w.wednesday'], $string['weekdays']['w.thursday'], $string['weekdays']['w.friday']);
 
 	function loadEditableStundenplan($wArray)
 	{

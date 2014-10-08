@@ -9,27 +9,27 @@
   <header>
     <nav class="navigation-bar dark fixed-top">
       <nav class="navigation-bar-content" style="text-align: center;">
-        <a class="element"><span class="icon-home"></span> Stundenplan<sup>online</sup></a>
+        <a class="element"><span class="icon-home"></span> <?=$string['links']['a.timetable']; ?><sup>online</sup></a>
       </nav>
     </nav>
   </header>
 
   <div class="container">
-    <h1><?=$string['login']['ueberschrift']; ?></h1>
+    <h1><?=$string['labels']['l.login']; ?></h1>
     <form action="login.php" method="post" style="display: inline;">
       <table cellpadding="2" align="center">
         <tr>
-          <th><?=$string['login']['username']; ?></th>
+          <th><?=$string['labels']['l.username']; ?></th>
           <th><input type="text" name="username" /></th>
         </tr>
         <tr>
-          <th><?=$string['login']['password']; ?></th>
+          <th><?=$string['labels']['l.password']; ?></th>
           <th><input type="password" name="password" /></th>
         </tr>
       </table>
-      <br/><input type="submit" value="<?=$string['login']['button.submit.anmelden']; ?>" />
+      <br/><input type="submit" value="<?=$string['buttons']['b.login']; ?>" />
     </form>
-    <form action="./register.php" style="display: inline;"><input type="submit" name="register" value="<?=$string['login']['button.submit.registrieren']; ?>" /></form>
+    <form action="./register.php" style="display: inline;"><input type="submit" name="register" value="<?=$string['buttons']['b.register']; ?>" /></form>
   </div>
  </body>
 </html>

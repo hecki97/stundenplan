@@ -23,12 +23,12 @@
 	      } 
 	      else 
 	      { 
-	        ?><script type="text/javascript">alert("<?php echo $string['global']['javascript.alert.login.failed']; ?>");</script><?php
+	        ?><script type="text/javascript">alert("<?=$string['javascript.alerts']['j.login.failed']; ?>");</script><?php
 	      }
 	    }
 	    else
 	    {
-	      ?><script type="text/javascript">alert("<?php echo $string['global']['javascript.alert.felder']; ?>");</script><?php
+	      ?><script type="text/javascript">alert("<?=$string['javascript.alerts']['j.fields']; ?>");</script><?php
 	    }
 	}
 ?>

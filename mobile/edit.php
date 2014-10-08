@@ -7,7 +7,7 @@
     <script type="text/javascript">
       function show_confirm_reset()
       {
-        return confirm("<?=$string['plan']['javascript.confirm.logout']; ?>");
+        return confirm("<?=$string['javascript.alerts']['j.reset']; ?>");
       }
     </script>
 	</head>
@@ -15,15 +15,15 @@
 		<header>
       <nav class="navigation-bar dark fixed-top">
         <nav class="navigation-bar-content">
-          <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan<sup>online</sup></a>
+          <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> <?=$string['links']['a.timetable']; ?><sup>online</sup></a>
         </nav>
       </nav>
     </header>
-      <h1><?=$string['mobile']['index']['header.bearbeiten']; ?></h1><br/>  
+      <h1><?=$string['labels']['l.edit']; ?></h1><br/>  
       <form action="edit.php" method="post">
         <?=loadEditableStundenplan($wochentagArray); ?>
-        <br/><input type="submit" name="save" value="<?=$string['global']['button.submit.speichern']; ?>">
-        <input type="submit" name="reset" value="Reset!" onclick="return show_confirm_reset();">
+        <br/><input type="submit" name="save" value="<?=$string['buttons']['b.save']; ?>">
+        <input type="submit" name="reset" value="<?=$string['buttons']['b.reset']; ?>" onclick="return show_confirm_reset();">
       </form>
       <?=@$result; ?>
   </body>

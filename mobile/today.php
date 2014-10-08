@@ -9,11 +9,11 @@
 		<header>
     		<nav class="navigation-bar dark fixed-top">
       			<nav class="navigation-bar-content">
-        			<a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan<sup>online</sup></a>
+        			<a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> <?=$string['links']['a.timetable']; ?><sup>online</sup></a>
       			</nav>
     		</nav>
   		</header>
-        <h1><?=$string['mobile']['index']['header.heute']; ?></h1><br/>  
+        <h1><?=$string['labels']['l.today']; ?></h1><br/>  
         <?=loadStundenplan(); ?>
   	</body>
 </html>

@@ -9,7 +9,7 @@
   <header>
     <nav class="navigation-bar dark fixed-top">
       <nav class="navigation-bar-content">
-        <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> Stundenplan-online<sup><?=$lang; ?></sup></a>
+        <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> <?=$string['links']['a.timetable']; ?>-online<sup><?=$lang; ?></sup></a>
    
         <span class="element-divider"></span>
         <button class="element brand no-phone no-tablet" onclick="window.location.reload();"><span class="icon-spin"></span></button>
@@ -19,31 +19,31 @@
         <span class="element-divider place-right"></span>
         <a class="element place-right no-phone no-tablet"><?=$version; ?></a>
         <span class="element-divider place-right"></span>
-        <a href="./login.php" class="element place-right no-phone no-tablet"><span class="icon-key"></span> <?=$string['global']['menu.login']; ?></a>
+        <a href="./login.php" class="element place-right no-phone no-tablet"><span class="icon-key"></span> <?=$string['links']['a.login']; ?></a>
         <span class="element-divider place-right"></span>
       </nav>
     </nav>
   </header>
 
   <div class="container">
-    <h1><?=$string['register']['registrierung']; ?></h1>
+    <h1><?=$string['labels']['l.registration']; ?></h1>
     <form action="registration.php" method="post">
-      <h3><?=$string['register']['daten']; ?></h3>
+      <h3><?=$string['labels']['l.data']; ?></h3>
       <table cellpadding="2" align="center">
         <tr>
-          <th><?=$string['register']['username']; ?></th>
+          <th><?=$string['labels']['l.username']; ?></th>
           <th><input type="text" name="username" /></th>
         </tr>
         <tr>
-          <th><?=$string['register']['password']; ?></th>
+          <th><?=$string['labels']['l.password']; ?></th>
           <th><input type="password" name="passwort" /></th>
         </tr>
         <tr>
-          <th><?=$string['register']['password.wdh']; ?></th>
+          <th><?=$string['labels']['l.password.rep']; ?></th>
           <th><input type="password" name="passwort2" /></th>
         </tr>
       </table>
-      <br><input type="submit" value="<?=$string['global']['button.submit.register']; ?>">
+      <br><input type="submit" value="<?=$string['buttons']['b.register']; ?>">
       <br/><?=@$return; ?>
     </form>
   </div>

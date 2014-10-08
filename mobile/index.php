@@ -39,7 +39,7 @@
     <script type="text/javascript">
         function show_confirm_logout()
         {
-            return confirm("<?=$string['plan']['javascript.confirm.logout']; ?>");
+            return confirm("<?=$string['javascript.alerts']['j.logout']; ?>");
         }
     </script>
  </head>
@@ -47,7 +47,7 @@
   <header>
     <nav class="navigation-bar dark fixed-top">
       <nav class="navigation-bar-content">
-        <button class="element" onclick="window.location.reload();"><span class="icon-home"></span> Stundenplan<sup>online</sup></button>
+        <button class="element" onclick="window.location.reload();"><span class="icon-home"></span> <?=$string['links']['a.timetable']; ?><sup>online</sup></button>
       </nav>
     </nav>
   </header>
@@ -59,13 +59,13 @@
             </a><br/>
             <h1>Willkommen <?=$_SESSION['username']; ?>!</h1><br/>
             <div style="text-align: left;">
-                <li><a href="./today.php"><h1>► <?=$string['mobile']['index']['a.heute']; ?></h1></a></li>
-                <li><a href="./plan.php"><h1>► <?=$string['mobile']['index']['a.stundenplan']; ?></h1></a></li>
+                <li><a href="./today.php"><h1>► <?=$string['links']['a.today']; ?></h1></a></li>
+                <li><a href="./plan.php"><h1>► <?=$string['links']['a.timetable']; ?></h1></a></li>
                 <br/>
-                <li><a href="./edit.php"><h1>► <?=$string['mobile']['index']['a.bearbeiten']; ?></h1></a></li>
-                <li><a href="./info.php"><h1>► <?=$string['mobile']['index']['a.info']; ?></h1></a></li>
+                <li><a href="./edit.php"><h1>► <?=$string['links']['a.edit']; ?></h1></a></li>
+                <li><a href="./info.php"><h1>► <?=$string['links']['a.info']; ?></h1></a></li>
                 <br/><br/>
-                <li><a href='./res/php/_logout.php' onclick="return show_confirm_logout();"><h1>► <?=$string['mobile']['index']['a.logout']; ?></h1></a></li>
+                <li><a href='./res/php/_logout.php' onclick="return show_confirm_logout();"><h1>► <?=$string['links']['a.logout']; ?></h1></a></li>
             </div>
             <br/><h2>Version: <?=$version ?></h2>
         </ul>

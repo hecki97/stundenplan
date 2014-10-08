@@ -11,7 +11,7 @@
 
         if($passwort != $passwort2 || $username == "" || $passwort == "")
         {
-        	?><script type='text/javascript'>alert("<?=$string['register']['javascript.alert.felder']; ?>");</script><?php
+        	?><script type='text/javascript'>alert("<?=$string['javascript.alerts']['j.fields']; ?>");</script><?php
         }
         else
        	{
@@ -25,16 +25,16 @@
 	          $eintragen = mysql_query($eintrag);
 	          if(@$eintragen == true)
 	          {
-	            $return = $string['register']['alert.succes']."<b>".$username."</b>".$string['register']['alert.succes.2']."<a href='./login.php'>".$string['global']['menu.login']."</a>"; 
+	            $return = $string['labels']['l.registration.succes']."<b>".$username."</b>".$string['labels']['l.registration.succes.2']."<a href='./login.php'>".$string['links']['a.login']."</a>"; 
 	          }
 	          else 
 	          {
-	          	?><script type='text/javascript'>alert("<?=$string['register']['javascript.alert.speicherfehler']; ?>");</script><?php
+	          	?><script type='text/javascript'>alert("<?=$string['javascript.alerts']['j.error']; ?>");</script><?php
 	          }
 	        }
 	        else 
 	        { 
-	        	?><script type='text/javascript'>alert("<?=$string['register']['javascript.alert.bereits.vorhanden']; ?>");</script><?php
+	        	?><script type='text/javascript'>alert("<?=$string['javascript.alerts']['j.already.exists']; ?>");</script><?php
 	        }
        	}
     }

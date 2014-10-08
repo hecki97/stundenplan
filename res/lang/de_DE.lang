@@ -1,73 +1,55 @@
 {
-	"global": {
-		"mysql.connect.error": "Verbindung zur Datenbank konnte nicht hergestellt werden",
-		"mysql.select.db.error": "Datenbank konnte nicht ausgewählt werden",
-		"javascript.alert.login.failed": "Bitte Benutzername und/oder Passwort überprüfen!",
-		"javascript.alert.felder": "Bitte alle Felder ausfüllen!",
-		"menu.login": "Zum Login!",
-		"stundenplan": "Stundenplan:",
-		"button.submit.plan": "Zum Plan!",
-		"button.submit.edit": "Bearbeiten!",
-		"button.submit.create": "Erstellen!",
-		"button.submit.auswahl": "Zur Auswahl!",
-		"button.submit.register": "Registrieren",
-		"button.submit.speichern": "Speichern!"
+	"javascript.alerts": {
+		"j.fields": "Bitte alle Felder korrekt ausfuellen.",
+		"j.error": "Fehler beim Speichern des Benutzernames. Bitte erneut versuchen!",
+		"j.already.exists": "Benutzername schon vorhanden. Bitte erneut versuchen!",
+		"j.login.failed": "Bitte Benutzername und/oder Passwort ueberpruefen!",
+		"j.logout": "Wollen Sie sich wirklich ausloggen?",
+		"j.reset": "Wollen Sie wirklich alle Felder leeren?"
 	},
-	"stundenplan": {
-		"preview": "Vorschau:",
-		"montag": "Montag:",
-		"dienstag": "Dienstag:",
-		"mittwoch": "Mittwoch:",
-		"donnerstag": "Donnerstag:",
-		"freitag": "Freitag:"
+	"buttons": {
+		"b.edit": "Bearbeiten!",
+		"b.register": "Registrieren!",
+		"b.save": "Speichern!",
+		"b.login": "Anmelden!",
+		"b.reset": "Reset!"
 	},
-	"register": {
-		"registrierung": "Account erstellen:",
-		"daten": "Anmeldeinformationen eingeben:",
-		"username": "Benutzername:",
-		"password": "Passwort:",
-		"password.wdh": "Passwort(wdh):",
-		"einladungscode": "Einladungscode:",
-		"alert.succes": "Benutzername ",
-		"alert.succes.2": " wurde erstellt.",
-		"javascript.alert.felder": "Eingabefehler. Bitte alle Felder korekt ausfüllen.",
-		"javascript.alert.einladungscode": "Der eingegebene Einladungscode ist nicht korrekt!",
-		"javascript.alert.speicherfehler": "Fehler beim Speichern des Benutzernames. Bitte erneut versuchen!",
-		"javascript.alert.bereits.vorhanden": "Benutzername schon vorhanden. Bitte erneut versuchen!"
+	"weekdays": {
+		"w.monday": "Montag:",
+		"w.tuesday": "Dienstag:",
+		"w.wednesday": "Mittwoch:",
+		"w.thursday": "Donnerstag:",
+		"w.friday": "Freitag:"
 	},
-	"login": {
-		"ueberschrift": "Login:",
-		"username": "Benutzername:",
-		"password": "Passwort:",
-		"button.submit.anmelden": "Anmelden!",
-		"button.submit.registrieren": "Account erstellen!"
+	"labels": {
+		"l.username": "Benutzername:",
+		"l.password": "Passwort:",
+		"l.password.rep": "Passwort(wdh):",
+		"l.today": "Heute:",
+		"l.edit": "Stundenplan bearbeiten:",
+		"l.preview": "Vorschau:",
+		"l.timetable": "Stundenplan:",
+		"l.login": "Login:",
+		"l.registration": "Account erstellen:",
+		"l.data": "Anmeldeinformationen eingeben:",
+		"l.info": "Info",
+		"l.source.code": "Source Code(Github)",
+		"l.powered.by": "Powered by:",
+		"l.c": "© 2014 - hecki97",
+		"l.version": "Version:",
+		"l.registration.succes": "Benutzer ",
+		"l.registration.succes.2": " wurde erfolgreich erstellt!"
 	},
-	"plan": {
-		"javascript.confirm.logout": "Wollen Sie sich wirklich ausloggen?",
-		"button.submit.logout": "Ausloggen!"
+	"mysql": {
+		"m.connect.error": "Verbindung zur Datenbank konnte nicht hergestellt werden",
+		"m.select.db.error": "Datenbank konnte nicht ausgewählt werden"
 	},
-	"authfailed": {
-		"auth.failed": "Sie besitzen derzeit keine Rechte auf diese Seite zuzugreifen!",
-		"relogin": "Bitte loggen Sie sich erneut ein!"
-	},
-	"info": {
-		"info": "Info",
-		"source.code": "Source Code(Github)",
-		"powered.by": "Powered by:",
-		"c": "© 2014 - hecki97",
-		"version": "Version:"
-	},
-	"mobile": {
-		"index": {
-			"a.heute": "Heute",
-			"a.stundenplan": "Stundenplan",
-			"a.erstellen": "Neu erstellen",
-			"a.bearbeiten": "Bearbeiten",
-			"a.info": "Info",
-			"a.logout": "Logout",
-			"header.heute": "Heute:",
-			"header.erstellen": "Stundenplan erstellen:",
-			"header.bearbeiten": "Stundenplan bearbeiten:"
-		}
+	"links": {
+		"a.login": "Zum Login!",
+		"a.today": "Heute",
+		"a.timetable": "Stundenplan",
+		"a.edit": "Bearbeiten",
+		"a.info": "Info",
+		"a.logout": "Logout"
 	}
 }

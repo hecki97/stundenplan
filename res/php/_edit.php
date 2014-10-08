@@ -25,7 +25,7 @@
     	if (@$_POST['save'])
     	{
     		saveStundenplan();
-    		$result  = "<h2>".$string['stundenplan']['preview']."</h2>";
+    		$result  = "<h2>".$string['labels']['l.preview']."</h2>";
         	$result .= loadStundenplan($wochentagArray);
         }
 
