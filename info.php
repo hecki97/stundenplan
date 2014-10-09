@@ -29,6 +29,7 @@
 		    <tr class="title"><h1><?=$string['labels']['l.info']; ?></h1></tr>
 		    <tr><a href="https://github.com/hecki97/stundenplan"><h2><?=$string['labels']['l.source.code']; ?></h2></a></tr><br/>
 		    <tr><h2><?=$string['labels']['l.powered.by']; ?> </h2><h3><a href="http://metroui.org.ua">Metro UI CSS 2.0</a></h3><br/></tr>
+		    <tr><a href="./mobile/index.php"><h2><?=$string['labels']['l.mobile']; ?></h2></a></tr><br/>
 		    <tr><h3><?=$string['labels']['l.c']; ?></h3></tr>
 		    <tr><h3><?=$string['labels']['l.version']; ?> <?php echo $version; ?></h3></tr>
 		</table>

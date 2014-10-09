@@ -16,16 +16,16 @@
         else
        	{
        		$passwort = md5($passwort);
-	        $result = mysql_query("SELECT id FROM login WHERE username LIKE '$username'");
+	        $result = mysql_query("SELECT id FROM $table WHERE username LIKE '$username'");
 	        $menge = mysql_num_rows($result);
 
 	        if($menge == 0) 
 	        {
-	          $eintrag = "INSERT INTO login (username, password) VALUES ('$username', '$passwort')";
+	          $eintrag = "INSERT INTO $table (username, password) VALUES ('$username', '$passwort')";
 	          $eintragen = mysql_query($eintrag);
 	          if(@$eintragen == true)
 	          {
-	            $return = $string['labels']['l.registration.succes']."<b>".$username."</b>".$string['labels']['l.registration.succes.2']."<a href='./login.php'>".$string['global']['menu.login']."</a>"; 
+	            $return = "<br/>".$string['labels']['l.registration.succes']."<b>".$username."</b>".$string['labels']['l.registration.succes.2']." <a href='./login.php'>".$string['links']['a.login']."</a>"; 
 	          }
 	          else 
 	          {

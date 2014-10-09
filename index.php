@@ -9,7 +9,7 @@
       {
         return confirm("<?=$string['javascript.alerts']['j.logout']; ?>");
       }
-      </script>
+    </script>
 	</head>
 	<body class="metro">
 		<header>

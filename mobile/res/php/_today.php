@@ -1,6 +1,6 @@
 <?php
 	$host = $_SERVER['SERVER_NAME'];
-	include(dirname(__FILE__)."/_auth.php");
+	include(dirname(__FILE__)."/../../../res/php/_auth.php");
 	include(dirname(__FILE__)."/../../../res/php/_loadLangFiles.php");
 	include(dirname(__FILE__)."/../../../res/php/_getVersionScript.php");
 

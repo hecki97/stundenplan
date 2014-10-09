@@ -65,7 +65,7 @@
                 <li><a href="./edit.php"><h1>► <?=$string['links']['a.edit']; ?></h1></a></li>
                 <li><a href="./info.php"><h1>► <?=$string['links']['a.info']; ?></h1></a></li>
                 <br/><br/>
-                <li><a href='./res/php/_logout.php' onclick="return show_confirm_logout();"><h1>► <?=$string['links']['a.logout']; ?></h1></a></li>
+                <li><a href='./../res/php/_logout.php' onclick="return show_confirm_logout();"><h1>► <?=$string['links']['a.logout']; ?></h1></a></li>
             </div>
             <br/><h2>Version: <?=$version ?></h2>
         </ul>

@@ -35,6 +35,8 @@
 		"l.info": "Info",
 		"l.source.code": "Source Code(Github)",
 		"l.powered.by": "Powered by:",
+		"l.mobile": "Zur mobilen Version!",
+		"l.desktop": "Zur Desktop Version!",
 		"l.c": "© 2014 - hecki97",
 		"l.version": "Version:",
 		"l.registration.succes": "Benutzer ",
