@@ -32,12 +32,12 @@
 		"l.login": "Login:",
 		"l.registration": "Create an account:", 
 		"l.data": "Enter credentials", 
-		"l.info": "Info", 
+		"l.about": "About", 
 		"l.source.code": "Source Code (Github)",
 		"l.powered.by": "Powered by",
 		"l.mobile": "View Mobile Site!",
 		"l.desktop": "View Desktop Site!",
-		"l.c": "© 2014 - hecki97",
+		"l.c": "© 2015 - hecki97",
 		"l.version": "Version:", 
 		"l.registration.succes": "User", 
 		"l.registration.succes.2": "has been successfully created!" 
@@ -51,7 +51,6 @@
 		"a.today": "Today",
 		"a.timetable": "Timetable",
 		"a.edit": "Edit", 
-		"a.info": "Info", 
 		"a.logout": "Logout" 
 	} 
 }

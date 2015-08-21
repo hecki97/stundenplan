@@ -32,12 +32,12 @@
 		"l.login": "Login:",
 		"l.registration": "Account erstellen:",
 		"l.data": "Anmeldeinformationen eingeben:",
-		"l.info": "Info",
+		"l.about": "About",
 		"l.source.code": "Source Code(Github)",
 		"l.powered.by": "Powered by:",
 		"l.mobile": "Zur mobilen Version!",
 		"l.desktop": "Zur Desktop Version!",
-		"l.c": "© 2014 - hecki97",
+		"l.c": "© 2015 - hecki97",
 		"l.version": "Version:",
 		"l.registration.succes": "Benutzer ",
 		"l.registration.succes.2": " wurde erfolgreich erstellt!"
@@ -51,7 +51,6 @@
 		"a.today": "Heute",
 		"a.timetable": "Stundenplan",
 		"a.edit": "Bearbeiten",
-		"a.info": "Info",
 		"a.logout": "Logout"
 	}
 }

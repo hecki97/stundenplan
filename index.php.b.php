@@ -1,15 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php include(dirname(__FILE__)."/res/php/_edit.php"); ?>
+<?php include(dirname(__FILE__)."/res/php/_index.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     <?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
-		<title>Edit</title>
+		<title>Stundenplan</title>
+    <script type="text/javascript">
+      function show_confirm_logout()
+      {
+        return confirm("<?=$string['javascript.alerts']['j.logout']; ?>");
+      }
+    </script>
 	</head>
 	<body class="metro">
 		<header>
       <nav class="navigation-bar dark fixed-top">
         <nav class="navigation-bar-content">
-          <a href="./index.php" class="element"><span class="icon-arrow-left-5"></span> <?=$string['links']['a.timetable']; ?>-online<sup><?=$lang; ?></sup></a>
+          <form action="./res/php/_logout.php" method="post"><button onclick="return show_confirm_logout();" class="element"><span class="icon-switch"></span> <?=$string['links']['a.timetable']; ?>-online<sup><?=$lang; ?></sup></button></form>
          
           <span class="element-divider"></span>
           <button class="element brand no-phone no-tablet" onclick="window.location.reload();"><span class="icon-spin"></span></button>
@@ -24,12 +30,9 @@
         </nav>
       </nav>
     </header>
-    <h1><?=$string['labels']['l.edit']; ?></h1><br/>
-    <form action="edit.php" method="post">
-      <?=$stundenplan->Edit(); ?>
-      <br/><input type="submit" name="save" value="<?=$string['buttons']['b.save']; ?>">
-      <input type="submit" name="reset" value="<?=$string['buttons']['b.reset']; ?>">
-    </form>
-    <?=@$result; ?>
+
+    <h1><?=$string['labels']['l.timetable']; ?></h1><br/>  
+    <?=$stundenplan->Load(); ?>
+    <br/><form action="./edit.php" style="display: inline;"><input type="submit" value="<?=$string['buttons']['b.edit']; ?>"></form>
   </body>
 </html>

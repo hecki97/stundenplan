@@ -1,6 +1,37 @@
 <?php
+
+/**
+* LanguageHandler
+**/
+class LanguageHandler
+{
+	public $array;
+	public $lang;
+
+	function __construct()
+	{ 
+		$this->lang = $this->get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false);
+
+		switch ($this->lang) {
+			case 'de':
+				$this->array = $this->get_array_from_file('de_DE.lang');
+				break;
+			case 'en':
+				$this->array = $this->get_array_from_file('en_US.lang');
+				break;
+			default:
+				$this->array = $this->get_array_from_file('la_LA.lang');
+				break;
+		}
+	}
+
+	function get_array_from_file($file)
+	{
+		return json_decode(file_get_contents('res/lang/'.$file), true);
+	}
+
 	// Browsersprache ermitteln
-	function lang_getFromBrowser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
+	function get_lang_from_Browser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
         // $_SERVER['HTTP_ACCEPT_LANGUAGE'] verwenden, wenn keine Sprachvariable mitgegeben wurde
         if ($lang_variable === null) {
             $lang_variable = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
@@ -68,4 +99,6 @@
 	    // die gefundene Sprache zurückgeben
 	    return $current_lang;
 	}
+}
+
 ?>

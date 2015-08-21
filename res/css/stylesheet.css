@@ -17,6 +17,14 @@ li {
     margin-right: auto;
 }
 
+.nav-container nav ul {
+    white-space:nowrap;
+}
+
+.nav-container nav ul li {
+    min-width:55px;
+}
+
 .style_li {
     text-align: center;
 }

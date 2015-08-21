@@ -1,5 +1,5 @@
 <?php
-	include(dirname(__FILE__)."/_checkDataBase.php");
+	//include(dirname(__FILE__)."/_checkDataBase.php");
 	include(dirname(__FILE__)."/_loadLangFiles.php");
 	include(dirname(__FILE__)."/_getVersionScript.php");
 
@@ -16,12 +16,12 @@
         else
        	{
        		$passwort = md5($passwort);
-	        $result = mysql_query("SELECT id FROM $table WHERE username LIKE '$username'");
+	        $result = mysql_query("SELECT id FROM `".$db['t.login']."` WHERE username LIKE '$username'");
 	        $menge = mysql_num_rows($result);
 
 	        if($menge == 0) 
 	        {
-	          $eintrag = "INSERT INTO $table (username, password) VALUES ('$username', '$passwort')";
+	          $eintrag = "INSERT INTO `".$db['t.login']."` (username, password) VALUES ('$username', '$passwort')";
 	          $eintragen = mysql_query($eintrag);
 	          if(@$eintragen == true)
 	          {
