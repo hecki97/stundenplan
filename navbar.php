@@ -1,46 +1,61 @@
 <!-- PHP Code -->
 <?php
-  //include(dirname(__FILE__)."/lib/php/GithubConnectionHandler.php");
-  //$githubConnectionHandler = new GithubConnectionHandler();
+  require(dirname(__FILE__).'/lib/php/BingImageHandler.php');
+  $bingImageHandler = new BingImageHandler();
 
-  require(dirname(__FILE__).'/lib/php/LanguageHandler.php');
+  require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
   $languageHandler = new LanguageHandler();
   $lang = $languageHandler->array;
 
-  $is_logged_in = false;
-  $b_main_menu = $is_logged_in ? '<form action="./res/php/_logout.php" method="post"><button onclick="return show_confirm_logout();" class="element"><span class="icon-switch"></span> '.$lang['links']['a.timetable'].'-online<sup>'.$languageHandler->lang.'</sup></button></form>' : ' <a href="./index.php" class="element"><span class="icon-home"></span> '.$lang["links"]["a.timetable"].'-online<sup>'.$languageHandler->lang.'</sup></a>';
-  $b_sign_in = $is_logged_in ? '<a class="element place-right no-phone no-tablet"><span class="icon-unlocked"></span> '.$_SESSION['username'].'</a>' : '<a href="./login.php" class="element place-right no-phone no-tablet"><span class="icon-key"></span> '.$lang['links']['a.login'].'</a>';
+  switch (isset($_SESSION["username"])) {
+    case true:
+      $logged_in_style = 'display: block;';
+      $logged_out_style = 'display: none;';
+      break;
+    
+    default:
+      $logged_in_style = 'display: none;';
+      $logged_out_style = 'display: block;';
+      break;
+  }
 ?>
-<!-- HTML Code -->
+<!-- HTML Code
+<!DOCTYPE html>
 <html>
   <head>
-    <!-- JavaScript Code -->
+  -->
+    <!-- JavaScript Code
     <script type="text/javascript">
       function show_confirm_logout()
       {
-        return confirm("<?=$lang['javascript.alerts']['j.logout']; ?>");
+        return confirm("<?//=$lang['javascript.alerts']['j.logout']; ?>");
       }
     </script>
-    <!---->
+    -->
+  <!--
   </head>
   <body>
-    <nav class="navigation-bar dark fixed-top">
-      <nav class="navigation-bar-content">
-        <!--<form action="./res/php/_logout.php" method="post"><button onclick="return show_confirm_logout();" class="element"><span class="icon-switch"></span> <?//=$lang['links']['a.timetable']; ?>-online<sup><?=$languageHandler->lang; ?></sup></button></form>-->
-        <?=$b_main_menu; ?>
-        <span class="element-divider"></span>
-        <button class="element brand no-phone no-tablet" onclick="window.location.reload();"><span class="icon-spin"></span></button>
-        <span class="element-divider"></span>
-
-        <a href="./about.php" class="element brand place-right no-phone no-tablet"><span class="icon-cog"></span></a>
-        <span class="element-divider place-right"></span>
-        <a class="element place-right no-phone no-tablet"> <?//=$githubConnectionHandler->github_json['repo']; ?> alpha dev<!--<?=$version; ?>--></a>
-        <span class="element-divider place-right"></span>
-        <!--<a class="element place-right no-phone no-tablet"><span class="icon-unlocked"></span> <?//=$_SESSION['username']; ?></a>-->
-        <?=$b_sign_in; ?>
-        <span class="element-divider place-right"></span>
-      </nav>
-    </nav>
+  -->
+    <div class="app-bar darcula">
+      <ul class="app-bar-menu">
+        <li style="<?=$logged_out_style; ?>"><a href="./index.php"><span class="mif-menu"></span> Stundenplan<sup>de</sup></a></li>
+        <li style="<?=$logged_in_style; ?>"><form action="./php/logout.php"><button class="button link fg-white" type="submit"><span class="mif-switch"></span> Logout</button></form></li>
+        <span class="app-bar-divider"></span>
+        <li><a onclick="window.location.reload();"><span class="mif-loop2"></span> Reload</a></li>
+        <span class="app-bar-divider"></span>
+      </ul>
+      <ul class="app-bar-menu place-right">
+        <span class="app-bar-divider"></span>
+        <li style="<?=$logged_out_style; ?>"><a href="./login.php"><span class="mif-enter"></span> Login</a></li>
+        <li style="<?=$logged_in_style; ?>"><a href="overview.php"><span class="mif-user"></span> <?=@$_SESSION["username"]; ?></a></li>
+        <span class="app-bar-divider"></span>
+        <li><a><span class="mif-info"></span> v0.1 dev</a></li>
+        <span class="app-bar-divider"></span>
+        <li><a href="./about.php" class="fg-white"><span class="mif-cogs"></span> About</a></li>
+      </ul>
+    </div>
     <br/>
+  <!--
   </body>
 </html>
+-->

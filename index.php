@@ -1,26 +1,23 @@
+<!-- PHP Code -->
+<?php session_start(); ?>
 <!-- HTML Code -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 	<head>
     	<!-- load header from header.html -->
-    	<?php require(dirname(__FILE__).'/res/html/header.html'); ?>
+    	<?php require(dirname(__FILE__).'/header.html'); ?>
 		<title>Stundenplan</title>
 	</head>
-	<body class="metro">
+	<body>
 		<!-- load navbar from navbar.php -->
 		<?php require(dirname(__FILE__).'/navbar.php'); ?>
-        <div style="margin-top: 45px;">
-            <h1><?=$lang['labels']['l.timetable']; ?></h1><br/>  
-            <?//=$stundenplan->Load(); ?>
+        <div class="page-content">
+            <div class="page-header">Stundenplan-online<sup>de</sup> <!--<?//=$lang['labels']['l.timetable']; ?>--></div>
             <br/>
-            <div>
-                <form action="./registration.php" style="display: inline;">
-                    <input type="submit" value="|Sofort loslegen!|">
-                </form>
-                <form action="./login.php" style="display: inline;">
-    	           <input type="submit" value="|Zum Login!|">
-                </form>
-            </div>
+            <img src="./res/bg.png">
+            <br/>
+            <a class="command-button fg-black page-box-shadow" href="./registration.php" style="margin-right: 25px;" type="submit"><span class="icon mif-enter"></span>Loslegen!<small>Zur Registrierung!</small></a>
+    	    <a class="command-button fg-black page-box-shadow" href="./login.php" style="margin-left: 25px;" type="submit"><span class="icon mif-key"></span>Fortsetzen!<small>Zum Login!</small></a>
         </div>
-  </body>
+    </body>
 </html>

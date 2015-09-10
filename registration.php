@@ -1,68 +1,81 @@
 <!-- PHP Code -->
 <?php
-  require(dirname(__FILE__).'/lib/php/AuthHandler.php');
-  $authHandler = new AuthHandler();
-?>
-<!-- HTML Code -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php //include(dirname(__FILE__)."/res/php/_registration.php"); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
-<head>
-    <!-- load header from header.html -->
-    <?php require(dirname(__FILE__).'/res/html/header.html'); ?>
-    <title>Registrierung</title>
-</head>
-<body class="metro">
-  <!-- load navbar from navbar.php -->
-  <?php require(dirname(__FILE__).'/navbar.php'); ?>
+  session_start();
 
-  <div class="container" style="margin-top: 45px;">
-    <h1><?=$lang['labels']['l.registration']; ?></h1>
-    <form action="registration.php" method="post">
-      <h3><?=$lang['labels']['l.data']; ?></h3>
-      <table cellpadding="2" align="center">
-        <tr>
-          <th><?=$lang['labels']['l.username']; ?></th>
-          <th><input type="text" name="username" /></th>
-        </tr>
-        <tr>
-          <th><?=$lang['labels']['l.password']; ?></th>
-          <th><input type="password" name="password" /></th>
-        </tr>
-        <tr>
-          <th><?=$lang['labels']['l.password.rep']; ?></th>
-          <th><input type="password" name="password2" /></th>
-        </tr>
-      </table>
-      <br><input type="submit" value="<?=$lang['buttons']['b.register']; ?>">
-      <br/><?=@$return; ?>
-    </form>
-  </div>
-</body>
-</html>
-<!-- PHP Code (Post) -->
-<?php
+  require_once(dirname(__FILE__).'/lib/php/AuthHandler.php');
+  $authHandler = new AuthHandler();
+
+  require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
+  $languageHandler = new LanguageHandler();
+  $lang = $languageHandler->array;
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
     $result = $authHandler->Sign_up($_POST['username'], $_POST['password'], $_POST['password2']);
 
     switch ($result) {
       case 'RegistrationSuccess':
-        $return = '<br/>'.$lang['labels']['l.registration.succes'].'<b>'.$_POST['username'].'</b>'.$lang['labels']['l.registration.succes.2'].' <a href="./login.php">'.$lang['links']['a.login'].'</a>'; 
+        $div  = '<div class="popover marker-on-top bg-green fg-black" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #003E00;">';
+        $div .= $lang['labels']['l.registration.succes'].'<b>'.$_POST['username'].'</b>'.$lang['labels']['l.registration.succes.2'];
+        $div .= '</div>';
         break;
       case 'RegistrationError':
-        JavaScript_Alert($lang['javascript.alerts']['j.error']);
+        $div  = '<div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">';
+        $div .= 'Username and passwords do not match. Please try again.';
+        $div .= '</div>';
         break;
       case 'AlreadyExists':
-        JavaScript_Alert($lang['javascript.alerts']['j.already.exists']);
+        $div  = '<div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">';
+        $div .= 'Username already exists. Please try again.';
+        $div .= '</div>';
         break;
       default:
-        JavaScript_Alert($lang['javascript.alerts']['j.fields']);
+        $div  = '<div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">';
+        $div .= 'Please fill the required fields (username, passwords).';
+        $div .= '</div>';
         break;
     }
   }
-
-  function JavaScript_Alert($message) {
-    ?><script type='text/javascript'>alert("<?=$message; ?>");</script><?php
-  }
 ?>
+<!-- HTML Code -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- load header from header.html -->
+    <?php require(dirname(__FILE__).'/header.html'); ?>
+    <title>Registrierung</title>
+</head>
+<body>
+  <!-- load navbar from navbar.php -->
+  <?php require(dirname(__FILE__).'/navbar.php'); ?>
+  <div class="page-content">
+    <div class="page-header"><?=$lang['labels']['l.registration']; ?></div>
+    <div class="page-content-box page-box-shadow">
+      <h3>Anmeldeinformationen</h3>
+      <form action="registration.php" method="post">
+        <div class="input-control text full-size" data-role="input">
+          <span class="mif-user prepend-icon"></span>
+          <input type="text" placeholder="Enter your username here..." name="username">
+          <button class="button helper-button clear"><span class="mif-cross"></span></button>
+        </div>
+        <br/>
+        <div class="input-control password full-size" data-role="input">
+          <span class="mif-lock prepend-icon"></span>
+          <input type="password" placeholder="Enter your password here..." name="password">
+          <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+        </div>
+        <br/>
+        <div class="input-control password full-size" data-role="input">
+          <span class="mif-lock prepend-icon"></span>
+          <input type="password" placeholder="Re-enter your password here..." name="password2">
+          <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+        </div>
+        <br/><br/>
+        <button class="button" type="submit">Registrieren!</button>
+        <a class="button link" href="./login.php">Zum Login!</a>
+      </form>
+    </div>
+    <?=@$div; ?>
+  </div>
+</body>
+</html>

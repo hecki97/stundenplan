@@ -2,7 +2,7 @@
 <?php include(dirname(__FILE__)."/res/php/_edit.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-    <?php include(dirname(__FILE__)."/res/html/htmlHead.html"); ?>
+    <?php include(dirname(__FILE__)."/header.html"); ?>
 		<title>Edit</title>
 	</head>
 	<body class="metro">

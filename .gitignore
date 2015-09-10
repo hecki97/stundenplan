@@ -215,9 +215,8 @@ pip-log.txt
 .mr.developer.cfg
 
 ##
-#
+# Project Files
 ##
-/res/data/
-*.data
+cache/
 *.sublime-workspace
-/nbproject/private/
+*.sublime-project

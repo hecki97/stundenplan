@@ -1,54 +1,55 @@
 body {
-	background-color: #f1f1f1;
-	text-align: center;
+	position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    color: #f1f1f1;
+    overflow: hidden;
 }
 
-th {
-	background-color: #f1f1f1;
-	font-size: 15px;
-}
-
-li {
-    display:table-cell;
-    vertical-align: middle;
-
+body:before {
+    content: "";
+    position: fixed;
+    /* background: url(https://www.bing.com/ImageResolution.aspx?w=1920&h=1080); */
+    background-image: url(../../cache/BingWallpaper.jpg);
+    background-size: 100%;
+    z-index: -1; /* Keep the background behind the content */
+    height: 100%; width: 100%; /* Using Glen Maddern's trick /via @mente */
     text-align: left;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: -5px;
+
+    /* don't forget to use the prefixes you need */
+    transform: scale(1.1);
+    transform-origin: top left;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
 }
 
-.nav-container nav ul {
-    white-space:nowrap;
-}
-
-.nav-container nav ul li {
-    min-width:55px;
-}
-
-.style_li {
+.page-content {
+    margin-top: 25px;
     text-align: center;
 }
 
-.content {
-	position: absolute;
-	left: 0;
-	top: 35%;
-	margin: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 2;
-	display: table;
-	text-align: center;
+.page-header {
+	color: #f1f1f1;
+    font-size: 75px;
+    text-shadow: 3px 3px #393939
 }
 
-.head {
-	position: absolute;
-    left: 0;
-    top: 10%;
-	margin: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: table;
-	text-align: center;
+.page-content-box {
+    margin: 45px auto 0 auto;
+    padding: 25px 25px 25px 25px;
+
+    color: #000;
+    background-color: #f1f1f1;
+    display: inline-block;
+}
+
+.page-content-popover {
+    margin: 15px auto 0px auto; width: 300px;
+}
+
+.page-box-shadow {
+    box-shadow: 7px 7px #393939;
 }

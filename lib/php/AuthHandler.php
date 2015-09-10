@@ -9,14 +9,11 @@
 
 		function __construct()
 		{
-			require 'DeviceHandler.php';
+			require_once 'DeviceHandler.php';
 			$this->deviceHandler = new DeviceHandler();
 
-			require 'DatabaseHandler.php';
+			require_once 'DatabaseHandler.php';
 			$this->databaseHandler = new DatabaseHandler();
-
-			session_start();
-			//$this->Check_session();
 		}
 
 		public function Check_session()
@@ -35,27 +32,23 @@
 
 		public function Sign_in($username, $password)
 		{
-			if (!empty($username) && !empty($password))
-	    	{
-	    		$request = "SELECT username, password FROM `".$db['t.login']."` WHERE username LIKE '".$username."' LIMIT 1"; 
-	    		$result = mysql_query($request); 
-	    		$row = mysql_fetch_object($result);
+			if ($username != '' && $password != '')
+			{
+	    		$result = mysql_query("SELECT username, password FROM `login` WHERE username LIKE '".$username."' LIMIT 1") or die(mysql_error()); 
+	    		if (empty($result))
+	    			return 'NotFoundInDatabase';
 
-	      		if($password == $row->password) 
+	    		$row = mysql_fetch_object($result);
+	    		if(!empty($row) && md5($password) == $row->password) 
 	      		{ 
 	        		$_SESSION["username"] = $username;
-	        		$this->deviceHandler->Head_to_site('index.php');
-	      		} 
-	      		else 
-	      		{ 
-	        		//<script type="text/javascript">alert("<?=//$string['javascript.alerts']['j.login.failed']; ");</script>
-	        		?><script type="text/javascript">alert("Login failed!");</script><?php
+	        		$this->deviceHandler->Head_to_site('overview.php');
+	        		exit;
 	      		}
-	    	}
-	    	else
-	    	{
-	      		?><script type="text/javascript">alert("<?=$string['javascript.alerts']['j.fields']; ?>");</script><?php
-	    	}
+	      		else
+	      			return 'LoginFailed';
+			}
+	      	return 'SomeFieldsAreEmpty';
 		}
 
 		public function Sign_up($username, $password, $password2)
@@ -63,13 +56,13 @@
 			$return = 'SomeFieldsAreEmpty';
 			if($password == $password2 && $username != '' && $password != '' && $password2 != '')
        		{
-	        	$result = mysql_query("SELECT `index` FROM `login` WHERE username LIKE '$username'");
+	        	$result = mysql_query("SELECT `id` FROM `login` WHERE username LIKE '".$username."'") or die(mysql_error());
 	        	$row = mysql_num_rows($result);
 	        	$password = md5($password);
+
 	        	if($row == 0) 
 	        	{
-	          		$query = "INSERT INTO login (username, password) VALUES ('$username', '$password')";
-	          		$result = mysql_query($query);
+	          		$result = mysql_query("INSERT INTO login (username, password) VALUES ('".$username."', '".$password."')") or die(mysql_error());
 	          		$return = (@$result) ? 'RegistrationSuccess' : 'RegistrationError';
 	        	}
 	        	else 
@@ -78,7 +71,7 @@
        		return $return;
 		}
 
-		public function Log_out()
+		public function Sign_out()
 		{
 			session_destroy();
 			$this->deviceHandler->Head_to_site('index.php');
