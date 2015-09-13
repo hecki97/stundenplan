@@ -1,28 +1,25 @@
 <?php
+	$configHandler = new ConfigHandler();
 
 	/**
 	* ConfigHandler
 	*/
 	class ConfigHandler
 	{
-		// 
-		define('LOAD_CONFIG_FROM_FILE', false);
-		define('CONFIG_FILE_PATH', '')
+		private $file_path;
 
-		//
-		define('USE_DATABASE_FOR_LOGIN', false);
-
-		define('USE_MULTILANG', true);
-		define('ALLOWED_LANGUAGES', 'en, de, la');
-		define('DEFAULT_LANGUAGE_PATH', '');
-
-
-		function __construct(argument)
+		function __construct()
 		{
-			if (USE_DATABASE_FOR_LOGIN) require(dirname(__FILE__).'/lib/php/DatabaseHandler.php');
+			$this->file_path = dirname(__FILE__).'/../../config/config.ini';
 
-			if (USE_MULTILANG) require(dirname(__FILE__).'/lib/php/LanguageHandler.php');
+			if (!file_exists($this->file_path)) die($this->file_path.' does not exist');
+			$ini_array = parse_ini_file($this->file_path);
+
+			reset($ini_array);
+			while (list($key, $value) = each($ini_array)) {
+    			$key = preg_replace("/([a-z])([A-Z])/", "$1_$2", $key);
+    			define(strtoupper($key), $value);
+			}
 		}
 	}
-
 ?>
