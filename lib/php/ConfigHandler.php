@@ -3,7 +3,7 @@
 
 	/**
 	* ConfigHandler
-	*/
+	**/
 	class ConfigHandler
 	{
 		private $file_path;

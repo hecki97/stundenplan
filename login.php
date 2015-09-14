@@ -1,6 +1,9 @@
 <!-- PHP Code -->
 <?php
   session_start();
+  // require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
+  // var_dump(defined('LANG'));
+  // if (!defined('LANG')) $languageHandler = new LanguageHandler();
 
   require_once(dirname(__FILE__).'/lib/php/AuthHandler.php');
   $authHandler = new AuthHandler();

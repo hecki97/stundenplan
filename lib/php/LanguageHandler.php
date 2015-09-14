@@ -6,29 +6,38 @@
 class LanguageHandler
 {
 	public $array;
-	public $lang;
 
 	function __construct()
 	{ 
-		$this->lang = $this->get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false);
+        define('LANG', $this->get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false));
 
-		switch ($this->lang) {
+		switch (LANG) {
 			case 'de':
-				$this->array = $this->get_array_from_file('de_DE.lang');
+                $this->parse_ini_file('de_DE.ini');
 				break;
 			case 'en':
-				$this->array = $this->get_array_from_file('en_US.lang');
+				$this->parse_ini_file('en_US.ini');
 				break;
 			default:
-				$this->array = $this->get_array_from_file('la_LA.lang');
+				$this->parse_ini_file('la_LA.ini');
 				break;
 		}
 	}
 
-	function get_array_from_file($file)
-	{
-		return json_decode(file_get_contents('res/lang/'.$file), true);
-	}
+    function parse_ini_file($file)
+    {
+        $file_path = dirname(__FILE__).'/../../res/lang/'.$file;
+
+        if (!file_exists($file_path)) die($file_path.' does not exist');
+        $ini_array = parse_ini_file($file_path);
+
+        reset($ini_array);
+        while (list($key, $value) = each($ini_array)) {
+            $key = str_replace('-', '_', $key);
+            $value = (!empty($value)) ? $value : strtoupper($key);
+            define(strtoupper($key), $value);
+        }
+    }
 
 	// Browsersprache ermitteln
 	function get_lang_from_Browser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
