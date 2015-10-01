@@ -1,0 +1,748 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"new",
+				"new_array"
+			],
+			[
+				"PHP",
+				"PHP_EOL"
+			],
+			[
+				"SITE",
+				"SITE_ROOT"
+			],
+			[
+				"ar",
+				"arArray"
+			],
+			[
+				"ver",
+				"version_sup"
+			],
+			[
+				"pass",
+				"passwort2"
+			],
+			[
+				"gameO",
+				"gameObject	*()"
+			],
+			[
+				"cub",
+				"cube	PrimitiveType.*"
+			],
+			[
+				"Create",
+				"CreatePrimitive	GameObject.*(type)"
+			],
+			[
+				"Createpr",
+				"CreatePrimitive	PolygonCollider2D.*(sides, scale, offset)"
+			],
+			[
+				"fo",
+				"form	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "about.php",
+			"settings":
+			{
+				"buffer_size": 1170,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "login.php",
+			"settings":
+			{
+				"buffer_size": 2747,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/library/php/DeviceHandler.php",
+			"settings":
+			{
+				"buffer_size": 1107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "timetable.php",
+			"settings":
+			{
+				"buffer_size": 2263,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "navbar.php",
+			"settings":
+			{
+				"buffer_size": 2046,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 1076,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/library/php/BingImageHandler.php",
+			"settings":
+			{
+				"buffer_size": 1200,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/library/php/LanguageHandler.php",
+			"settings":
+			{
+				"buffer_size": 4139,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "overview.php",
+			"settings":
+			{
+				"buffer_size": 3398,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/php/remove_from_list.php",
+			"settings":
+			{
+				"buffer_size": 380,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "css/stylesheet.css",
+			"settings":
+			{
+				"buffer_size": 1216,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "edit.php",
+			"settings":
+			{
+				"buffer_size": 2527,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/config",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/data",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/library",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/library/php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/php"
+	],
+	"file_history":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/header.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/data/admin.json",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/resources/data/admin.ini",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/header.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/css/stylesheet.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/lang/de_DE.ini",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_stundenplanClass.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/html/htmlHead.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_edit.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/edit.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/stundenplan.sublime-workspace",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/registration.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/info.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_registration.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_auth.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/php/_checkDataBase.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/res/config/database.config",
+		"/Applications/XAMPP/xamppfiles/htdocs/stundenplan/stundenplan.sublime-project",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/html/htmlHead.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/registration.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/onlineEditor.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/settings.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/upload.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/info.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_onlineEditor.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_registration.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_settings.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_upload.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/config/database.config",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_checkDataBase.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/lang/de_DE.lang",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/lang/en_US.lang",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/mobile_info.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/php/_mobile_modul.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/lang/la_LA.lang",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/mobile_modul.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/php/_mobile_info.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_auth.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/php/_session.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/php/_index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/php/_mobile_cookie.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/mobile_cookie.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mobile/res/html/mobileHtmlHead.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mlkvplan-desktop.air/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/mlkvplan-desktop.air/mlkvplan-desktop-app.xml",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/modulDisabled.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/mlkvplan/res/php/_logout.php",
+		"/Users/hecki97/Documents/SourceTree/stundenplan/index.php",
+		"/Users/hecki97/touchProject/unity_project.sublime-project",
+		"/Users/hecki97/touchProject/.gitignore",
+		"/Users/hecki97/Documents/SourceTree/MLKVertretungsplan-online/res/lang/de_DE.lang",
+		"/Users/hecki97/Documents/SourceTree/stundenplan/edit.php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"host",
+			"th",
+			"!\",",
+			"_auth",
+			"}\n",
+			"warning2",
+			"b"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 11,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "about.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "login.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								209,
+								209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 536.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/library/php/DeviceHandler.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								141,
+								141
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 43.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "timetable.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2263,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "navbar.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2046,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1797,
+								1797
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "index.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								156,
+								182
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "resources/library/php/BingImageHandler.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								267,
+								267
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 111.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "resources/library/php/LanguageHandler.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4139,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								792,
+								792
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 384.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "overview.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3398,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1187,
+								1230
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 96.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "resources/php/remove_from_list.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 380,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "css/stylesheet.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1168,
+								1168
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "edit.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1070,
+								1070
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 74.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "stundenplan.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

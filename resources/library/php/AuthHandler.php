@@ -20,7 +20,8 @@
 		{
     		if(!isset($_SESSION['username'])) 
 			{ 
-        		$this->deviceHandler->Head_to_site('login.php');
+        		//$this->deviceHandler->Head_to_site('login.php');
+        		header('Refresh:0; url=../../../login.php');
         		exit;
 			} 
 		}
@@ -42,7 +43,8 @@
 	    		if(!empty($row) && md5($password) == $row->password) 
 	      		{ 
 	        		$_SESSION["username"] = $username;
-	        		$this->deviceHandler->Head_to_site('overview.php');
+	        		//$this->deviceHandler->Head_to_site('overview.php');
+	        		header('Refresh:0; url=../../../overview.php');
 	        		exit;
 	      		}
 	      		else
@@ -74,7 +76,8 @@
 		public function Sign_out()
 		{
 			session_destroy();
-			$this->deviceHandler->Head_to_site('index.php');
+			//$this->deviceHandler->Head_to_site('index.php');
+			header('Refresh:0; url=../../../index.php');
 		}
 	}
 ?>

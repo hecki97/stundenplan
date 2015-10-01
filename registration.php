@@ -1,13 +1,11 @@
-<!-- PHP Code -->
 <?php
   session_start();
 
-  require_once(dirname(__FILE__).'/lib/php/AuthHandler.php');
+  require_once(dirname(__FILE__).'/resources/library/php/AuthHandler.php');
   $authHandler = new AuthHandler();
 
-  require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
-  $languageHandler = new LanguageHandler();
-  $lang = $languageHandler->array;
+  //require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
+  //$languageHandler = new LanguageHandler();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
@@ -41,8 +39,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- load header from header.html -->
-    <?php require(dirname(__FILE__).'/header.html'); ?>
+    <!-- load header from header.php -->
+    <?php require(dirname(__FILE__).'/header.php'); ?>
     <title>Registrierung</title>
 </head>
 <body>
@@ -50,7 +48,7 @@
   <?php require(dirname(__FILE__).'/navbar.php'); ?>
   <div class="page-content">
     <div class="page-header"><?=$lang['labels']['l.registration']; ?></div>
-    <div class="page-content-box page-box-shadow">
+    <div class="page-content-box content-box-shadow">
       <h3>Anmeldeinformationen</h3>
       <form action="registration.php" method="post">
         <div class="input-control text full-size" data-role="input">

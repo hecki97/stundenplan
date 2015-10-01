@@ -1,16 +1,12 @@
-<!-- PHP Code -->
 <?php
   session_start();
-  // require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
-  // var_dump(defined('LANG'));
-  // if (!defined('LANG')) $languageHandler = new LanguageHandler();
 
-  require_once(dirname(__FILE__).'/lib/php/AuthHandler.php');
+  //loads AuthHandler which handles the login mechanic
+  require_once(realpath(dirname(__FILE__)).'/resources/library/php/AuthHandler.php');
+  require_once(realpath(dirname(__FILE__)).'/resources/library/php/LanguageHandler.php');
+
   $authHandler = new AuthHandler();
-
-  require_once(dirname(__FILE__).'/lib/php/LanguageHandler.php');
   $languageHandler = new LanguageHandler();
-  $lang = $languageHandler->array;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
@@ -19,13 +15,16 @@
     $div  = '<div class="popover marker-on-top bg-red fg-grayLighter page-content-popover" style="box-shadow: 7px 7px #4C0000; display: block;">';
     switch ($result) {
       case 'LoginFailed':
-        $div .= 'Username and password do not match. Please try again.';
+        //$div .= 'Username and password do not match. Please try again.';
+        $div .= DIV_POPOVER_LOGIN_FAILED;
         break;
       case 'SomeFieldsAreEmpty':
-        $div .= 'Please fill the required fields (username, password).';
+        //$div .= 'Please fill the required fields (username, password).';
+        $div .= DIV_POPOVER_SOME_FIELDS_ARE_EMPTY;
         break;
       case 'NotFoundInDatabase':
-        $div .= 'Username not found in Database.';
+        //$div .= 'Username not found in Database.';
+        $div .= DIV_POPOVER_NOT_FOUND_IN_DATABASE;
         break;
     }
     $div .= '</div>';
@@ -35,33 +34,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- load header from header.html -->
-    <?php require(dirname(__FILE__)."/header.html"); ?>
-    <title>Login</title>
+    <!-- load header from header.php -->
+    <?php require(realpath(dirname(__FILE__))."/header.php"); ?>
+    <title><?=LOGIN_TITLE; ?></title>
   </head>
   <body>
     <!-- load navbar from navbar.php -->
-    <?php require(dirname(__FILE__)."/navbar.php"); ?>
+    <?php require(realpath(dirname(__FILE__))."/navbar.php"); ?>
     <div class="page-content">
-      <div class="page-header"><?=$lang['labels']['l.login']; ?></div>
-      <div class="page-content-box page-box-shadow">
-        <h3>Enter your credentials:</h3>
+      <div class="page-header"><?=LOGIN_PAGE_HEADER; ?></div>
+      <div class="page-content-box content-box-shadow">
+        <!--<h3>Enter your credentials:</h3>-->
+        <h3><?=LOGIN_PAGE_CONTENT_BOX_HEADER; ?></h3>
         <br/>
         <form action="login.php" method="post">
           <div class="input-control text full-size" data-role="input">
             <span class="mif-user prepend-icon"></span>
-            <input type="text" placeholder="Enter your username here..." name="username">
+            <input type="text" placeholder="<?=INPUT_TEXT_USERNAME_PLACEHOLDER; ?>" name="username">
             <button class="button helper-button clear"><span class="mif-cross"></span></button>
           </div>
           <br/>
           <div class="input-control password full-size" data-role="input">
             <span class="mif-lock prepend-icon"></span>
-            <input type="password" placeholder="Enter your password here..." name="password">
+            <input type="password" placeholder="<?=INPUT_TEXT_PASSWORD_PLACEHOLDER; ?>" name="password">
             <button class="button helper-button reveal"><span class="mif-looks"></span></button>
           </div>
           <br/><br/>
-          <button class="button" type="submit">Login!</button>
-          <a class="button link" href="./registration.php">Zur Registrierung!</a>
+          <button class="button" type="submit"><?=BUTTON_LOGIN; ?></button>
+          <a class="button link" href="./registration.php"><?=BUTTON_LINK_REGISTRATION; ?></a>
         </form>
     </div>
     <?=@$div; ?>

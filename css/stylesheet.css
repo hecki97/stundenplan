@@ -2,14 +2,14 @@ body {
 	position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
     color: #f1f1f1;
-    overflow: hidden;
+    overflow: normal;
 }
 
 body:before {
     content: "";
     position: fixed;
     /* background: url(https://www.bing.com/ImageResolution.aspx?w=1920&h=1080); */
-    background-image: url(../../cache/BingWallpaper.jpg);
+    background-image: url(../img/cache/BingWallpaper.jpg);
     background-size: 100%;
     z-index: -1; /* Keep the background behind the content */
     height: 100%; width: 100%; /* Using Glen Maddern's trick /via @mente */
@@ -27,8 +27,21 @@ body:before {
 }
 
 .page-content {
-    margin-top: 25px;
     text-align: center;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.table-container {
+    text-align: center;
+    width: 90%;
+    overflow: auto;
+
+    margin: 45px auto 0 auto;
+    padding: 5px 10px 5px 10px;
+
+    color: #000;
+    background-color: #f1f1f1;
 }
 
 .page-header {
@@ -50,6 +63,6 @@ body:before {
     margin: 15px auto 0px auto; width: 300px;
 }
 
-.page-box-shadow {
+.content-box-shadow {
     box-shadow: 7px 7px #393939;
 }

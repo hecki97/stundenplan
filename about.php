@@ -1,11 +1,10 @@
-<!-- PHP Code -->
 <?php session_start(); ?>
 <!-- HTML Code -->
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- load header from header.html -->
-    	<?php require(dirname(__FILE__)."/header.html"); ?>
+		<!-- load header from header.php -->
+    	<?php require(dirname(__FILE__)."/header.php"); ?>
 		<title>About</title>
 	</head>
 	<body>
@@ -13,7 +12,7 @@
 		<?php require(dirname(__FILE__)."/navbar.php"); ?>
 		<div class="page-content">
 			<div class="page-header">About</div>
-			<div class="page-content-box page-box-shadow">
+			<div class="page-content-box content-box-shadow">
 				<dl>
 					<dt><h2><?=$lang['labels']['l.source.code']; ?></h2></dt>
 					<dd><h3><a href="https://github.com/hecki97/stundenplan">github.com</h3></a></dd>

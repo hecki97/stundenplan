@@ -5,8 +5,6 @@
 **/
 class LanguageHandler
 {
-	public $array;
-
 	function __construct()
 	{ 
         define('LANG', $this->get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false));
@@ -26,15 +24,22 @@ class LanguageHandler
 
     function parse_ini_file($file)
     {
-        $file_path = dirname(__FILE__).'/../../res/lang/'.$file;
+        //Dateipfad setzen
+        $file_path = dirname(__FILE__).'/../../lang/'.$file;
 
+        //Falls die Datei nicht existiert => Fehlermeldung zurückgeben
         if (!file_exists($file_path)) die($file_path.' does not exist');
-        $ini_array = parse_ini_file($file_path);
+        //Der Variable den Inhalt der .ini Datei zuweisen
+        $array = parse_ini_file($file_path);
 
-        reset($ini_array);
-        while (list($key, $value) = each($ini_array)) {
+        reset($array);
+        //Einmal durch das Array laufen
+        while (list($key, $value) = each($array)) {
+            //Alle Bindestriche mit einem Unterstrich ersetzen
             $key = str_replace('-', '_', $key);
+            //Falls $value leer ist => Wert von $key in Großbuchstaben zuweisen ansonsten der Wert von $value 
             $value = (!empty($value)) ? $value : strtoupper($key);
+            //Eine Konstante mit dem Schlüssel $key und dem Wert $value definieren
             define(strtoupper($key), $value);
         }
     }

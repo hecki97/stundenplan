@@ -12,7 +12,7 @@
 
 		function __construct()
 		{
-			$this->dir_path = dirname(__FILE__).'/../../'.$this->dirname;
+			$this->dir_path = dirname(__FILE__).'/../../../img/'.$this->dirname;
 			$this->file_full_path = $this->dir_path.'/'.$this->filename;
 			// $this->filename = 'BingWallpaper.jpg';
 

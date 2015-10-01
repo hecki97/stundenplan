@@ -8,7 +8,7 @@
 
 		function __construct()
 		{
-			$this->host = $_SERVER['SERVER_NAME'];
+			$this->host = $_SERVER['HTTP_HOST'];
 			if ($this->Check_if_device_is_mobile())
 				header("Location: http://".$this->host."/stundenplan/mobile/index.php");
 		}
