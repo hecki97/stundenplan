@@ -1,16 +1,23 @@
 <?php
   session_start();
 
-  //loads AuthHandler which handles the login mechanic
-  require_once(realpath(dirname(__FILE__)).'/resources/library/php/AuthHandler.php');
+  require_once(realpath(dirname(__FILE__)).'/resources/library/php/DatabaseHandler.php');
   require_once(realpath(dirname(__FILE__)).'/resources/library/php/LanguageHandler.php');
 
-  $authHandler = new AuthHandler();
+  $databaseHandler = new DatabaseHandler();
   $languageHandler = new LanguageHandler();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
-    $result = $authHandler->Sign_in($_POST["username"], $_POST["password"]);
+    $result = $databaseHandler->Get_Password_Hash_from_database($_POST["username"]);
+    if (password_verify($_POST['password'], $result))
+    {
+      $_SESSION['username'] = $_POST["username"];
+      header('Refresh:0; url=./overview.php');
+      exit;
+    }
+    else
+      $result = 'LoginFailed';
 
     $div  = '<div class="popover marker-on-top bg-red fg-grayLighter page-content-popover" style="box-shadow: 7px 7px #4C0000; display: block;">';
     switch ($result) {

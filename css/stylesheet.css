@@ -29,7 +29,6 @@ body:before {
 .page-content {
     text-align: center;
     margin-top: 25px;
-    margin-bottom: 50px;
 }
 
 .table-container {
@@ -51,7 +50,7 @@ body:before {
 }
 
 .page-content-box {
-    margin: 45px auto 0 auto;
+    margin: 45px auto 0px auto;
     padding: 25px 25px 25px 25px;
 
     color: #000;
