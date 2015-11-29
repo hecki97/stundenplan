@@ -1,19 +1,3 @@
-<?php
-	//Debug
-	ini_set('display_errors', 1);
-  	error_reporting(E_ALL | E_STRICT);
-
-  	$root = pathinfo($_SERVER['SCRIPT_FILENAME']);
-	define ('BASE_FOLDER', basename($root['dirname']));
-	define ('SITE_ROOT',    realpath(dirname(__FILE__)));
-	define ('SITE_URL',    'http://'.$_SERVER['HTTP_HOST'].'/'.BASE_FOLDER);
-
-	require(realpath(dirname(__FILE__)).'/resources/library/php/BingImageHandler.php');
-	require_once(realpath(dirname(__FILE__)).'/resources/library/php/LanguageHandler.php');
-
-	$bingImageHandler = new BingImageHandler();
-  	if (!defined('LANG')) $languageHandler = new LanguageHandler();
-?>
 <!-- HTML Code
 <!DOCTYPE html>
 <html>

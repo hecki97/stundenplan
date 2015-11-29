@@ -1,0 +1,26 @@
+RewriteEngine on
+#AllowOverride ALL
+
+# Redirect .html to .php
+RewriteRule ^(.*).html$ $1.php
+
+RewriteRule ^view_(.*).php$ view.php?id=$1
+RewriteRule ^edit_(.*).php$ view.php?id=$1&mode=edit
+RewriteRule ^dashboard_(.*).php$ dashboard.php?sort=$1
+# RewriteRule ^toolboard_(.*).php$ dashboard.php?sort=$1&mode=edit
+
+# -- File System Protection --
+
+# directory browsing
+Options All -Indexes
+
+# deny to open .htaccess file
+<Files ~ "^\.htaccess">
+  Order allow,deny
+  Deny from all
+</Files>
+
+#deny to open any file in the resources directory
+#RewriteRule ^css/.*\.(css)$ - [F,L,NC]
+#RewriteRule ^img/.*\.(jpg|gif|png)$ - [F,L,NC]
+#RewriteRule ^resources/.*\.(css|dat|eot|ico|ini|js|json|php|svt|ttf|txt|woff)$ - [F,L,NC]

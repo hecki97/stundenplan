@@ -3,12 +3,12 @@ body {
     top: 0; bottom: 0; left: 0; right: 0;
     color: #f1f1f1;
     overflow: normal;
+    z-index: 0;
 }
 
 body:before {
     content: "";
     position: fixed;
-    /* background: url(https://www.bing.com/ImageResolution.aspx?w=1920&h=1080); */
     background-image: url(../img/cache/BingWallpaper.jpg);
     background-size: 100%;
     z-index: -1; /* Keep the background behind the content */
@@ -26,9 +26,45 @@ body:before {
     filter: blur(5px);
 }
 
+/** IDs **/
+
+/* Navbar Style */
+#navbar-style {
+    position: fixed;
+    z-index: 999;
+}
+
+/* Dashboard Table Content Box */
+#dashboard-table-content-box {
+    overflow: auto;
+    margin: 25px 125px 0px 125px;
+    transform: scale(0.85);
+}
+
+#dashboard-table-content-box table {
+    background-color: #ffffff;
+    color: #000;
+}
+
+#dashboard-table-content-box th {
+    text-align: center;
+}
+
+#dashboard-table-content-box button {
+    background-color: transparent;
+    position: absolute;
+    left: -1000px;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/** Classes **/
+
 .page-content {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 60px;
+    padding-bottom: 25px;
 }
 
 .table-container {
@@ -58,10 +94,24 @@ body:before {
     display: inline-block;
 }
 
+.page-large-content-box {
+    margin: 0px auto 0px auto;
+    padding: 20px 25px 20px 25px;
+
+    color: #000;
+    background-color: #f1f1f1;
+    display: inline-block;
+}
+
 .page-content-popover {
-    margin: 15px auto 0px auto; width: 300px;
+    margin: 15px auto -15px auto;
+    width: 300px;
 }
 
 .content-box-shadow {
     box-shadow: 7px 7px #393939;
+}
+
+.delete-account-input {
+    color: red;
 }

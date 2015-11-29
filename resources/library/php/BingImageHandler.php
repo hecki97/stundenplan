@@ -4,41 +4,41 @@
 	**/
 	class BingImageHandler
 	{
-		public $dirname = 'cache';
-		public $filename = 'BingWallpaper.jpg';
+		private static $file_full_path;
+		private static $dir_path;
 
-		private $file_full_path;
-		private $dir_path;
+		private function __construct() {}
+		private static $initialized = false;
 
-		function __construct()
+		private static function initialize()
 		{
-			$this->dir_path = dirname(__FILE__).'/../../../img/'.$this->dirname;
-			$this->file_full_path = $this->dir_path.'/'.$this->filename;
-			// $this->filename = 'BingWallpaper.jpg';
+			if (self::$initialized) return;
+			FileLoader::Load('Resources.Library.Php.LogHandler');
+			FileLoader::Load('Resources.Library.Php.Utilities');
 
-			$this->Create_folder_if_not_exists();
-			$this->Get_Image_from_Bing();
+			self::$dir_path = PROJECT_DIR.'/'.BING_BACKGROUND_IMAGE_DIR;
+			self::$file_full_path = self::$dir_path.'/'.BING_BACKGROUND_IMAGE_FILENAME;
+
+			self::$initialized = true;
 		}
 
-		function Create_folder_if_not_exists() {
-			if (!is_dir($this->dir_path) && !file_exists($this->dir_path))
-				mkdir($this->dir_path);
-		}
-
-		function Get_Image_from_Bing()
+		public static function Get_Image_from_Bing()
 		{
-			$current_time = time();
-			$expire_time = 24 * 60 * 60;
-			$file_time = file_exists($this->file_full_path) ? filemtime($this->file_full_path) : time();
+			self::initialize();
+			
+			if (!is_dir(self::$dir_path) && !file_exists(self::$dir_path)) {
+				mkdir(self::$dir_path) or LogHandler::Log('Failed to create dir "'.self::$dir_path.'"', 'ERROR');
+				LogHandler::Log('Created dir "'.self::$dir_path.'"');
+			}
 
-			if (!file_exists($this->file_full_path) || ($current_time - $expire_time > $file_time))
-				copy('https://www.bing.com/ImageResolution.aspx?w=1920&h=1080', $this->file_full_path);
+			if (!NetworkUtilities::Is_connected()) return;
 
-			// if ((time() - $last_update) >= 86400 && (date('G') < 7))
-			// {
-				// copy('https://www.bing.com/ImageResolution.aspx?w=1920&h=1080', $file_full_path);
-				// $last_update = time();
-			// }
+			if (!file_exists(self::$file_full_path) || (strtotime(date('d-m-Y')) > strtotime(date('d-m-Y', filemtime(self::$file_full_path))))) {
+				if (copy('https://www.bing.com/ImageResolution.aspx?w=1920&h=1080', self::$file_full_path))
+					LogHandler::Log('Updated Bing background image');
+				else
+					LogHandler::Log_Error('Failed to update Bing Background Image');
+			}
 		}
 	}
 ?>

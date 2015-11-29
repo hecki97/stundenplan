@@ -217,5 +217,10 @@ pip-log.txt
 ##
 # Project Files
 ##
+data/
+logs/
 cache/
-stundenplan.sublime-project
+.old/
+
+*.sublime-project
+*.log

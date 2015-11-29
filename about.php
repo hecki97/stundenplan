@@ -1,15 +1,22 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	require('bootstrap.php');
+
+	// Use .html instead of .php file extension
+    $info = pathinfo($_SERVER['REQUEST_URI']);
+    if (@$info['extension'] == 'php') header('Refresh:0; url=./'.str_replace('.php', '.html', basename(__FILE__)));
+?>
 <!-- HTML Code -->
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- load header from header.php -->
-    	<?php require(dirname(__FILE__)."/header.php"); ?>
+    	<?php require('header.php'); ?>
 		<title><?=ABOUT_TITLE; ?></title>
 	</head>
 	<body>
 		<!-- load navbar from navbar.php -->
-		<?php require(dirname(__FILE__)."/navbar.php"); ?>
+		<?php require('navbar.php'); ?>
 		<div class="page-content">
 			<div class="page-header"><?=ABOUT_PAGE_HEADER; ?></div>
 			<div class="page-content-box content-box-shadow">

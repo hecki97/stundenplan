@@ -4,75 +4,47 @@
 	**/
 	class DatabaseHandler
 	{
-		private $mysql_link;
+		//private static $mysql_link;
+		private static $mysqli;
 
-		function __construct()
-		{
-			require_once('ConfigHandler.php');
+		private function __construct() {}
+		private static $initialized = false;
 
-			$this->mysql_link = mysql_connect(DATABASE_SERVER, DATABASE_USERNAME, DATABASE_PASSWORD) or die('Could not connect: '.mysql_error());
-			$this->Create_database_if_not_exists("CREATE DATABASE ".DATABASE);
-			$this->Create_table_if_not_exists("SELECT ID FROM ".DATABASE_TABLE_LOGIN, "CREATE TABLE ".DATABASE_TABLE_LOGIN." (id int(255) AUTO_INCREMENT, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, PRIMARY KEY (id))");
+		private static function initialize() {
+			if (self::$initialized) return;
+			require_once(PROJECT_DIR.'/bootstrap.php');
+
+			self::$mysqli = mysqli_connect(DATABASE_SERVER, DATABASE_USERNAME, DATABASE_PASSWORD);
+
+			/* check connection */
+			if (mysqli_connect_error()) {
+    			die('Connect Error (' . mysqli_connect_errno().') '.mysqli_connect_error());
+			}
+
+			self::Create_database_if_not_exists("CREATE DATABASE ".DATABASE);
+			self::Create_table_if_not_exists("SELECT ID FROM ".DATABASE_TABLE_LOGIN, "CREATE TABLE ".DATABASE_TABLE_LOGIN." (id int(255) AUTO_INCREMENT, uuid varchar(255) NOT NULL, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, unique_filename varchar(255) NOT NULL, PRIMARY KEY (id))");
+
+			self::$initialized = true;
 		}
 
-		function Create_database_if_not_exists($sql)
-		{
-			$db_selected = mysql_select_db(DATABASE, $this->mysql_link);
-			
-			if (!$db_selected)
-				mysql_query($sql, $this->mysql_link) or die('Error creating database: '.mysql_error());
+		private static function Create_database_if_not_exists($sql) {
+			if (!mysqli_select_db(self::$mysqli, DATABASE))
+				mysqli_query(self::$mysqli, $sql) or die('Error creating database: '.mysqli_error(self::$mysqli));
+			else
+				mysqli_select_db(self::$mysqli, DATABASE);
 		}
 
-		function Create_table_if_not_exists($query, $sql)
-		{
-			$result = mysql_query($query, $this->mysql_link);
+		private static function Create_table_if_not_exists($query, $sql) {
+			$result = mysqli_query(self::$mysqli, $query);
 
 			if (empty($result))
-				mysql_query($sql, $this->mysql_link) or die('Error creating table: '.mysql_error());
+				mysqli_query(self::$mysqli, $sql) or die('Error creating table: '.mysqli_error(self::$mysqli));
 		}
 
-		public function Create_account_if_not_exists($username, $password_hash)
-		{
-			$result = mysql_query("SELECT `id` FROM `login` WHERE username LIKE '".$username."'") or die(mysql_error());
-            $row = mysql_num_rows($result);
-
-            if($row == 0) 
-            {
-                $result = mysql_query("INSERT INTO login (username, password_hash) VALUES ('".$username."', '".$password_hash."')") or die(mysql_error());
-                $return = (@$result) ? 'RegistrationSuccess' : 'RegistrationError';
-            }
-            else 
-              $return = 'AlreadyExists';
-
-          	return $return;
-		}
-
-		public function Get_Password_Hash_from_database($username)
-		{
-			$result = mysql_query("SELECT username, password_hash FROM `login` WHERE username LIKE '".$username."' LIMIT 1") or die(mysql_error()); 
-	    	if (empty($result))
-	    		$return = 'NotFoundInDatabase';
-
-	    	$row = mysql_fetch_object($result);
-	    	$return = !empty($row) ? $row->password_hash : 'LoginFailed';
-
-	      	return $return;
-		}
-
-		public function Generate_Encryption_Key()
-		{
-			$key = bin2hex(openssl_random_pseudo_bytes(32));
-			mysql_query("UPDATE login SET `encryption_key`='".$key."' WHERE username LIKE '".$_SESSION['username']."'") or die(mysql_error());
-
-			return $key;
-		}
-
-		public function Get_Encryption_Key_from_database()
-		{
-			$result = mysql_query("SELECT username, encryption_key FROM `login` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1") or die(mysql_error());
-	    	$row = mysql_fetch_object($result);
-
-	      	return !empty($row) ? $row->encryption_key : die('Failed to get Encryption Key from Database');
+		public static function MySqli_Query($query) {
+			self::initialize();
+			$result = mysqli_query(self::$mysqli, $query) or die ('Error while executing query: '.mysqli_error(self::$mysqli));
+			return $result;
 		}
 	}
 ?>

@@ -5,47 +5,27 @@
 **/
 class LanguageHandler
 {
-	function __construct()
-	{ 
-        define('LANG', $this->get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false));
+    private function __construct() {}
+    private static $initialized = false;
 
-		switch (LANG) {
-			case 'de':
-                $this->parse_ini_file('de_DE.ini');
-				break;
-			case 'en':
-				$this->parse_ini_file('en_US.ini');
-				break;
-			default:
-				$this->parse_ini_file('la_LA.ini');
-				break;
-		}
+	private static function initialize()
+	{
+        if (self::$initialized) return;
+        require_once(PROJECT_DIR.'/bootstrap.php');
+
+        define('LANG', self::get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false));
+
+        self::$initialized = true;
 	}
 
-    function parse_ini_file($file)
-    {
-        //Dateipfad setzen
-        $file_path = dirname(__FILE__).'/../../lang/'.$file;
+    public static function ParseLangFile() {
+        self::initialize();
 
-        //Falls die Datei nicht existiert => Fehlermeldung zurückgeben
-        if (!file_exists($file_path)) die($file_path.' does not exist');
-        //Der Variable den Inhalt der .ini Datei zuweisen
-        $array = parse_ini_file($file_path);
-
-        reset($array);
-        //Einmal durch das Array laufen
-        while (list($key, $value) = each($array)) {
-            //Alle Bindestriche mit einem Unterstrich ersetzen
-            $key = str_replace('-', '_', $key);
-            //Falls $value leer ist => Wert von $key in Großbuchstaben zuweisen ansonsten der Wert von $value 
-            $value = (!empty($value)) ? $value : strtoupper($key);
-            //Eine Konstante mit dem Schlüssel $key und dem Wert $value definieren
-            define(strtoupper($key), $value);
-        }
+        IniParser::Parse(PROJECT_DIR.'/resources/lang/'.LANG.'_'.strtoupper(LANG).'.ini');
     }
 
 	// Browsersprache ermitteln
-	function get_lang_from_Browser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
+	private static function get_lang_from_Browser ($allowed_languages, $default_language, $lang_variable = null, $strict_mode = true) {
         // $_SERVER['HTTP_ACCEPT_LANGUAGE'] verwenden, wenn keine Sprachvariable mitgegeben wurde
         if ($lang_variable === null) {
             $lang_variable = $_SERVER['HTTP_ACCEPT_LANGUAGE'];

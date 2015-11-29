@@ -1,15 +1,28 @@
 <?php
   session_start();
+  require('bootstrap.php');
 
-  require_once(dirname(__FILE__).'/resources/library/php/DatabaseHandler.php');
-  $databaseHandler = new DatabaseHandler();
+  FileLoader::Load('Resources.Library.Php.DatabaseHandler');
+  FileLoader::Load('Resources.Library.Php.Utilities');
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
-    if($_POST['password'] == $_POST['password2'] && $_POST['password'] != null && $_POST['password2'] != null && $_POST['username'] != null)
-      $result = $databaseHandler->Create_account_if_not_exists($_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+    if($_POST['password'] == $_POST['password2'] && $_POST['password'] != null && $_POST['password2'] != null && $_POST['username'] != null) {
+      $rows = DatabaseHandler::MySqli_Query("SELECT `id` FROM `login` WHERE username LIKE '".$_POST['username']."'");
+      $num_rows = mysqli_num_rows($rows);
 
-    switch (@$result) {
+      if($num_rows == 0) 
+      {
+        $uuid = UUID::v5(UUID::v4(), strip_tags($_POST['username']));
+
+        $result = DatabaseHandler::MySqli_Query("INSERT INTO login (uuid, username, password_hash) VALUES ('".$uuid."', '".strip_tags($_POST['username'])."', '".password_hash(strip_tags($_POST['password']), PASSWORD_DEFAULT)."')");
+        $return = (@$result) ? 'RegistrationSuccess' : 'RegistrationError';
+      }
+      else 
+        $return = 'AlreadyExists';
+    }
+
+    switch (@$return) {
       case 'RegistrationSuccess':
         $div  = '<div class="popover marker-on-top bg-green fg-black" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #003E00;">';
         $div .= $lang['labels']['l.registration.succes'].'<b>'.$_POST['username'].'</b>'.$lang['labels']['l.registration.succes.2'];
@@ -38,12 +51,12 @@
 <html>
 <head>
     <!-- load header from header.php -->
-    <?php require(dirname(__FILE__).'/header.php'); ?>
+    <?php require('header.php'); ?>
     <title><?=REGISTRATION_TITLE;?></title>
 </head>
 <body>
   <!-- load navbar from navbar.php -->
-  <?php require(dirname(__FILE__).'/navbar.php'); ?>
+  <?php require('navbar.php'); ?>
   <div class="page-content">
     <div class="page-header"><?=REGISTRATION_HEADER; ?></div>
     <div class="page-content-box content-box-shadow">
