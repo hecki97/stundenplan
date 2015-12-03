@@ -11,7 +11,24 @@
 	FileLoader::Register('Resources.Php', PROJECT_DIR.'/resources/php');
 
 	// Parse .ini Files
-	IniParser::Parse(PROJECT_DIR.'/resources/config/config.ini', false);
+	if (file_exists(PROJECT_DIR.'/resources/config/'.$_SERVER['HTTP_HOST'].'.config.ini'))
+		IniParser::Parse(PROJECT_DIR.'/resources/config/'.$_SERVER['HTTP_HOST'].'.config.ini', false);
+	else
+	{
+		$array = explode('/', PROJECT_DIR.'/resources/config/'.$_SERVER['HTTP_HOST'].'.config.ini');
+		$filepath = '';
+		
+		for ($i = 0; $i < count($array); $i++) {
+			$filepath = $filepath.$array[$i].'/';
+			
+			if (!file_exists($filepath)){
+				$fp = fopen(PROJECT_DIR.'/resources/config/'.$_SERVER['HTTP_HOST'].'.config.ini', 'w');
+				fwrite($fp, file_get_contents(PROJECT_DIR.'/resources/config/default.config.ini'));
+				fclose($fp);
+			}
+		}
+		IniParser::Parse(PROJECT_DIR.'/resources/config/'.$_SERVER['HTTP_HOST'].'.config.ini', false);
+	}
 
 	FileLoader::Load('Resources.Library.Php.BingImageHandler');
   	FileLoader::Load('Resources.Library.Php.LanguageHandler');
@@ -19,7 +36,8 @@
   	// FileLoader::Load('Resources.Library.Php.LogHandler');
   	// LogHandler::Log(basename(__FILE__, '.php'), 'Test', 'ERROR');
 
-  	BingImageHandler::Get_Image_from_Bing();
+  	var_dump($_SERVER['HTTP_HOST']);
+
   	if (!defined('LANG')) LanguageHandler::ParseLangFile();
 
 	//Debug Mode Show all errors
@@ -27,4 +45,8 @@
 		ini_set('display_errors', 1);
   		error_reporting(E_ALL | E_STRICT);
 	}
+	else
+		ini_set('display_errors', 0);
+
+	if (BING_BACKGROUND_IMAGE_ENABLED) BingImageHandler::Get_Image_from_Bing();
 ?>

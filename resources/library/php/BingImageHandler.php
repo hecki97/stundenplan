@@ -16,7 +16,7 @@
 			FileLoader::Load('Resources.Library.Php.LogHandler');
 			FileLoader::Load('Resources.Library.Php.Utilities');
 
-			self::$dir_path = PROJECT_DIR.'/'.BING_BACKGROUND_IMAGE_DIR;
+			self::$dir_path = PROJECT_DIR.'/img/cache';
 			self::$file_full_path = self::$dir_path.'/'.BING_BACKGROUND_IMAGE_FILENAME;
 
 			self::$initialized = true;
