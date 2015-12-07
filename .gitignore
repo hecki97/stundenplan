@@ -222,7 +222,8 @@ pip-log.txt
 
 #Exclude config files
 *.config.ini
-!default.config.ini #Exception for default.config.ini 
+!default.config.ini
+#Exception for default.config.ini 
 
 #Exclude Data Folder
 data/
