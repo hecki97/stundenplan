@@ -15,28 +15,18 @@
 		public static function initialize() {
 			if (self::$initialized) return;
 			FileLoader::Load('Resources.Library.Php.DatabaseHandler');
+			FileLoader::Load('Resources.Library.Php.Utilities');
+
 			if (isset($_SESSION['username'])) {
 				$result = DatabaseHandler::Mysqli_Query("SELECT uuid FROM `login` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
 				self::$user_uuid = mysqli_fetch_object($result);
 			}
-			self::$path = PROJECT_DIR.'/logs/general/'.date('Y').'/'.date('F');
-			self::$user_path = PROJECT_DIR.'/logs/user/'.date('Y').'/'.date('F').'/'.date('d-m-Y');
-			self::Create_folder_if_not_exists(self::$path);
-			self::Create_folder_if_not_exists(self::$user_path);
+			self::$path = PROJECT_DIR.'/logs/general/'.date(LOG_HANDLER_DATE_YEAR).'/'.date(LOG_HANDLER_DATE_MONTH);
+			self::$user_path = PROJECT_DIR.'/logs/user/'.date(LOG_HANDLER_DATE_YEAR).'/'.date(LOG_HANDLER_DATE_MONTH).'/'.date(LOG_HANDLER_DATE_DAY);
+			FileLoader::Create_new_folder(self::$path);
+			FileLoader::Create_new_folder(self::$user_path);
 
 			self::$initialized = true;
-		}
-
-		private static function Create_folder_if_not_exists($path) {
-			$array = explode('/', $path);
-			$filepath = '';
-			
-			for ($i = 0; $i < count($array); $i++) {
-				$filepath = $filepath.$array[$i].'/';
-				
-				if (!file_exists($filepath))
-					mkdir($filepath);
-			}
 		}
 		
 		public static function Log_Error($message, $general = true)
@@ -47,9 +37,9 @@
 		public static function Log($message, $type = 'INFO', $general = true) {
 			self::initialize();
 			
-			$fp = $general ? fopen(self::$path.'/'.date('d-m-Y').'.log', 'a') : fopen(self::$user_path.'/'.self::$user_uuid->uuid, 'a');
+			$fp = $general ? fopen(self::$path.'/'.date(LOG_HANDLER_DATE_DAY).'.log', 'a') : fopen(self::$user_path.'/'.self::$user_uuid->uuid, 'a');
 			//hackish solution but it works (more or less)
-			fwrite($fp, "[".date('Y-d-m')."]"."[".date('H:i:s')."] - ".basename(debug_backtrace()[0]['file'])." - ".$type." - ".$message."\r\n");
+			fwrite($fp, "[".date(LOG_HANDLER_DATE_DAY)."]"."[".date(LOG_HANDLER_DATE_TIME)."] - ".basename(debug_backtrace()[0]['file'])." - ".$type." - ".$message."\r\n");
 			fclose($fp);
 		}
 	}

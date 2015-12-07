@@ -13,7 +13,7 @@ class LanguageHandler
         if (self::$initialized) return;
         require_once(PROJECT_DIR.'/bootstrap.php');
 
-        define('LANG', self::get_lang_from_Browser(array ('de', 'en', 'la'), 'de', null, false));
+        define('LANG', self::get_lang_from_Browser(array ('de', 'en', 'la'), DEFAULT_LANGUAGE, null, false));
 
         self::$initialized = true;
 	}

@@ -43,6 +43,33 @@
 
             require_once(self::$dirMap[$path].'/'.$file.'.php');
         }
+
+        public static function Create_new_file($path, $string = '') {
+            $array = explode('/', $path);
+            $filepath = '';
+        
+            for ($i = 0; $i < count($array); $i++) {
+                $filepath = $filepath.$array[$i].'/';
+            
+                if (!file_exists($filepath)){
+                    $fp = fopen($path, 'w');
+                    fwrite($fp, $string);
+                    fclose($fp);
+                }
+            }
+        }
+
+        public static function Create_new_folder($path) {
+            $array = explode('/', $path);
+            $filepath = '';
+            
+            for ($i = 0; $i < count($array); $i++) {
+                $filepath = $filepath.$array[$i].'/';
+                
+                if (!file_exists($filepath))
+                    mkdir($filepath);
+            }
+        }
    	}
 
     /**
