@@ -1,4 +1,6 @@
 <?php
+  use \Colors\RandomColor;
+
 	/**
 	* StundenplanHandler
 	**/
@@ -15,12 +17,18 @@
     public static $table_height;
     private function __construct() {}
 
+    private static $rand_hex_colors;
+
     private static function initialize() {
       if (self::$initialized) return;
       //FileLoader::Load('Resources.Library.Php.LogHandler');
       FileLoader::Load('Resources.Library.Php.CryptHandler');
       FileLoader::Load('Resources.Library.Php.DatabaseHandler');
       FileLoader::Load('Resources.Library.Php.Utilities');
+
+      //Test
+      FileLoader::Load('Resources.Library.Php.RandomColor');
+      //
 
       $result = DatabaseHandler::MySqli_Query("SELECT encryption_key, unique_filename FROM `".DATABASE_TABLE_LOGIN."` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
       self::$db_data = mysqli_fetch_object($result);
@@ -37,6 +45,11 @@
       self::$table_width = self::$data[self::$key]['width'];
       self::$table_height = self::$data[self::$key]['height'];
 
+      //Test
+      $max_cells = self::$data[self::$key]['width'] * self::$data[self::$key]['height'];
+      self::$rand_hex_colors = RandomColor::many($max_cells, array('luminosity' => 'dark', 'hue'=>'random'));
+      //
+
       self::$initialized = true;
     }
 
@@ -44,12 +57,14 @@
 			self::initialize();
 
       $table = '';
+      $count = 0;
   		for ($y = 1; $y <= self::$data[self::$key]['height']; $y++) { 
    			$table .= '<tr><th>'.$y.'</th>';
    			for ($x = 1; $x <= self::$data[self::$key]['width']; $x++) {
-   		   	$placeholder = (empty(self::$data[self::$key]['savedata']['x'.$x.'y'.$y])) ? '-' : self::$data[self::$key]['savedata']['x'.$x.'y'.$y];
-   				$value = (empty(self::$data[self::$key]['savedata']['x'.$x.'y'.$y])) ? '' : self::$data[self::$key]['savedata']['x'.$x.'y'.$y];
-   				$table .= '<th>'.$placeholder.'</th>';
+   		   	$placeholder = (empty(self::$data[self::$key]['savedata']['x'.$x.'y'.$y])) ? '-' : self::$data[self::$key]['savedata']['x'.$x.'y'.$y].'</span>';
+          //$value = (empty(self::$data[self::$key]['savedata']['x'.$x.'y'.$y])) ? '' : self::$data[self::$key]['savedata']['x'.$x.'y'.$y];
+   				$table .= '<th><span style="color: '.self::$rand_hex_colors[$count].';">'.$placeholder.'</span></th>';
+          $count++;
    			}
     		$table .= '</tr>';
   		}

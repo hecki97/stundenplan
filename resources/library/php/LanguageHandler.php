@@ -8,12 +8,25 @@ class LanguageHandler
     private function __construct() {}
     private static $initialized = false;
 
+    private static $allowed_languages = array();
+    private static $lang_path;
+
 	private static function initialize()
 	{
         if (self::$initialized) return;
         require_once(PROJECT_DIR.'/bootstrap.php');
 
-        define('LANG', self::get_lang_from_Browser(array ('de', 'en', 'la'), DEFAULT_LANGUAGE, null, false));
+        self::$lang_path = PROJECT_DIR.'/resources/lang';
+
+        $allowed_languages = FileLoader::Scan_dir(self::$lang_path, 'ini', true);
+        if (count($allowed_languages) <= 0) die('No valid language files found in "'.self::$lang_path.'"');
+
+        for ($i = 0; $i < count($allowed_languages); $i++) { 
+            $tmp_lang = explode('_', $allowed_languages[$i]);
+            $lang_array[] = $tmp_lang[0];
+        }
+
+        define('LANG', self::get_lang_from_Browser($lang_array, DEFAULT_LANGUAGE, null, false));
 
         self::$initialized = true;
 	}

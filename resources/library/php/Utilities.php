@@ -23,10 +23,17 @@
 	class FileLoader {
         private static $dirMap = array();
 
+        /**
+         * @param [type]
+         * @param [type]
+         */
         public static function Register($virtual, $physical) {
             self::$dirMap[$virtual] = $physical;
         }
 
+        /**
+         * @param [type]
+         */
         public static function Load($file) {
 
             $pos = strrpos($file, '.');
@@ -69,6 +76,26 @@
                 if (!file_exists($filepath))
                     mkdir($filepath);
             }
+        }
+
+        public static function Scan_dir($path, $extension = null, $remove_extension = false) {
+            if ($handle = opendir($path)) {
+                while (false !== ($entry = readdir($handle))) {
+                    $file_array = explode(".", $entry);
+                    if ($entry == "." || $entry == "..") continue;
+
+                    $file_extension_index = count($file_array) - 1;
+                    if ($extension != null && $file_array[$file_extension_index] != $extension) continue;
+
+                    if ($remove_extension)
+                        unset($file_array[$file_extension_index]);
+
+                    $array[] = implode('.', $file_array);
+                }
+                closedir($handle);
+                var_dump($array);
+            }
+            return $array;
         }
    	}
 

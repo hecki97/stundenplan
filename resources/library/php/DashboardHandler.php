@@ -17,9 +17,9 @@ class DashboardHandler
     FileLoader::Load('Resources.Library.Php.DatabaseHandler');
     FileLoader::Load('Resources.Library.Php.Utilities');
 
-    $result = DatabaseHandler::MySqli_Query("SELECT encryption_key, unique_filename FROM `".DATABASE_TABLE_LOGIN."` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
+    $result = DatabaseHandler::MySqli_Query("SELECT uuid, encryption_key, unique_filename FROM `".DATABASE_TABLE_LOGIN."` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
     self::$db_data = mysqli_fetch_object($result);
-    
+
     $file_data = @file_get_contents(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename);
     self::$data = (!empty(self::$db_data->unique_filename) && file_exists(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename)) ? CryptHandler::Decrypt(self::$db_data->encryption_key, $file_data) : array();
     self::$initialized = true;
