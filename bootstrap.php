@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	define('USERNAME', @$_SESSION['username']);
 	define('PROJECT_DIR', dirname(__FILE__));
 	define('HTTP_HOST', $_SERVER['HTTP_HOST']);
 

@@ -38,7 +38,7 @@ body:before {
 #dashboard-table-content-box {
     overflow: auto;
     margin: 25px 125px 0px 125px;
-    transform: scale(0.85);
+    /*transform: scale(0.85);*/
 }
 
 #dashboard-table-content-box table {
@@ -58,6 +58,58 @@ body:before {
     width: 1px;
     overflow: hidden;
 }
+
+/* Dashboard Table Style */
+#dashboard-table-column-index {
+    width: 85px;
+}
+
+#dashboard-table-column-table-name div {
+    display: inline;
+}
+
+#dashboard-table-column-table-name a#fav-star {
+    display: inline;
+    top: 8.5px;
+    float: left;
+}
+
+#dashboard-table-column-table-name a#move-up {
+    text-align: left;
+    display: inline;
+    float: left;
+    top: 8.5px;
+}
+
+#dashboard-table-column-table-name a#move-down {
+    display: inline;
+    float: left;
+    top: 8.5px;
+}
+
+#dashboard-table-column-table-name a#table-name {
+    display: inline;
+    font-size: 20px;
+    float: center;
+    left: 25px;
+    top: 13.5px;
+}
+
+#dashboard-table-column-table-name p#is-empty {
+    display: inline;
+    float: right;
+    width: 50px;
+}
+
+#dashboard-table-column-date {
+    top: -1.25px;
+    width: 125px;
+}
+
+#dashboard-table-column-options {
+    width: 125px;
+}
+
 
 /** Classes **/
 

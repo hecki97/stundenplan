@@ -97,6 +97,21 @@
             }
             return $array;
         }
+
+        public static function deleteDir($dirPath) {
+            if (! is_dir($dirPath)) throw new InvalidArgumentException("$dirPath must be a directory");
+            if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') $dirPath .= '/';
+
+            $files = glob($dirPath . '*', GLOB_MARK);
+            foreach ($files as $file) {
+                if (is_dir($file)) {
+                    self::deleteDir($file);
+                } else {
+                    unlink($file);
+                }
+            }
+            rmdir($dirPath);
+        }
    	}
 
     /**
@@ -152,6 +167,17 @@
                 header("Refresh:0; url=$url");
                 exit;
             }
+        }
+    }
+
+    /**
+    * Git
+    **/
+    class Git {
+        public static function GetGitCommitHash($major = '1', $minor = '0', $mode = 'dev') {
+            $commit_hash = trim(exec('git log --pretty="%h" -n1 HEAD'));
+
+            return sprintf('v%s.%s-%s.%s', $major, $minor, $mode, $commit_hash);
         }
     }
 

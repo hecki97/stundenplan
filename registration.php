@@ -1,5 +1,4 @@
 <?php
-  session_start();
   require('bootstrap.php');
 
   FileLoader::Load('Resources.Library.Php.DatabaseHandler');
@@ -13,9 +12,9 @@
 
       if($num_rows == 0) 
       {
-        $uuid = UUID::v5(UUID::v4(), strip_tags($_POST['username']));
+        //$uuid = UUID::v5(UUID::v4(), strip_tags($_POST['username']));
 
-        $result = DatabaseHandler::MySqli_Query("INSERT INTO login (uuid, username, password_hash) VALUES ('".$uuid."', '".strip_tags($_POST['username'])."', '".password_hash(strip_tags($_POST['password']), PASSWORD_DEFAULT)."')");
+        $result = DatabaseHandler::MySqli_Query("INSERT INTO login (uuid, username, password_hash) VALUES ('".UUID::v4()."', '".strip_tags($_POST['username'])."', '".password_hash(strip_tags($_POST['password']), PASSWORD_DEFAULT)."')");
         $return = (@$result) ? 'RegistrationSuccess' : 'RegistrationError';
       }
       else 

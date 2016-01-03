@@ -1,6 +1,5 @@
 <!-- PHP Code -->
 <?php
-	session_start();
   require('bootstrap.php');
 
   FileLoader::Load('Resources.Library.Php.StundenplanHandler');
@@ -15,7 +14,8 @@
     default:
       $div_content_box_display = 'display: none;';
       $div_header_display = 'display: block';
-      $table = StundenplanHandler::Load_Timetable_View();
+      $table = StundenplanHandler::Generate_Table();
+      //$table = StundenplanHandler::Load_Timetable_View();
       break;
   }
 
@@ -58,12 +58,7 @@
       </div>
 
 			<div class="table-container content-box-shadow" style="width: 90%; margin-bottom: 50px;">
-        <table class="table bordered striped" align="center" style="background-color: #ffffff; color: #000;">
-          <thead><tr><th>/</th><th>Montag</th><th>Dienstag</th><th>Mittwoch</th><th>Donnerstag</th><th>Freitag</th><tr></thead>
-          <tbody>
-            <?=$table; ?>
-          </tbody>
-        </table>
+        <?=$table; ?>
       </div>
 
       <div class="toolbar rounded" style="margin-top: -25px;">

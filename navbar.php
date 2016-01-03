@@ -36,7 +36,7 @@
           </ul>
         </li>
         <span class="app-bar-divider"></span>
-        <li><a href="https://github.com/hecki97/stundenplan/tree/develop"><span class="mif-info"></span><?=file_get_contents('./resources/version.txt'); ?></a></li>
+        <li><a href="https://github.com/hecki97/stundenplan/tree/develop"><span class="mif-info"></span> <?=Git::GetGitCommitHash(1, 2); ?></a></li>
         <span class="app-bar-divider"></span>
         <li><a href="./about.html" class="fg-white"><span class="mif-cogs"></span> <?=NAV_BUTTON_ABOUT; ?></a></li>
       </ul>
