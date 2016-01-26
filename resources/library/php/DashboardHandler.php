@@ -1,159 +1,142 @@
 <?php
-
 /**
 * DashboardHandler
 **/
 class DashboardHandler
 {
   private static $initialized = false;
-  private static $db_data;
-  private static $data;
-	private function __construct() {}
+  private static $decrypted_data;
+  private static $data_dir_path;
 
   private static function initialize() {
     if (self::$initialized) return;
+    
     FileLoader::Load('Resources.Library.Php.LogHandler');
     FileLoader::Load('Resources.Library.Php.CryptHandler');
     FileLoader::Load('Resources.Library.Php.DatabaseHandler');
     FileLoader::Load('Resources.Library.Php.Utilities');
 
-    $result = DatabaseHandler::MySqli_Query("SELECT uuid, encryption_key, unique_filename FROM `".DATABASE_TABLE_LOGIN."` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
-    self::$db_data = mysqli_fetch_object($result);
+    $result = DatabaseHandler::MySqli_Query("SELECT uuid, encryption_key FROM `".DATABASE_TABLE_LOGIN."` WHERE username LIKE '".USERNAME."' LIMIT 1");
+    $db_data = mysqli_fetch_object($result);
 
-    $file_data = @file_get_contents(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename);
-    self::$data = (!empty(self::$db_data->unique_filename) && file_exists(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename)) ? CryptHandler::Decrypt(self::$db_data->encryption_key, $file_data) : array();
+    self::$data_dir_path = PROJECT_DIR.'/resources/data/'.UUID::v5($db_data->uuid, USERNAME);
+    (!is_dir(self::$data_dir_path)) ? mkdir(self::$data_dir_path) : false;
+
+    self::$decrypted_data = (file_exists(self::$data_dir_path.'/data')) ? CryptHandler::Decrypt($db_data->encryption_key, @file_get_contents(self::$data_dir_path.'/data')) : array();
+
     self::$initialized = true;
-  }
+  }  
 
-  public static function Generate_List($key, $sort) {
+  /**
+   * Returns the dashboard table data array
+   * @return array
+   */
+  public static function Get_Dashboard_Data() {
     self::initialize();
 
-    $table = '';
-    switch ($key) {
-      case 'index':
-        if ($sort === SORT_ASC) {
-          for ($i = 0; $i < count(self::$data); $i++) { 
-            $table = self::Generate_View_Table($table, $i);
-          } 
-        }
-        else {
-          for ($i = count(self::$data) - 1; $i >= 0; $i--) { 
-            $table = ($_GET['edit'] == 'true') ? self::Generate_Edit_Table($table, $i) : self::Generate_View_Table($table, $i);
-          } 
-        }
-        break;
-      default:
-        self::$data = Array_Sort::Sort(self::$data, $key, $sort);
-        for ($i = 0; $i < count(self::$data); $i++) { 
-          $table = self::Generate_View_Table($table, $i);
-        }
-        break;
+    return self::$decrypted_data;
+  }
+
+  /**
+   * Adds a new table on top of the list and saves the list.
+   * @param string $tablename
+   */
+  public static function Add_Item($table_name) {
+    self::initialize();
+          
+    $table_id = uniqid();
+    $encryption_key = bin2hex(openssl_random_pseudo_bytes(32));
+    TableHandler::Create_Table($table_id, $encryption_key, strip_tags($table_name, '<b></b><i></i><u></u>'));
+    $new_list[0] = array('id' => $table_id, 'key' => $encryption_key, 'favorite' => 'false', 'sha1' => TableHandler::Get_Sha1_File_Hash($table_id));
+    for ($i = 0; $i < count(self::$decrypted_data); $i++)
+      $new_list[$i+1] = self::$decrypted_data[$i];    
+
+    self::Save_List($new_list);
+  }
+
+  /**
+   * Removes an item from the list when it matches with the given $table_id 
+   * @param string $table_id
+   */
+  public static function Remove_Item($table_id) {
+    self::initialize();
+
+    for ($i = 0; $i < count(self::$decrypted_data); $i++) { 
+      if (self::$decrypted_data[$i]['id'] == $table_id) {
+        unset(self::$decrypted_data[$i]);
+        $new_list = array_values(self::$decrypted_data);
+      }
     }
-    return $table;
+    self::Save_List($new_list);
   }
 
-  private static function Generate_View_Table($table, $i) {
-    $table .= "<tr><th style='width: 85px;'>".($i + 1).".</th>";
-    $table .= "<th><div style='display: table-row;'><a class='button link fg-black' style='display: table-cell; float: left;'><span class='mif-star-full'></span></a><a class='button link full-size fg-black' href='./view_".self::$data[$i]['id'].".html' style='display: table-cell; font-size: 20px; float: center; left: 25px;'>".self::$data[$i]['name']."</a><p style='display: table-cell; float: right; width: 50px;'><i>".((self::$data[$i]['empty']) ? '(Empty)' : '')."</i></p></div></th>";
-    $table .= "<th style='text-align: center; width: 125px;'><i>(".date('d/m/y', self::$data[$i]['timestamp']).")</i></th>";
-    $table .= "<th style='text-align: right; width: 125px;'><a class='button' href='./edit_".self::$data[$i]['id'].".html'><span class='mif-pencil'></span></a><a class='button' href='./remove_from_list.php?id=".self::$data[$i]['id']."'><span class='mif-bin'></span></a></th></tr>";
-    
-    return $table;
-  }
-
-  //Test
-
-  private static function Generate_Edit_Table($table, $i) {
-    $table .= "<tr><th style='width: 85px;'>".($i + 1).".</th>";
-    $table .= "<th><div style='display: inline;'><a class='button' style='display: inline; float: left;'><span class='mif-star-full'></span></a><a class='button' style='display: inline; float: left;'><span class='mif-arrow-up'></span></a><a class='button' style='display: inline; float: left;'><span class='mif-arrow-down'></span></a></div><a class='button link full-size fg-black' href='./view_".self::$data[$i]['id'].".html' style='display: inline; font-size: 20px; float: center; left: 25px; top: 10px;'>".self::$data[$i]['name']."</a><p style='display: inline; float: right; width: 50px;'><i>".((self::$data[$i]['empty']) ? '(Empty)' : '')."</i></p></div></th>";
-    $table .= "<th style='text-align: center; width: 125px;'><i>(".date('d/m/y', self::$data[$i]['timestamp']).")</i></th>";
-    $table .= "<th style='text-align: right; width: 125px;'><a class='button' href='./edit_".self::$data[$i]['id'].".html'><span class='mif-pencil'></span></a><a class='button' href='./remove_from_list.php?id=".self::$data[$i]['id']."'><span class='mif-bin'></span></a></th></tr>";
-    
-    return $table;
-  }
-
-  //Test
-
-  public static function Remove_List() {
+  /**
+   * Clears the entire list and removes all files from the system
+   */
+  public static function Clear_List() {
     self::initialize();
 
-    if (!empty(self::$db_data->unique_filename) && file_exists(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename))
-      unlink(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename);
+    FileLoader::deleteDir(self::$data_dir_path);
 
     header('Refresh:0; url=./dashboard.html');
   }
 
-  public static function Remove_Item_from_List($id) {
+  /**
+   * Returns specific properties from a specific table item   
+   * @param string $item_id
+   * @param array $properties
+   * @return array
+   */
+  public static function Get_Item_Properties($item_id, $properties) {
     self::initialize();
 
-    for ($i = 0; $i < count(self::$data); $i++) { 
-      if (self::$data[$i]['id'] == $id) {
-        unset(self::$data[$i]);
-        $new_array = array_values(self::$data);
+    $index = Array_Class::Get_Array_Index($item_id, self::$decrypted_data);
+    $array = array();
+    foreach ($properties as $property) {
+      if (array_key_exists($property, self::$decrypted_data[$index])) {
+        $array[$property] = self::$decrypted_data[$index][$property];
       }
     }
-
-    self::Save_List($new_array);
+    return $array;
   }
 
-  public static function Save_Tablename($tablename) {
+  /**
+   * Manipulates specific properties in a specific table item  
+   * @param string $item_id
+   * @param array $new_properties
+   */
+  public static function Set_Item_Properties($item_id, $new_properties) {
     self::initialize();
 
-    if (!empty(self::$db_data->unique_filename) && file_exists(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename))
-      unlink(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename);
-
-    /*
-    $array = array();
-    $array['name'] = strip_tags($tablename, '<b></b><i></i><u></u>');
-    $array['id'] = uniqid();
-    $array['timestamp'] = time();
-    $array['width'] = 5;
-    $array['height'] = 8;
-    $array['empty'] = true;
-    */
-
-    $array = array('name' => strip_tags($tablename, '<b></b><i></i><u></u>'), 'id' => uniqid(), 'timestamp' => time(), 'width' => 5, 'height' => 8, 'empty' => true);
-      
-    $new_array[0] = $array;
-    for ($i = 0; $i < count(self::$data); $i++)
-      $new_array[$i+1] = self::$data[$i];    
-
-    self::Save_List($new_array);
+    $index = Array_Class::Get_Array_Index($item_id, self::$decrypted_data);
+    $new_list = self::$decrypted_data;
+    $new_properties_keys = array_keys($new_properties);
+    foreach ($new_properties_keys as $new_property_key) {
+      if (array_key_exists($new_property_key, self::$decrypted_data[$index]))
+        $new_list[$index][$new_property_key] = $new_properties[$new_property_key];
+    }
+    self::Save_List($new_list);
   }
 
-  private static function Save_List($data) {
-    // self::initialize();
-
-    /*
-    if (!empty(self::$db_data->unique_filename) && file_exists(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename))
-      unlink(PROJECT_DIR.'/resources/data/'.self::$db_data->unique_filename);
-    */
-
-    //var_dump(preg_replace(array('/\<([0-9a-zA-Z])\>(.*)\<\/([0-9a-zA-Z])>/'), '$1', $tablename));
-
-    /*
-    $array = array();
-    $array['name'] = strip_tags($tablename, '<b></b><i></i><u></u>');
-    $array['id'] = uniqid();
-    $array['timestamp'] = time();
-    $array['width'] = 5;
-    $array['height'] = 8;
-    $array['empty'] = true;
-      
-    $new_array[0] = $array;
-    for ($i = 0; $i < count(self::$data); $i++)
-      $new_array[$i+1] = self::$data[$i];
-    */
-
+  /**
+   * Writes the given array to file and encrypts the file.
+   * @param array $data_arraydata_array
+   */
+  private static function Save_List($data_array) {
     $key = bin2hex(openssl_random_pseudo_bytes(32));
-    $unique_filename = uniqid();
-    DatabaseHandler::MySqli_Query("UPDATE ".DATABASE_TABLE_LOGIN." SET `unique_filename`='".$unique_filename."' WHERE username LIKE '".$_SESSION['username']."'");
-    DatabaseHandler::MySqli_Query("UPDATE ".DATABASE_TABLE_LOGIN." SET `encryption_key`='".$key."' WHERE username LIKE '".$_SESSION['username']."'");
+    DatabaseHandler::MySqli_Query("UPDATE ".DATABASE_TABLE_LOGIN." SET `encryption_key`='".$key."' WHERE username LIKE '".USERNAME."'");
+    $encrypted_data = CryptHandler::Encrypt($key, $data_array);
     
-    $encrypted_data = CryptHandler::Encrypt($key, $data);
-    $fp = fopen(PROJECT_DIR.'/resources/data/'.$unique_filename, 'w');
+    // Only for testing!
+    $fp = fopen(self::$data_dir_path.'/data_output', 'w');
+    fwrite($fp, print_r($data_array, true));
+    fclose($fp);
+    //
+    
+    $fp = fopen(self::$data_dir_path.'/data', 'w');
     fwrite($fp, $encrypted_data);
     fclose($fp);
+
     LogHandler::Log('New table created', 'INFO', false);
     header('Refresh:0; url=./dashboard.html');
   }

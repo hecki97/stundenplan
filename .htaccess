@@ -4,9 +4,10 @@ RewriteEngine on
 # Redirect .html to .php
 RewriteRule ^(.*).html$ $1.php
 
-RewriteRule ^view_(.*).php$ view.php?id=$1
-RewriteRule ^edit_(.*).php$ view.php?id=$1&mode=edit
+RewriteRule ^view_item_(.*).php$ view.php?id=$1
+RewriteRule ^edit_item_(.*).php$ view.php?id=$1&mode=edit
 RewriteRule ^dashboard_(.*).php$ dashboard.php?sort=$1
+RewriteRule ^remove_item_(.*).php$ dashboard.php?remove=$1
 # RewriteRule ^toolboard_(.*).php$ dashboard.php?sort=$1&mode=edit
 
 # -- File System Protection --

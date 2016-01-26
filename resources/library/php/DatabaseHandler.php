@@ -4,7 +4,6 @@
 	**/
 	class DatabaseHandler
 	{
-		//private static $mysql_link;
 		private static $mysqli;
 
 		private function __construct() {}
@@ -12,7 +11,6 @@
 
 		private static function initialize() {
 			if (self::$initialized) return;
-			require_once(PROJECT_DIR.'/bootstrap.php');
 
 			self::$mysqli = mysqli_connect(DATABASE_SERVER, DATABASE_USERNAME, DATABASE_PASSWORD);
 
@@ -21,28 +19,41 @@
     			die('Connect Error (' . mysqli_connect_errno().') '.mysqli_connect_error());
 			}
 
-			self::Create_database_if_not_exists("CREATE DATABASE ".DATABASE);
-			self::Create_table_if_not_exists("SELECT ID FROM ".DATABASE_TABLE_LOGIN, "CREATE TABLE ".DATABASE_TABLE_LOGIN." (id int(255) AUTO_INCREMENT, uuid varchar(255) NOT NULL, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, unique_filename varchar(255) NOT NULL, PRIMARY KEY (id))");
+			self::mkdatabase(DATABASE);
+			mysqli_select_db(self::$mysqli, DATABASE);
+			self::mktable("SELECT ID FROM ".DATABASE_TABLE_LOGIN, "CREATE TABLE ".DATABASE_TABLE_LOGIN." (id int(255) AUTO_INCREMENT, uuid varchar(255) NOT NULL, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, PRIMARY KEY (id))");
 
 			self::$initialized = true;
 		}
 
-		private static function Create_database_if_not_exists($sql) {
-			if (!mysqli_select_db(self::$mysqli, DATABASE))
-				mysqli_query(self::$mysqli, $sql) or die('Error creating database: '.mysqli_error(self::$mysqli));
-			else
-				mysqli_select_db(self::$mysqli, DATABASE);
+		/**
+		 * Checks if the given database exists and if not creates the database
+		 * @param string $database
+		 */
+		private static function mkdatabase($database) {
+			if (!mysqli_select_db(self::$mysqli, $database))
+				mysqli_query(self::$mysqli, "CREATE DATABASE ".$database) or die('Error creating database: '.mysqli_error(self::$mysqli));
 		}
 
-		private static function Create_table_if_not_exists($query, $sql) {
+		/**
+		 * Checks if the result of the given query is empty and if true it creates a new table
+		 * @param string $query
+		 * @param string $sql
+		 */
+		private static function mktable($query, $sql) {
 			$result = mysqli_query(self::$mysqli, $query);
 
 			if (empty($result))
 				mysqli_query(self::$mysqli, $sql) or die('Error creating table: '.mysqli_error(self::$mysqli));
 		}
 
+		/**
+		 * Executes the given query and returns the result from the database
+		 * @param string $query
+		 */
 		public static function MySqli_Query($query) {
 			self::initialize();
+
 			$result = mysqli_query(self::$mysqli, $query) or die ('Error while executing query: '.mysqli_error(self::$mysqli));
 			return $result;
 		}

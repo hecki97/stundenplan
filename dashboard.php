@@ -1,75 +1,61 @@
 <?php
-  session_start();
   require('bootstrap.php');
 
   FileLoader::Load('Resources.Library.Php.DashboardHandler');
+  FileLoader::Load('Resources.Library.Php.DashboardViewController');
+
+  $dashboardView = new DashboardViewController();
+
+  if (isset($_GET['remove'])) DashboardHandler::Remove_Item($_GET['remove']);
+  if (isset($_GET['favorite'])) {
+    $array_favorite = DashboardHandler::Get_Item_Properties($_GET['favorite'], array('favorite'));
+    $array_favorite['favorite'] = ($array_favorite['favorite'] === 'true') ? 'false' : 'true';
+    DashboardHandler::Set_Item_Properties($_GET['favorite'], $array_favorite);
+  }
   NetworkUtilities::Redirect_if_not_exists($_SESSION['username'], './login.html');
   NetworkUtilities::Redirect_if_not_exists(@$_GET['sort'], './dashboard_index_asc.html');
 
-  $get = preg_replace('/\_(.*)/', '', $_GET['sort']);
-  $edit = (isset($_GET['edit'])) ? $_GET['edit'] : 'false';
-  $sort = (preg_replace('/(.*)\_/', '', $_GET['sort']) == 'asc') ? SORT_ASC : SORT_DESC;
-  $list = DashboardHandler::Generate_List($get, $sort);
+  //Setup vars from url
+  $url_get_column = preg_replace('/\_(.*)/', '', $_GET['sort']);
+  $url_get_sort = preg_replace('/(.*)\_/', '', $_GET['sort']);
+  $url_get_edit = (isset($_GET['edit'])) ? $_GET['edit'] : 'false';
 
-  $sort_status_array = array('index' => '', 'name' => '', 'timestamp' => '');
-  switch ($get) {
-    case 'name':
-      $sort_status_array['name'] = 'sort-'.(($sort == SORT_ASC) ? 'asc' : 'desc');
-      break;
-    case 'timestamp':
-      $sort_status_array['timestamp'] = 'sort-'.(($sort == SORT_ASC) ? 'asc' : 'desc');
-      break;
-    default:
-      $sort_status_array['index'] = 'sort-'.(($sort == SORT_ASC) ? 'asc' : 'desc');
-      break;
-  }
+  //Generate list
+  $list = $dashboardView->Generate_List($url_get_column, ($url_get_sort == 'asc') ? SORT_ASC : SORT_DESC, ($url_get_edit == 'true') ? true : false);
 
-  $div_edit_display = ($edit == 'true') ? 'disabled' : '';
+  $column_status_array = array('index' => '', 'name' => '', 'timestamp' => '');
+  $column_status_array[$url_get_column] = 'sort-'.$url_get_sort;
+
+  //Setup div vars to show/hide some elements
+  $div_edit_display = ($url_get_edit == 'true') ? 'disabled' : '';
   $div_display = empty($list) ? 'display: none;' : 'display: block;';
   $div_popover_display = 'display: none;';
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch (isset($_POST)) {
-      //Create_Table
+      //Create Item
       case isset($_POST['create']):
         if (!empty($_POST['tablename']))
-          DashboardHandler::Save_Tablename($_POST['tablename']);
+          DashboardHandler::Add_Item($_POST['tablename']);
         else
           $div_popover_display = 'display: block;';
         break;
-      //Toolbar
+      //Toolbar Trashbin
       case isset($_POST['toolbar_trashbin']):
-        DashboardHandler::Remove_List();
+        DashboardHandler::Clear_List();
         break;
+      //Toolbar Edit
       case isset($_POST['toolbar_wrench']):
-        $edit = ($edit == 'true') ? 'false' : 'true';
-        header('Refresh:0; url=./dashboard.html?sort='.$get.'&edit='.$edit);
+        $edit = ($url_get_edit == 'true') ? 'false' : 'true';
+        header('Refresh:0; url=./dashboard.html?sort=index_asc&edit='.$edit);
         break;
-      //Table_Column
-      case isset($_POST['column_index']):
-        $get = 'index_'.(($sort_status_array['index'] == 'sort-asc') ? 'desc' : 'asc');
-        header('Refresh:0; url=./dashboard.html?sort='.$get.'&edit='.$edit);
-        // header('Refresh:0; url=./dashboard_'.$get.'.html');
+      //Sort Table
+      case isset($_POST['column']):
+        $sort = ($url_get_column == $_POST['column']) ? (($url_get_sort == 'asc') ? 'desc' : 'asc') : 'asc';
+        $get = ($_POST['column']).'_'.$sort;
+        header('Refresh:0; url=./dashboard_'.$get.'.html');
         break;
-      case isset($_POST['column_tablename']):
-        $get = 'name_'.(($sort_status_array['name'] == 'sort-asc') ? 'desc' : 'asc');
-        header('Refresh:0; url=./dashboard.html?sort='.$get.'&edit='.$edit);
-        // header('Refresh:0; url=./dashboard_'.$get.'.html');
-        break;
-      case isset($_POST['column_date']):
-        $get = 'timestamp_'.(($sort_status_array['timestamp'] == 'sort-asc') ? 'desc' : 'asc');
-        header('Refresh:0; url=./dashboard.html?sort='.$get.'&edit='.$edit);
-        // header('Refresh:0; url=./dashboard_'.$get.'.html');
-        break;
-      //Table_Item
-      /*
-      case isset($_POST['column_date']):
-        DashboardHandler::Remove_List();
-        break;
-      */
     }
-    // if (isset($_POST['column_index']) || isset($_POST['column_index']) || isset($_POST['column_index']))
-      // header('Refresh:0; url=./dashboard.html?sort='.$get);
   }
 ?>
 <!-- HTML Code -->
@@ -100,8 +86,8 @@
         <?=DIV_POPOVER_TEXTFIELD_CANNOT_BE_EMPTY; ?>
       </div>
 
-       <div class="toolbar rounded" style="margin-top: 25px; margin-bottom: -20px;">
-        <button class="toolbar-button <?=$div_edit_display; ?>" style="cursor: pointer;" name="toolbar_wrench"><span class="mif-wrench"></span></button>
+       <div class="toolbar rounded" style="margin-top: 25px; margin-bottom: -5px;">
+        <button class="toolbar-button <?=$div_edit_display; ?>" style="cursor: pointer;" name="toolbar_wrench" type="submit"><span class="mif-wrench"></span></button>
         <button class="toolbar-button"><span class="mif-warning"></span></button>
         <button class="toolbar-button" name="toolbar_trashbin" onclick="return confirm('Do you really want to remove your list?');"><span class="mif-bin"></span></button>
       </div>
@@ -110,10 +96,10 @@
         <table class="table border striped" align="center">
           <thead>
             <tr>
-              <th class="sortable-column <?=$sort_status_array['index']; ?>"><label>Index<button name="column_index" type="submit"></button></label></th>
-              <th class="sortable-column <?=$sort_status_array['name']; ?>"><label>Tablename<button name="column_tablename" type="submit"></button></label></th>
-              <th class="sortable-column <?=$sort_status_array['timestamp']; ?>"><label>Date<button name="column_date" type="submit"></button></label></th>
-              <th>Options</th>
+              <th class="sortable-column <?=$column_status_array['index']; ?>"><label><?=TABLE_HEADER_INDEX; ?><button name="column" value="index" type="submit"></button></label></th>
+              <th class="sortable-column <?=$column_status_array['name']; ?>"><label><?=TABLE_HEADER_TABLENAME; ?><button name="column" value="name" type="submit"></button></label></th>
+              <th class="sortable-column <?=$column_status_array['timestamp']; ?>"><label><?=TABLE_HEADER_DATE; ?><button name="column" value="timestamp" type="submit"></button></label></th>
+              <th><?=TABLE_HEADER_OPTIONS; ?></th>
             </tr>
           </thead>
           <tbody>

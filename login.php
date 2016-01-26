@@ -1,5 +1,4 @@
 <?php
-  session_start();
   require('bootstrap.php');
 
   FileLoader::Load('Resources.Library.Php.DatabaseHandler');

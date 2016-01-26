@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require('bootstrap.php');
 
     if (isset($_SESSION['username'])) header('Refresh:0; url=./dashboard.php');

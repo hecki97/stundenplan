@@ -18,9 +18,9 @@
   -->
     <div class="app-bar darcula" id="navbar-style">
       <ul class="app-bar-menu">
-        <li style="<?=$logged_out_style; ?>"><a href="./index.html"><span class="mif-home"></span> <?=NAV_BUTTON_INDEX; ?><sup><?=LANG; ?></sup></a></li>
+        <li style="<?=$logged_out_style; ?>"><a href="./index.html"><span class="mif-home"></span> <?=NAV_BUTTON_INDEX; ?><sup><?=LANG; ?>-dev</sup></a></li>
         <!--<li style="<?=$logged_in_style; ?>"><form action="./resources/php/logout.php"><button class="button link fg-white" type="submit"><span class="mif-switch"></span> <?//=NAV_BUTTON_LOGOUT; ?></button></form></li>-->
-        <li style="<?=$logged_in_style; ?>"><a href="./dashboard.html"><span class="mif-home"></span> <?=NAV_BUTTON_DASHBOARD; ?></a></li>
+        <li style="<?=$logged_in_style; ?>"><a href="./dashboard.html"><span class="mif-home"></span> <?=NAV_BUTTON_DASHBOARD; ?><sup><?=LANG; ?>-dev</sup></a></li>
         <span class="app-bar-divider"></span>
         <!--<li><a onclick="window.location.reload();"><span class="mif-loop2"></span> <?//=NAV_BUTTON_RELOAD; ?></a></li>
         <span class="app-bar-divider"></span>-->
@@ -36,7 +36,7 @@
           </ul>
         </li>
         <span class="app-bar-divider"></span>
-        <li><a href="https://github.com/hecki97/stundenplan/tree/develop"><span class="mif-info"></span><?=file_get_contents('./resources/version.txt'); ?></a></li>
+        <li><a href="https://github.com/hecki97/stundenplan/tree/develop"><span class="mif-info"></span> v1.2-dev<?//=Git::GetGitCommitHash(1, 2); ?></a></li>
         <span class="app-bar-divider"></span>
         <li><a href="./about.html" class="fg-white"><span class="mif-cogs"></span> <?=NAV_BUTTON_ABOUT; ?></a></li>
       </ul>
