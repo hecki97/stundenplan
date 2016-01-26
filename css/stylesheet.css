@@ -70,7 +70,7 @@ body:before {
 
 #dashboard-table-column-table-name a#fav-star {
     display: inline;
-    top: 8.5px;
+    top: .75px;
     float: left;
 }
 
@@ -90,9 +90,8 @@ body:before {
 #dashboard-table-column-table-name a#table-name {
     display: inline;
     font-size: 20px;
-    float: center;
     left: 25px;
-    top: 13.5px;
+    top: 8.5px;
 }
 
 #dashboard-table-column-table-name p#is-empty {
@@ -103,7 +102,7 @@ body:before {
 
 #dashboard-table-column-date {
     top: -1.25px;
-    width: 125px;
+    width: 135px;
 }
 
 #dashboard-table-column-options {

@@ -1,5 +1,5 @@
 <?php
-	/**
+    /**
 	* IniParser
 	**/
 	class IniParser
@@ -79,6 +79,7 @@
         }
 
         public static function Scan_dir($path, $extension = null, $remove_extension = false) {
+            $array = array();
             if ($handle = opendir($path)) {
                 while (false !== ($entry = readdir($handle))) {
                     $file_array = explode(".", $entry);
@@ -93,7 +94,6 @@
                     $array[] = implode('.', $file_array);
                 }
                 closedir($handle);
-                var_dump($array);
             }
             return $array;
         }
@@ -112,14 +112,27 @@
             }
             rmdir($dirPath);
         }
+
+        public static function file_write_encrypted($file_path, $data, $encryption_key)
+        {
+            if (DEBUG_MODE && DEV_MODE) {
+                $fp = fopen($file_path.'_output', 'w');
+                fwrite($fp, print_r($data, true));
+                fclose($fp);
+            }
+
+            $fp = fopen($file_path, 'w');
+            fwrite($fp, CryptHandler::Encrypt($encryption_key, $data));
+            fclose($fp);
+        }
    	}
 
     /**
-    * Array_Sort
+    * Array
     **/
-    class Array_Sort
+    class Array_Class
     {
-        public static function Sort($array, $on, $order = SORT_ASC) {
+        public static function Array_Sort($array, $on, $order = SORT_ASC) {
             $new_array = array();
             $sortable_array = array();
 
@@ -151,6 +164,23 @@
             }
             return array_values($new_array);
         }
+
+        public static function in_array_r($needle, $haystack, $strict = false) {
+            foreach ($haystack as $item) {
+                if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static function Get_Array_Index($needle, $haystack) {
+            $index = 0;
+            for ($i = 0; $i < count($haystack); $i++) { 
+                if (in_array($needle, $haystack[$i])) $index = $i;
+            }
+            return $index;
+        }
     }
 
     /**
@@ -175,7 +205,7 @@
     **/
     class Git {
         public static function GetGitCommitHash($major = '1', $minor = '0', $mode = 'dev') {
-            $commit_hash = trim(exec('git log --pretty="%h" -n1 HEAD'));
+            $commit_hash = trim(exec('git rev-parse --verify HEAD'));
 
             return sprintf('v%s.%s-%s.%s', $major, $minor, $mode, $commit_hash);
         }

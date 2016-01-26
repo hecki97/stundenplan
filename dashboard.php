@@ -2,7 +2,16 @@
   require('bootstrap.php');
 
   FileLoader::Load('Resources.Library.Php.DashboardHandler');
-  if (isset($_GET['remove'])) DashboardHandler::Remove_Item_from_List($_GET['remove']);
+  FileLoader::Load('Resources.Library.Php.DashboardViewController');
+
+  $dashboardView = new DashboardViewController();
+
+  if (isset($_GET['remove'])) DashboardHandler::Remove_Item($_GET['remove']);
+  if (isset($_GET['favorite'])) {
+    $array_favorite = DashboardHandler::Get_Item_Properties($_GET['favorite'], array('favorite'));
+    $array_favorite['favorite'] = ($array_favorite['favorite'] === 'true') ? 'false' : 'true';
+    DashboardHandler::Set_Item_Properties($_GET['favorite'], $array_favorite);
+  }
   NetworkUtilities::Redirect_if_not_exists($_SESSION['username'], './login.html');
   NetworkUtilities::Redirect_if_not_exists(@$_GET['sort'], './dashboard_index_asc.html');
 
@@ -12,7 +21,7 @@
   $url_get_edit = (isset($_GET['edit'])) ? $_GET['edit'] : 'false';
 
   //Generate list
-  $list = DashboardHandler::Generate_List($url_get_column, ($url_get_sort == 'asc') ? SORT_ASC : SORT_DESC, ($url_get_edit == 'true') ? true : false);
+  $list = $dashboardView->Generate_List($url_get_column, ($url_get_sort == 'asc') ? SORT_ASC : SORT_DESC, ($url_get_edit == 'true') ? true : false);
 
   $column_status_array = array('index' => '', 'name' => '', 'timestamp' => '');
   $column_status_array[$url_get_column] = 'sort-'.$url_get_sort;
