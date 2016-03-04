@@ -61,7 +61,7 @@ body:before {
 
 /* Dashboard Table Style */
 #dashboard-table-column-index {
-    width: 85px;
+    max-width: 85px;
 }
 
 #dashboard-table-column-table-name div {
@@ -72,6 +72,7 @@ body:before {
     display: inline;
     top: .75px;
     float: left;
+    max-width: 25px;
 }
 
 #dashboard-table-column-table-name a#move-up {
@@ -102,11 +103,12 @@ body:before {
 
 #dashboard-table-column-date {
     top: -1.25px;
-    width: 135px;
+    max-width: 135px;
+
 }
 
 #dashboard-table-column-options {
-    width: 125px;
+    max-width: 125px;
 }
 
 
@@ -165,4 +167,12 @@ body:before {
 
 .delete-account-input {
     color: red;
+}
+
+.line {
+    border :none;
+    border-top: 2.5px solid #393939;
+    background-color:#fff;
+    height: 1px;
+    margin: 0px 50px 0px 50px;
 }

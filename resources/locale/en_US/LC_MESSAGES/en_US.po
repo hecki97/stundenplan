@@ -1,0 +1,237 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Timetable\n"
+"POT-Creation-Date: 2016-02-05 20:31+0100\n"
+"PO-Revision-Date: 2016-02-12 19:33+0100\n"
+"Last-Translator: \n"
+"Language-Team: hecki97 <taurus97@gmx.de>\n"
+"Language: en_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# About
+#. About Title
+#: about.php:8
+msgid "about-title"
+msgstr ""
+
+# About
+#. About Page Header
+#: about.php:14
+msgid "about-page-header"
+msgstr ""
+
+# About
+#. About Content Box Sourcecode
+#: about.php:17
+msgid "about-content-box-sourcecode"
+msgstr ""
+
+# About
+#. About Content Box Background Image
+#: about.php:20
+msgid "about-content-box-bg-image"
+msgstr ""
+
+# About
+#. About Content Box Powered By
+#: about.php:23
+msgid "about-content-box-powered-by"
+msgstr ""
+
+# About
+#. About Content Box Copyright
+#: about.php:28
+msgid "about-content-box-copyright"
+msgstr ""
+
+# About
+#. About Content Box Version
+#: about.php:29
+msgid "about-content-box-version"
+msgstr ""
+
+# Button
+#. Create Button
+#: dashboard.php:81
+msgid "button-create"
+msgstr ""
+
+# Button
+#. Registration Button
+#: registration.php:80, login.php:79
+msgid "button-registration"
+msgstr ""
+
+# Button
+#. Login Button
+#: registration.php:81, login.php:78
+msgid "button-login"
+msgstr ""
+
+# Dashboard
+#. Dashboard Title
+#: dashboard.php:67
+msgid "dashboard-title"
+msgstr ""
+
+# Dashboard
+#. Dashboard Page Header
+#: dashboard.php:73
+msgid "dasboard-page-header"
+msgstr ""
+
+# Dashboard
+#. Dashboard Table Header Index
+#: dashboard.php:99
+msgid "dashboard-table-header-index"
+msgstr "Index"
+
+# Dashboard
+#. Dashboard Table Header Tablename
+#: dashboard.php:100
+msgid "dashboard-table-header-tablename"
+msgstr "Tablename"
+
+# Dashboard
+#. Dashboard Table Header Date
+#: dashboard.php:101
+msgid "dashboard-table-header-date"
+msgstr "Date"
+
+# Dashboard
+#. Dashboard Table Header Options
+#: dashboard.php:102
+msgid "dashboard-table-header-options"
+msgstr "Options"
+
+# Index
+#. Index Title
+#: index.php:16
+msgid "index-title"
+msgstr ""
+
+# Index
+#. Index Page Header
+#: index.php:22
+msgid "index-header"
+msgstr ""
+
+# Index
+#. Index Registration Command Button
+#: index.php:26
+msgid "command-button-registration"
+msgstr ""
+
+# Index
+#. Index Registration Command Button Sub Text
+#: index.php:26
+msgid "command-button-registration-sub-text"
+msgstr ""
+
+# Index
+#. Index Login Command Button
+#: index.php:27
+msgid "command-button-login"
+msgstr ""
+
+# Index
+#. Index Login Command Button Sub Text
+#: index.php:27
+msgid "command-button-login-sub-text"
+msgstr ""
+
+# Input
+#. Input Text Username Placeholder
+#: registration.php:64, login.php:68
+msgid "input-text-username-placeholder"
+msgstr ""
+
+# Input
+#. Input Text Password Placeholder
+#: registration.php:70, registration.php:76, login.php:74
+msgid "input-text-password-placeholder"
+msgstr ""
+
+# Input
+#. Input Text Timetable Placeholder
+#: dashboard.php:78
+msgid "input-text-timetable-placeholder"
+msgstr ""
+
+# Login
+#. Login Title
+#: login.php:55
+msgid "login-title"
+msgstr ""
+
+# Login
+#. Login Page Header
+#: login.php:61
+msgid "login-page-header"
+msgstr ""
+
+# Login
+#. Login Page Content Box Header
+#: login.php:63
+msgid "login-page-content-box-header"
+msgstr "Enter your credentials:"
+
+# Navigation Bar
+#. Navigation Bar Index Button
+#: navbar.php:21
+msgid "button-navbar-index"
+msgstr "Index"
+
+# Navigation Bar
+#. Navigation Bar Dashboard Button
+#: navbar.php:23
+msgid "button-navbar-dashboard"
+msgstr "Dashboard"
+
+# Navigation Bar
+#. Navigation Bar Login Button
+#: navbar.php:30
+msgid "button-navbar-login"
+msgstr "Login"
+
+# Navigation Bar
+#. Navigation Bar Settings Button
+#: navbar.php:33
+msgid "button-navbar-settings"
+msgstr "Settings"
+
+# Navigation Bar
+#. Navigation Bar Logout Button
+#: navbar.php:35
+msgid "button-navbar-logout"
+msgstr "Logout"
+
+# Navigation Bar
+#. Navigation Bar About Button
+#: navbar.php:41
+msgid "button-navbar-about"
+msgstr "About"
+
+# Registration
+#. Registration Title
+#: registration.php:52
+msgid "registration-title"
+msgstr ""
+
+# Registration
+#. Registration Page Header
+#: registration.php:57
+msgid "registration-page-header"
+msgstr ""
+
+# Registration
+#. Registration Page Content Box Header
+#: registration.php:60
+msgid "registration-page-content-box-header"
+msgstr ""

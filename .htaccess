@@ -5,7 +5,7 @@ RewriteEngine on
 RewriteRule ^(.*).html$ $1.php
 
 RewriteRule ^view_item_(.*).php$ view.php?id=$1
-RewriteRule ^edit_item_(.*).php$ view.php?id=$1&mode=edit
+RewriteRule ^edit_item_(.*).php$ view.php?id=$1&view=edit
 RewriteRule ^dashboard_(.*).php$ dashboard.php?sort=$1
 RewriteRule ^remove_item_(.*).php$ dashboard.php?remove=$1
 # RewriteRule ^toolboard_(.*).php$ dashboard.php?sort=$1&mode=edit

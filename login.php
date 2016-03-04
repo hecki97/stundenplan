@@ -1,23 +1,15 @@
 <?php
   require('bootstrap.php');
 
-  FileLoader::Load('Resources.Library.Php.DatabaseHandler');
-  FileLoader::Load('Resources.Library.Php.LogHandler');
-
-  // Use .html instead of .php file extension
-  $info = pathinfo($_SERVER['REQUEST_URI']);
-  if (@$info['extension'] == 'php') header('Refresh:0; url=./'.str_replace('.php', '.html', basename(__FILE__)));
+  //FileLoader::Load('Resources.Library.Php.LogHandler');
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
     if($_POST['password'] != null && $_POST['username'] != null) {
-      //$result = DatabaseHandler::Get_Password_Hash_from_database($_POST["username"]);
       $result = DatabaseHandler::MySqli_Query("SELECT username, password_hash FROM `login` WHERE username LIKE '".strip_tags($_POST['username'])."' LIMIT 1");
-      if (empty($result))
-          $return = 'NotFoundInDatabase';
-
+      
+      if (empty($result)) $return = 'NotFoundInDatabase';
       $row = mysqli_fetch_object($result);
-      //$return = !empty($row) ? $row->password_hash : 'LoginFailed';
 
       if (!empty($row) && password_verify(strip_tags($_POST['password']), $row->password_hash))
       {
@@ -56,32 +48,31 @@
   <head>
     <!-- load header from header.php -->
     <?php require('header.php'); ?>
-    <title><?=LOGIN_TITLE; ?></title>
+    <title><?=_('login-title'); ?></title>
   </head>
   <body>
     <!-- load navbar from navbar.php -->
     <?php require('navbar.php'); ?>
     <div class="page-content">
-      <div class="page-header"><?=LOGIN_PAGE_HEADER; ?></div>
+      <div class="page-header"><?=_('login-page-header'); ?></div>
       <div class="page-content-box content-box-shadow">
-        <!--<h3>Enter your credentials:</h3>-->
-        <h3><?=LOGIN_PAGE_CONTENT_BOX_HEADER; ?></h3>
+        <h3><?=_('login-page-content-box-header'); ?></h3>
         <br/>
         <form action="login.html" method="post">
           <div class="input-control text full-size" data-role="input">
             <span class="mif-user prepend-icon"></span>
-            <input type="text" placeholder="<?=INPUT_TEXT_USERNAME_PLACEHOLDER; ?>" name="username">
+            <input type="text" placeholder="<?=_('input-text-username-placeholder'); ?>" name="username">
             <button class="button helper-button clear"><span class="mif-cross"></span></button>
           </div>
           <br/>
           <div class="input-control password full-size" data-role="input">
             <span class="mif-lock prepend-icon"></span>
-            <input type="password" placeholder="<?=INPUT_TEXT_PASSWORD_PLACEHOLDER; ?>" name="password">
+            <input type="password" placeholder="<?=_('input-text-password-placeholder'); ?>" name="password">
             <button class="button helper-button reveal"><span class="mif-looks"></span></button>
           </div>
           <br/><br/>
-          <button class="button" type="submit"><?=BUTTON_LOGIN; ?></button>
-          <a class="button link" href="./registration.php"><?=BUTTON_LINK_REGISTRATION; ?></a>
+          <button class="button" type="submit"><?=_('button-login'); ?></button>
+          <a class="button link" href="./registration.php"><?=_('button-registration'); ?></a>
         </form>
     </div>
     <?=@$div; ?>

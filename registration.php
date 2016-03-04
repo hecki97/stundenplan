@@ -49,36 +49,36 @@
 <head>
     <!-- load header from header.php -->
     <?php require('header.php'); ?>
-    <title><?=REGISTRATION_TITLE;?></title>
+    <title><?=_('registration-title');?></title>
 </head>
 <body>
   <!-- load navbar from navbar.php -->
   <?php require('navbar.php'); ?>
   <div class="page-content">
-    <div class="page-header"><?=REGISTRATION_HEADER; ?></div>
+    <div class="page-header"><?=_('registration-page-header'); ?></div>
     <div class="page-content-box content-box-shadow">
-      <h3><?=REGISTRATION_PAGE_CONTENT_BOX_HEADER; ?></h3>
+      <h3><?=_('registration-page-content-box-header'); ?></h3>
       <form action="registration.php" method="post">
         <div class="input-control text full-size" data-role="input">
           <span class="mif-user prepend-icon"></span>
-          <input type="text" placeholder="<?=INPUT_TEXT_USERNAME_PLACEHOLDER; ?>" name="username">
+          <input type="text" placeholder="<?=_('input-text-username-placeholder'); ?>" name="username">
           <button class="button helper-button clear"><span class="mif-cross"></span></button>
         </div>
         <br/>
         <div class="input-control password full-size" data-role="input">
           <span class="mif-lock prepend-icon"></span>
-          <input type="password" placeholder="<?=INPUT_TEXT_PASSWORD_PLACEHOLDER; ?>" name="password">
+          <input type="password" placeholder="<?=_('input-text-registration-placeholder'); ?>" name="password">
           <button class="button helper-button reveal"><span class="mif-looks"></span></button>
         </div>
         <br/>
         <div class="input-control password full-size" data-role="input">
           <span class="mif-lock prepend-icon"></span>
-          <input type="password" placeholder="<?=INPUT_TEXT_PASSWORD_PLACEHOLDER; ?>" name="password2">
+          <input type="password" placeholder="<?=_('input-text-password-placeholder'); ?>" name="password2">
           <button class="button helper-button reveal"><span class="mif-looks"></span></button>
         </div>
         <br/><br/>
-        <button class="button" type="submit"><?=BUTTON_REGISTRATION; ?></button>
-        <a class="button link" href="./login.php"><?=BUTTON_LINK_LOGIN; ?></a>
+        <button class="button" type="submit"><?=_('button-registration'); ?></button>
+        <a class="button link" href="./login.php"><?=_('button-login'); ?></a>
       </form>
     </div>
     <?=@$div; ?>

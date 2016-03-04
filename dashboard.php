@@ -64,21 +64,21 @@
   <head>
     <!-- load header from header.php -->
     <?php require('header.php'); ?>
-    <title><?=DASHBOARD_TITLE; ?></title>
+    <title><?=_('dashboard-title'); ?></title>
   </head>
   <body>
     <!-- load navbar from navbar.php -->
     <?php require('navbar.php'); ?>
     <div class="page-content" style="max-height: 100%;">
-      <div class="page-header"><?=DASHBOARD_PAGE_HEADER; ?></div>
+      <div class="page-header"><?=_('dashboard-page-header'); ?></div>
       <div class="page-content-box content-box-shadow">
       <form method="post">
         <div class="input-control text full-size" data-role="input">
           <span class="mif-table prepend-icon"></span>
-          <input type="text" placeholder="<?=INPUT_TEXT_TIMETABLE_PLACEHOLDER; ?>" name="tablename">
+          <input type="text" placeholder="<?=_('input-text-timetable-placeholder'); ?>" name="tablename">
           <div class="button-group">
             <button class="button helper-button clear"><span class="mif-cross"></span></button>
-            <button class="button" name="create" type="submit"><?=BUTTON_CREATE; ?></button>
+            <button class="button" name="create" type="submit"><?=_('button-create'); ?></button>
           </div> 
         </div>
       </div>
@@ -96,10 +96,10 @@
         <table class="table border striped" align="center">
           <thead>
             <tr>
-              <th class="sortable-column <?=$column_status_array['index']; ?>"><label><?=TABLE_HEADER_INDEX; ?><button name="column" value="index" type="submit"></button></label></th>
-              <th class="sortable-column <?=$column_status_array['name']; ?>"><label><?=TABLE_HEADER_TABLENAME; ?><button name="column" value="name" type="submit"></button></label></th>
-              <th class="sortable-column <?=$column_status_array['timestamp']; ?>"><label><?=TABLE_HEADER_DATE; ?><button name="column" value="timestamp" type="submit"></button></label></th>
-              <th><?=TABLE_HEADER_OPTIONS; ?></th>
+              <th class="sortable-column <?=$column_status_array['index']; ?>"><label><?=_('dashboard-table-header-index'); ?><button name="column" value="index" type="submit"></button></label></th>
+              <th class="sortable-column <?=$column_status_array['name']; ?>"><label><?=_('dashboard-table-header-tablename'); ?><button name="column" value="name" type="submit"></button></label></th>
+              <th class="sortable-column <?=$column_status_array['timestamp']; ?>"><label><?=_('dashboard-table-header-date'); ?><button name="column" value="timestamp" type="submit"></button></label></th>
+              <th><?=_('dashboard-table-header-options'); ?></th>
             </tr>
           </thead>
           <tbody>

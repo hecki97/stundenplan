@@ -64,10 +64,10 @@
 		 * Writes the given $data_array operator to file, changes the sha1 hash value and reloads the page
 		 * @param string $table_id       
 		 * @param array $data_array     
-		 * @param string $encryption_key 
 		 */
-		private static function Save_Table($table_id, $data_array, $encryption_key) {
-			FileLoader::file_write_encrypted($file_path, $data_array, $encryption_key);
+		public static function Save_Table($table_id, $data_array) {
+			$file_path = self::$tables_dir_path.'/'.self::Generate_Filename($table_id);
+			FileLoader::file_write_encrypted($file_path, $data_array, DashboardHandler::Get_Item_Properties($table_id, array('key'))['key']);
 			
 			DashboardHandler::Set_Item_Properties($table_id, array('sha1' => self::Get_Sha1_File_Hash($table_id)));
 			header('Refresh:0; url=./view_item_'.$table_id.'.html');
