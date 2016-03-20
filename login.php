@@ -15,7 +15,7 @@
       {
         $_SESSION['username'] = $_POST["username"];
         LogHandler::Log('User logged in', 'INFO', false);
-        header('Refresh:0; url=./dashboard.php?sort=index_asc');
+        header('Refresh:0; url=./dashboard.html?column=index&sort=asc&view=normal&page=0');
         exit;
       }
       else

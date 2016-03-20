@@ -61,7 +61,7 @@ body:before {
 
 /* Dashboard Table Style */
 #dashboard-table-column-index {
-    max-width: 85px;
+    width: 85px;
 }
 
 #dashboard-table-column-table-name div {
@@ -70,9 +70,9 @@ body:before {
 
 #dashboard-table-column-table-name a#fav-star {
     display: inline;
-    top: .75px;
+    top: 7.5px;
     float: left;
-    max-width: 25px;
+    width: 25px;
 }
 
 #dashboard-table-column-table-name a#move-up {
@@ -91,8 +91,8 @@ body:before {
 #dashboard-table-column-table-name a#table-name {
     display: inline;
     font-size: 20px;
-    left: 25px;
-    top: 8.5px;
+    /*left: 25px;*/
+    top: 12.5px;
 }
 
 #dashboard-table-column-table-name p#is-empty {
@@ -103,12 +103,12 @@ body:before {
 
 #dashboard-table-column-date {
     top: -1.25px;
-    max-width: 135px;
+    width: 135px;
 
 }
 
 #dashboard-table-column-options {
-    max-width: 125px;
+    width: 125px;
 }
 
 
@@ -175,4 +175,9 @@ body:before {
     background-color:#fff;
     height: 1px;
     margin: 0px 50px 0px 50px;
+}
+
+/* Hacky Solution */
+.notify-container {
+    top: 50px !important;
 }

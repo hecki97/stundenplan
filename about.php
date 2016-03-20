@@ -15,7 +15,7 @@
 			<div class="page-content-box content-box-shadow">
 				<dl>
 					<dt><h2><?=_('about-content-box-sourcecode'); ?></h2></dt>
-					<dd><h3><a href="https://github.com/hecki97/stundenplan">github.com</h3></a></dd>
+					<dd><h3><a href="https://github.com/hecki97/stundenplan">github.com</a></h3></dd>
 					<br/>
 					<dt><h2><?=_('about-content-box-bg-image'); ?></h2></dt>
 					<dd><h3><a href="http://www.bing.com">bing.com</a></h3></dd>
