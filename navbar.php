@@ -14,8 +14,11 @@
 <!-- HTML Code
 <!DOCTYPE html>
 <html>
-  <body>
-  -->
+  <head></head> --> 
+  <!-- Hacky Solution  -->
+  <?php if (DEV_MODE) { ?><script>$.Notify({type: 'warning', caption: 'Warning!', content: 'Development Build', keepOpen: true, icon: "<span class='mif-warning'></span>"});</script><?php } ?>
+  <?php if (DEBUG_MODE) { ?><script>$.Notify({type: 'warning', caption: 'Warning!', content: 'Debug-Mode Activated', keepOpen: true, icon: "<span class='mif-warning'></span>"});</script><?php } ?>
+  <!--<body> -->
     <div class="app-bar darcula" id="navbar-style">
       <ul class="app-bar-menu">
         <li style="<?=$logged_out_style; ?>"><a href="./index.html"><span class="mif-home"></span> <?=_('button-navbar-index'); ?><sup><?//=LANG; ?>-dev</sup></a></li>

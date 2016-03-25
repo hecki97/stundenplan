@@ -53,8 +53,4 @@
 		ini_set('display_errors', 0);
 
 	if (BING_BACKGROUND_IMAGE_ENABLED) BingImageHandler::Get_Image_from_Bing();
-
-	//Warnings
-	if (DEV_MODE) echo "<span style='color: #fed545;'>WARNING!: This is an <b>in development build</b>. Things can and will be broken. For the best experience and security you should always use a master build.</span><br/>";
-	if (DEBUG_MODE) echo "<span style='color: #fed545;'>WARNING!: Debug-mode activated.</span>\n";
 ?>

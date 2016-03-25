@@ -138,7 +138,7 @@ class DashboardHandler
     fclose($fp);
 
     LogHandler::Log('New table created', 'INFO', false);
-    header('Refresh:0; url=./dashboard.html');
+    header('Refresh:0; url=./dashboard.html?column=index&sort=asc&view=normal&page=1');
   }
 }
 ?>
