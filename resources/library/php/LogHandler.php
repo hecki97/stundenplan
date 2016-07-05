@@ -1,10 +1,10 @@
 <?php
+	use Utilities\Dir;
 	/**
 	* LogHandler
 	*/
 	class LogHandler
 	{
-		private function __construct() {}
 		private static $initialized = false;
 
 		private static $path;
@@ -14,8 +14,8 @@
 
 		public static function initialize() {
 			if (self::$initialized) return;
-			FileLoader::Load('Resources.Library.Php.DatabaseHandler');
-			FileLoader::Load('Resources.Library.Php.Utilities');
+			Dir::include_file('Resources.Library.Php.DatabaseHandler');
+			Dir::include_file('Resources.Library.Php.Utilities');
 
 			if (isset($_SESSION['username'])) {
 				$result = DatabaseHandler::Mysqli_Query("SELECT uuid FROM `login` WHERE username LIKE '".$_SESSION['username']."' LIMIT 1");
@@ -23,8 +23,8 @@
 			}
 			self::$path = PROJECT_DIR.'/logs/general/'.date(LOG_HANDLER_DATE_YEAR).'/'.date(LOG_HANDLER_DATE_MONTH);
 			self::$user_path = PROJECT_DIR.'/logs/user/'.date(LOG_HANDLER_DATE_YEAR).'/'.date(LOG_HANDLER_DATE_MONTH).'/'.date(LOG_HANDLER_DATE_DAY);
-			FileLoader::Create_new_folder(self::$path);
-			FileLoader::Create_new_folder(self::$user_path);
+			Dir::mkdir(self::$path);
+			Dir::mkdir(self::$user_path);
 
 			self::$initialized = true;
 		}

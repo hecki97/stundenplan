@@ -26,7 +26,7 @@
 					<dt><h2><a href="./mobile/index.php"><?//=$lang['labels']['l.mobile']; ?></a></h2></dt>
 					<br/>
 					<dt><h4><?=_('about-content-box-copyright'); ?></h4></dt>
-					<dt><h4><?=_('about-content-box-version'); ?> 0.1 dev</h4></dt>
+					<dt><h4><?=_('about-content-box-version'); ?> 1.2-dev</h4></dt>
 				</dl>
 			</div>
 		</div>

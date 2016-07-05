@@ -19,9 +19,9 @@
     			die('Connect Error (' . mysqli_connect_errno().') '.mysqli_connect_error());
 			}
 
-			self::mkdatabase(DATABASE);
-			mysqli_select_db(self::$mysqli, DATABASE);
-			self::mktable("SELECT ID FROM ".DATABASE_TABLE_LOGIN, "CREATE TABLE ".DATABASE_TABLE_LOGIN." (id int(255) AUTO_INCREMENT, uuid varchar(255) NOT NULL, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, PRIMARY KEY (id))");
+			self::mkdatabase(DATABASE_NAME);
+			mysqli_select_db(self::$mysqli, DATABASE_NAME);
+			self::mktable("SELECT ID FROM ".DATABASE_TABLE_NAME, "CREATE TABLE ".DATABASE_TABLE_NAME." (id int(255) AUTO_INCREMENT, uuid varchar(255) NOT NULL, username varchar(255) NOT NULL, password_hash varchar(255) NOT NULL, encryption_key varchar(255) NOT NULL, PRIMARY KEY (id))");
 
 			self::$initialized = true;
 		}

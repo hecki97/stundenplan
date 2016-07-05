@@ -1,21 +1,24 @@
 <?php
+	use Utilities\Dir;
+	use Utilities\UUID;
+	use Utilities\Utilities;
 	/**
 	* TableHandler
 	*/
 	class TableHandler
 	{
 		private static $initialized = false;
-		private static $tables_dir_path;
-		private static $fallback_properties = array('tablename' => 'Tablename', 'timestamp' => 0, 'width' => 0, 'height' => 0, 'empty' => true);
+		private static $tables_directory;
+		private static $table_default_properties = array('tablename' => DEFAULT_TABLE_NAME, 'timestamp' => 0, 'width' => DEFAULT_TABLE_WIDTH, 'height' => DEFAULT_TABLE_HEIGHT, 'empty' => true);
 
 		private static function initialize() {
     		if (self::$initialized) return;
     
-    		FileLoader::Load('Resources.Library.Php.CryptHandler');
-    		FileLoader::Load('Resources.Library.Php.Utilities');
+    		Dir::include_file('Resources.Library.Php.CryptHandler');
+    		Dir::include_file('Resources.Library.Php.Utilities');
 
-    		self::$tables_dir_path = PROJECT_DIR.'/resources/data/'.UUID::v5(UUID, USERNAME).'/tables';
-    		(!is_dir(self::$tables_dir_path)) ? mkdir(self::$tables_dir_path) : false;
+    		self::$tables_directory = PROJECT_DIR.'/resources/data/'.UUID::v5(UUID, USERNAME).'/tables';
+    		(!is_dir(self::$tables_directory)) ? mkdir(self::$tables_directory) : false;
 
     		self::$initialized = true;
   		}
@@ -37,8 +40,10 @@
 		public static function Create_Table($table_id, $encryption_key, $table_name) {
 			self::initialize();
 
+			$filename = self::Generate_Filename($table_id);
 			$properties = array('tablename' => $table_name, 'timestamp' => time(), 'width' => 5, 'height' => 8, 'empty' => true);			
-			FileLoader::file_write_encrypted(self::$tables_dir_path.'/'.self::Generate_Filename($table_id), array('properties' => $properties, 'table' => ''), $encryption_key);
+			Dir::fwrite_encrypted(self::$tables_directory.'/'.$filename, array('properties' => $properties, 'table' => ''), $encryption_key);
+			return Utilities::SHA1_File_Hash(self::$tables_directory.'/'.$filename);
 		}
 
 		/**
@@ -50,14 +55,18 @@
 		public static function Load_Table($table_id) {
 			self::initialize();
 
-			$table_filename = self::Generate_Filename($table_id);
-
+			$filename = self::Generate_Filename($table_id);
+			$sha1_hash = Utilities::SHA1_File_Hash(self::$tables_directory.'/'.$filename);
 			/**
 			 TODO: Error page for better error visualisation 
 			**/
-			if (DashboardHandler::Get_Item_Properties($table_id, array('sha1'))['sha1'] != self::Get_Sha1_File_Hash($table_id)) die('SHA1 checksum mismatch error!');
+			$key = DashboardHandler::Verify_SHA1($table_id, $sha1_hash);
 
-			return (file_exists(self::$tables_dir_path.'/'.$table_filename)) ? CryptHandler::Decrypt(DashboardHandler::Get_Item_Properties($table_id, array('key'))['key'], file_get_contents(self::$tables_dir_path.'/'.$table_filename), true) : self::$fallback_properties;
+			return (file_exists(self::$tables_directory.'/'.$filename)) ? CryptHandler::Decrypt($key, file_get_contents(self::$tables_directory.'/'.$filename), true) : self::$table_default_properties;
+		}
+
+		public static function Fetch_Table_Properties($table_id) {
+			return self::Load_Table($table_id)['properties'];
 		}
 
 		/**
@@ -66,25 +75,14 @@
 		 * @param array $data_array     
 		 */
 		public static function Save_Table($table_id, $data_array) {
-			$file_path = self::$tables_dir_path.'/'.self::Generate_Filename($table_id);
-			FileLoader::file_write_encrypted($file_path, $data_array, DashboardHandler::Get_Item_Properties($table_id, array('key'))['key']);
+			$filepath = self::$tables_directory.'/'.self::Generate_Filename($table_id);
+			$key = DashboardHandler::Verify_SHA1($table_id, Utilities::SHA1_File_Hash($filepath));
 			
-			DashboardHandler::Set_Item_Properties($table_id, array('sha1' => self::Get_Sha1_File_Hash($table_id)));
+			Dir::fwrite_encrypted($filepath, $data_array, $key);
+			
+			//DashboardHandler::Generate_Key($table_id, $filepath); WIP
+			DashboardHandler::Set_Item_Properties($table_id, array('sha1' => Utilities::SHA1_File_Hash($filepath)));
 			header('Refresh:0; url=./view_item_'.$table_id.'.html');
-		}
-
-		/**
-		 * Generates and returns the sha1 file hash from a table
-		 * @param string $table_id
-		 */
-		public static function Get_Sha1_File_Hash($table_id) {
-			self::initialize();
-
-			$file_path = self::$tables_dir_path.'/'.self::Generate_Filename($table_id);
-
-			if (!file_exists($file_path)) die('file '.self::Generate_Filename($table_id).' not found');
-
-			return sha1_file($file_path);
 		}
 	}
 ?>

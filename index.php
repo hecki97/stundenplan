@@ -1,7 +1,6 @@
 <?php
     require('bootstrap.php');
-
-    if (isset($_SESSION['username'])) header('Refresh:0; url=./dashboard.php');
+    if (isset($_SESSION['username'])) header('Refresh:0; url=./dashboard-js.html');
 ?>
 <!-- HTML Code -->
 <!DOCTYPE html>

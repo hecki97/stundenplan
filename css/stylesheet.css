@@ -1,8 +1,8 @@
 body {
 	position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
+    /* top: 0; bottom: 0; */
+    left: 0; right: 0;
     color: #f1f1f1;
-    overflow: normal;
     z-index: 0;
 }
 
@@ -10,6 +10,7 @@ body:before {
     content: "";
     position: fixed;
     background-image: url(../img/cache/BingWallpaper.jpg);
+    background-color: #c3c3c3;
     background-size: 100%;
     z-index: -1; /* Keep the background behind the content */
     height: 100%; width: 100%; /* Using Glen Maddern's trick /via @mente */
@@ -38,6 +39,7 @@ body:before {
 #dashboard-table-content-box {
     overflow: auto;
     margin: 25px 125px 0px 125px;
+    display: block;
     /*transform: scale(0.85);*/
 }
 
@@ -60,54 +62,63 @@ body:before {
 }
 
 /* Dashboard Table Style */
-#dashboard-table-column-index {
+.dashboard-table-column-index {
     width: 85px;
+
+    font-weight: bold;
 }
 
-#dashboard-table-column-table-name div {
+.dashboard-table-column-table-name div {
     display: inline;
 }
 
-#dashboard-table-column-table-name a#fav-star {
+.dashboard-table-column-table-name a.fav-star {
     display: inline;
-    top: 7.5px;
+    /* top: 7.5px; */
     float: left;
     width: 25px;
+
+    font-weight: bold;
 }
 
-#dashboard-table-column-table-name a#move-up {
+.dashboard-table-column-table-name a.move-up {
     text-align: left;
     display: inline;
     float: left;
     top: 8.5px;
 }
 
-#dashboard-table-column-table-name a#move-down {
+.dashboard-table-column-table-name a.move-down {
     display: inline;
     float: left;
     top: 8.5px;
 }
 
-#dashboard-table-column-table-name a#table-name {
+.dashboard-table-column-table-name a.table-name {
     display: inline;
     font-size: 20px;
     /*left: 25px;*/
     top: 12.5px;
+
+    font-weight: bold;
 }
 
-#dashboard-table-column-table-name p#is-empty {
+.dashboard-table-column-table-name p.is-empty {
     display: inline;
     float: right;
     width: 50px;
+
+    font-weight: bold;
 }
 
-#dashboard-table-column-date {
-    top: -1.25px;
+.dashboard-table-column-date {
+    /* top: -1.25px; */
     width: 135px;
 
+    font-weight: bold;
 }
 
-#dashboard-table-column-options {
+.dashboard-table-column-options {
     width: 125px;
 }
 
@@ -116,8 +127,8 @@ body:before {
 
 .page-content {
     text-align: center;
-    margin-top: 60px;
-    padding-bottom: 25px;
+    margin-top: 5rem;
+    padding-bottom: 5rem;
 }
 
 .table-container {
@@ -149,7 +160,8 @@ body:before {
 
 .page-large-content-box {
     margin: 0px auto 0px auto;
-    padding: 20px 25px 20px 25px;
+    /* padding: 20px 25px 20px 25px; */
+    padding: 5px 13px 5px 13px;
 
     color: #000;
     background-color: #f1f1f1;
@@ -180,4 +192,33 @@ body:before {
 /* Hacky Solution */
 .notify-container {
     top: 50px !important;
+    z-index: 1 !important;
+}
+
+.circle {
+    width: 17.5px;
+    height: 17.5px;
+    border-radius: 50px;
+    display: inline; 
+    float: left;
+    /* font-size: 20px;
+    color: #fff;
+    line-height: 100px; */
+    text-align: center;
+    margin: .2em 0;
+    margin-bottom: -12.5px;
+}
+
+.info {
+    position: absolute;
+    margin-left: 15px;
+    word-break: break-word;
+}
+
+.color-string:hover {
+    text-decoration: underline;
+}
+
+#listElements {
+    display: none;
 }

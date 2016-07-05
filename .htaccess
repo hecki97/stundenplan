@@ -13,7 +13,7 @@ RewriteRule ^remove_item_(.*).php$ dashboard.php?remove=$1
 # -- File System Protection --
 
 # directory browsing
-Options All -Indexes
+#Options All -Indexes
 
 # deny to open .htaccess file
 <Files ~ "^\.htaccess">

@@ -1,46 +1,6 @@
 <?php
   require('bootstrap.php');
-
-  //FileLoader::Load('Resources.Library.Php.LogHandler');
-
-  if ($_SERVER['REQUEST_METHOD'] == 'POST')
-  {
-    if($_POST['password'] != null && $_POST['username'] != null) {
-      $result = DatabaseHandler::MySqli_Query("SELECT username, password_hash FROM `login` WHERE username LIKE '".strip_tags($_POST['username'])."' LIMIT 1");
-      
-      if (empty($result)) $return = 'NotFoundInDatabase';
-      $row = mysqli_fetch_object($result);
-
-      if (!empty($row) && password_verify(strip_tags($_POST['password']), $row->password_hash))
-      {
-        $_SESSION['username'] = $_POST["username"];
-        LogHandler::Log('User logged in', 'INFO', false);
-        header('Refresh:0; url=./dashboard.html?column=index&sort=asc&view=normal&page=0');
-        exit;
-      }
-      else
-        $result = 'LoginFailed';
-    }
-    else
-      $result = 'SomeFieldsAreEmpty';
-
-    $div  = '<div class="popover marker-on-top bg-red fg-grayLighter page-content-popover" style="box-shadow: 7px 7px #4C0000; display: block;">';
-    switch ($result) {
-      case 'LoginFailed':
-        //$div .= 'Username and password do not match. Please try again.';
-        $div .= DIV_POPOVER_LOGIN_FAILED;
-        break;
-      case 'SomeFieldsAreEmpty':
-        //$div .= 'Please fill the required fields (username, password).';
-        $div .= DIV_POPOVER_SOME_FIELDS_ARE_EMPTY;
-        break;
-      case 'NotFoundInDatabase':
-        //$div .= 'Username not found in Database.';
-        $div .= DIV_POPOVER_NOT_FOUND_IN_DATABASE;
-        break;
-    }
-    $div .= '</div>';
-  }
+  if (isset($_SESSION['username'])) header('Refresh:0; url=./dashboard-js.html');
 ?>
 <!-- HTML Code -->
 <!DOCTYPE html>
@@ -49,32 +9,74 @@
     <!-- load header from header.php -->
     <?php require('header.php'); ?>
     <title><?=_('login-title'); ?></title>
+    <script type="text/javascript">
+      function loginUser() {
+        var index = -1, formElements = document.getElementById('loginForm').children;
+        var data = new Array(formElements[0].children[1].value, formElements[1].children[1].value);
+        
+        if (data[0].length > 0 && data[1].length > 0) {
+          $.ajax({
+            url: './resources/library/php/ProcessAjaxRequests.php',
+            data: { data: data, action: 'LoginUser' },
+            type: 'post',
+            success: function(output) {
+              switch(output) {
+                case 'LoginSuccess':
+                  window.location.href = "./dashboard-js.html";
+                  break;
+                case 'LoginFailed':
+                  index = 1;
+                  break;
+                case 'NotFoundInDatabase':
+                  index = 2;
+                  break;
+              }
+              DisplayResponse(index);
+            }
+          });
+        }
+        else DisplayResponse(0); 
+      }
+
+      function DisplayResponse(index) {
+        if (index > -1) document.getElementById('popover').innerHTML = document.getElementById('response').children[index].innerHTML;
+      }
+    </script>
   </head>
   <body>
     <!-- load navbar from navbar.php -->
     <?php require('navbar.php'); ?>
     <div class="page-content">
-      <div class="page-header"><?=_('login-page-header'); ?></div>
-      <div class="page-content-box content-box-shadow">
-        <h3><?=_('login-page-content-box-header'); ?></h3>
-        <br/>
-        <form action="login.html" method="post">
+      <div class="page-header"><?=_('registration-page-header'); ?></div>
+      <div class="page-content-box content-box-shadow" style="width: 27.5rem;">
+        <h3><?=_('registration-page-content-box-header'); ?></h3>
+        <form action="login.php" id="loginForm" method="post">
           <div class="input-control text full-size" data-role="input">
             <span class="mif-user prepend-icon"></span>
             <input type="text" placeholder="<?=_('input-text-username-placeholder'); ?>" name="username">
             <button class="button helper-button clear"><span class="mif-cross"></span></button>
           </div>
-          <br/>
           <div class="input-control password full-size" data-role="input">
             <span class="mif-lock prepend-icon"></span>
             <input type="password" placeholder="<?=_('input-text-password-placeholder'); ?>" name="password">
             <button class="button helper-button reveal"><span class="mif-looks"></span></button>
           </div>
-          <br/><br/>
-          <button class="button" type="submit"><?=_('button-login'); ?></button>
-          <a class="button link" href="./registration.php"><?=_('button-registration'); ?></a>
+          <button class="button" type="button" onclick="loginUser();"><?=_('button-login'); ?></button>
+          <a class="button link" href="./registration.html"><?=_('button-registration'); ?></a>
         </form>
+      </div>
+      <div id="popover"></div>
     </div>
-    <?=@$div; ?>
+    <div id="response" style="display: none;">
+      <div><div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">
+        Please fill the required fields (username, password).
+      </div></div>
+      <div><div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">
+        Username and password do not match. Please try again.
+      </div></div>
+      <div><div class="popover marker-on-top bg-red fg-grayLighter" style="margin: 15px auto 0px auto; width: 300px; display: block; box-shadow: 7px 7px #4C0000;">
+        Username not found in Database. Please try again.
+      </div></div>
+    </div>
   </body>
 </html>

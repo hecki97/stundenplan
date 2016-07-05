@@ -1,4 +1,142 @@
 <?php
+    namespace Utilities;
+    use CryptHandler;
+    
+    /**
+    * Directory
+    */
+    class Dir
+    {
+        private static $dir_map = array();
+
+        public static function rgdir($virtual, $physical) {
+            self::$dir_map[$virtual] = $physical;
+        }
+
+        public static function include_file($virtual_file_path) {
+            $pos = strrpos($virtual_file_path, '.');
+            if ($pos === false) die('Error: expected at least one dot.');
+
+            $path = substr($virtual_file_path, 0, $pos);
+            $file = substr($virtual_file_path, $pos + 1);
+
+            if (!isset(self::$dir_map[$path])) throw new InvalidArgumentException('Unknown virtual directory: '.$path);
+
+            require_once(self::$dir_map[$path].'/'.$file.'.php');
+        }
+
+        public static function mkdir($path) {
+            $array = explode('/', $path);
+            $filepath = '';
+            
+            for ($i = 0; $i < count($array); $i++) {
+                $filepath = $filepath.$array[$i].'/';
+                
+                if (!file_exists($filepath))
+                    mkdir($filepath);
+            }
+        }
+
+        public static function rmdir($path) {
+            if (! is_dir($path)) throw new InvalidArgumentException("$path must be a directory");
+            if (substr($path, strlen($path) - 1, 1) != '/') $path .= '/';
+
+            $files = glob($path . '*', GLOB_MARK);
+            foreach ($files as $file) {
+                if (is_dir($file)) {
+                    self::rmdir($file);
+                } else {
+                    unlink($file);
+                }
+            }
+            rmdir($path);
+        }
+
+        public static function scan_dir($path, $extension = null, $remove_extension = false) {
+            $directories = array();
+            if ($handle = opendir($path)) {
+                while (false !== ($entry = readdir($handle))) {
+                    $file_array = explode(".", $entry);
+                    if ($entry == "." || $entry == "..") continue;
+
+                    $file_extension_index = count($file_array) - 1;
+
+                    if ($extension != null && $file_array[$file_extension_index] != $extension) continue;
+                    if ($remove_extension) unset($file_array[$file_extension_index]);
+
+                    $directories[] = implode('.', $file_array);
+                }
+                closedir($handle);
+            }
+            return $directories;
+        }
+
+        public static function mkfile($path, $content = '') {
+            $array = explode('/', $path);
+            $filepath = '';
+        
+            for ($i = 0; $i < count($array); $i++) {
+                $filepath = $filepath.$array[$i].'/';
+            
+                if (!file_exists($filepath)){
+                    $fp = fopen($path, 'w');
+                    fwrite($fp, $content);
+                    fclose($fp);
+                }
+            }
+        }
+        
+        public static function fwrite_encrypted($path, $data, $encryption_key) {
+            if (DEBUG_MODE && DEV_MODE) {
+                $fp = fopen($path.'_output', 'w');
+                fwrite($fp, print_r($data, true));
+                fclose($fp);
+            }
+
+            $fp = fopen($path, 'w');
+            fwrite($fp, CryptHandler::Encrypt($encryption_key, $data));
+            fclose($fp);
+        }
+    }
+
+    /**
+    * Utilities
+    */
+    class Utilities
+    {
+        public static function hex2rgb($hex)
+        {
+            $hex = str_replace("#", "", $hex);
+
+            if(strlen($hex) == 3) {
+                $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+                $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+                $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+            } else {
+                $r = hexdec(substr($hex,0,2));
+                $g = hexdec(substr($hex,2,2));
+                $b = hexdec(substr($hex,4,2));
+            }
+            //return implode(",", $rgb); // returns the rgb values separated by commas
+            return array($r, $g, $b); // returns an array with the rgb values
+        }
+
+        public static function hex2rgb_string($hex)
+        {
+            $rgb = self::hex2rgb($hex);
+
+            return '('.$rgb[0].','.$rgb[1].','.$rgb[2].')';
+        }
+
+        /**
+         * Generates and returns the sha1 file hash when found
+         * @param string $filepath
+         */
+        public static function SHA1_File_Hash($filepath) {
+            return (file_exists($filepath)) ? sha1_file($filepath) : die('path "'.$filepath.'" not found');
+        }
+    }
+
     /**
 	* IniParser
 	**/
@@ -186,8 +324,7 @@
     /**
     * NetworkUtilities
     */
-    class NetworkUtilities
-    {
+    class NetworkUtilities {
         public static function Is_connected() {
             return @fsockopen("www.google.com", 80);
         }
@@ -197,17 +334,6 @@
                 header("Refresh:0; url=$url");
                 exit;
             }
-        }
-    }
-
-    /**
-    * Git
-    **/
-    class Git {
-        public static function GetGitCommitHash($major = '1', $minor = '0', $mode = 'dev') {
-            $commit_hash = trim(exec('git rev-parse --verify HEAD'));
-
-            return sprintf('v%s.%s-%s.%s', $major, $minor, $mode, $commit_hash);
         }
     }
 

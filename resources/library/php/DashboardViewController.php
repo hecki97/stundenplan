@@ -1,4 +1,6 @@
 <?php
+  use Utilities\Dir;
+  use Utilities\Array_Class;
 	/**
 	* Dashboard View Controller
 	*/
@@ -7,8 +9,8 @@
 		private $decrypted_data;
 
 		function __construct(){
-			FileLoader::Load('Resources.Library.Php.DashboardHandler');
-			FileLoader::Load('Resources.Library.Php.TableHandler');
+			Dir::include_file('Resources.Library.Php.DashboardHandler');
+			Dir::include_file('Resources.Library.Php.TableHandler');
 
 			$this->decrypted_data = DashboardHandler::Get_Dashboard_Data();
 		}
@@ -61,17 +63,17 @@
         if (!isset($this->decrypted_data[$i])) return;
 
     		$item_properties = TableHandler::Load_Table($this->decrypted_data[$i]['id']);
-    		$item  = "<tr><th id='dashboard-table-column-index'>".($i + 1).".</th>";
-    		$item .= "<th><div id='dashboard-table-column-table-name'>";
-    		$item .= "<a href='./dashboard.html?column=index&sort=asc&view=normal&page=1&post=favorite_item&item_id=".$this->decrypted_data[$i]['id']."' class='button link fg-black' id='fav-star'>";
+    		$item  = "<tr><th class='dashboard-table-column-index'>".($i + 1).".</th>";
+    		$item .= "<th><div class='dashboard-table-column-table-name'>";
+    		$item .= "<a href='./dashboard.html?column=index&sort=asc&view=normal&page=1&post=favorite_item&item_id=".$this->decrypted_data[$i]['id']."' class='fav-star button link fg-black'>";
     		$item .= ($this->decrypted_data[$i]['favorite'] === 'true') ? "<span class='mif-star-full'></span>" : "<span class='mif-star-empty'></span>";
     		$item .= "</a>";
     		$item .= ($edit) ? "<div><a class='button disabled' style='display: inline; float: left; top: 8.5px;'><span class='mif-arrow-up'></span></a><a class='button disabled' style='display: inline; float: left; top: 8.5px;'><span class='mif-arrow-down'></span></a></div>" : "";
-    		$item .= "<a class='button link full-size fg-black' id='table-name' href='./view_item_".$this->decrypted_data[$i]['id'].".html'>".$item_properties['properties']['tablename']."</a>";
-    		$item .= "<p id='is-empty'><i>".(($item_properties['properties']['empty']) ? '(Empty)' : '')."</i></p>";
+    		$item .= "<a class='table-name button link full-size fg-black' href='./view_item_".$this->decrypted_data[$i]['id'].".html'>".$item_properties['properties']['tablename']."</a>";
+    		$item .= "<p class='is-empty'><i>".(($item_properties['properties']['empty']) ? '(Empty)' : '')."</i></p>";
     		$item .= "</div></th>";
-    		$item .= "<th id='dashboard-table-column-date'><i>".'Latest change: '.date('d/m/y', $item_properties['properties']['timestamp'])."</i></th>";
-    		$item .= "<th id='dashboard-table-column-options'>";
+    		$item .= "<th class='dashboard-table-column-date'><i>".'Latest change: '.date('d/m/y', $item_properties['properties']['timestamp'])."</i></th>";
+    		$item .= "<th class='dashboard-table-column-options'>";
     		$item .= "<a class='button' href='./edit_item_".$this->decrypted_data[$i]['id'].".html'><span class='mif-pencil'></span></a><a class='button' href='./remove_item_".$this->decrypted_data[$i]['id'].".html'><span class='mif-bin'></span></a></th></tr>";
 
     		return $item;

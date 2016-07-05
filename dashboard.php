@@ -1,6 +1,9 @@
 <?php
   require('bootstrap.php');
-  FileLoader::Load('Resources.Library.Php.DashboardViewController');
+  use Utilities\Dir;
+  use Utilities\NetworkUtilities;
+
+  Dir::include_file('Resources.Library.Php.DashboardViewController');
 
   $dashboardView = new DashboardViewController();
 
@@ -104,7 +107,7 @@
   <body>
     <!-- load navbar from navbar.php -->
     <?php require('navbar.php'); ?>
-    <div class="page-content" style="max-height: 100%;">
+    <div class="page-content">
       <div class="page-header"><?=_('dashboard-page-header'); ?></div>
       <div class="page-content-box content-box-shadow">
       <form method="post">
@@ -159,6 +162,10 @@
         </table>
       </div>
       </form>
+      <br/>
+      <footer>
+      <h4><a href="./dashboard-js.php">Javascript Version</a></h4>
+      </footer>
     </div>
   </body>
 </html>

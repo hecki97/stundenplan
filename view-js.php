@@ -1,3 +1,4 @@
+<!-- TODO: Porting PHP Code over to JavaScript -->
 <!-- PHP Code -->
 <?php
   require('bootstrap.php');
@@ -29,10 +30,10 @@
       header('Refresh:0; url=./edit_item_'.$_GET['id'].'.html');
     }
     else if (isset($_POST['toolbar-color'])) {
-      header('Refresh:0; url=./view.php?id='.$_GET['id'].'&view=color');
+      header('Refresh:0; url=./view-js.html?id='.$_GET['id'].'&view=color');
     }
     else
-      header('Refresh:0; url=./view_item_'.$_GET['id'].'.html');
+      header('Refresh:0; url=./view-js.html?id='.$_GET['id']);
   }
 ?>
 <!-- HTML Code -->
@@ -43,90 +44,53 @@
     	<?php require(dirname(__FILE__).'/header.php'); ?>
 		<title><?=$tableView->table_name; ?></title>
 	</head>
+	<script type="text/javascript" src="resources/library/js/randomColor.js"></script>
 	<script type="text/javascript">
-		function rgb2hex(rgb) {
+		function GenerateRandomColor(event) {
+			// Get the event (handle MS difference)
+		   	var button = event || window.event;
+
+		   	var rootElement = button.parentElement.parentElement;
+			var color = randomColor({ luminosity: 'dark', hue: 'random' });
+			var buttonType = rootElement.firstChild.firstChild.innerText.substring(0, 3);
+		
+			rootElement.firstChild.style.backgroundColor = color;
+			rootElement.firstChild.firstChild.children[0].innerText = (buttonType === "HEX") ? color : Hex2RGB(color);
+		}
+
+		Hex2RGB = function(hex) {
+			hex = (hex.lastIndexOf('#') > -1) ? hex.replace(/#/, '0x') : '0x' + hex;
+		    return "rgb(" + (hex >> 16) + ", " + ((hex & 0x00FF00) >> 8) + ", " + (hex & 0x0000FF) + ")";
+		};
+
+		RGB2Hex = function(rgb) {
 		    if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
 		    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-		    
+
 		    function hex(x) {
 		        return ("0" + parseInt(x).toString(16)).slice(-2);
 		    }
 		    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 		}
 
-		function switchValue(event) {
-			var button, otherButton, buttonIndex, buttonType,
-				parentElement, bgColor;
-
+		function SwitchColorString(event) {
 			// Get the event (handle MS difference)
-		    button = event || window.event;
+		    var button = event || window.event;
 
 		    // Execute only when 'disabled' was not found
 		    if (button.className.indexOf("disabled") === -1) {
-		    	buttonName = button.name.split("_");
-		    	buttonIndex = buttonName[1];
-		    	buttonType = buttonName[2];
-		    	
-		    	parentElement = document.getElementById(buttonIndex);
-		    	bgColor = parentElement.style.backgroundColor;
+		    	var infoElement = button.parentElement;
+		    	var circleElement = infoElement.parentElement.firstChild;
 
-		    	parentElement.firstChild.innerHTML = ((buttonType === 'hex') ? "HEX" : "RGB") + " <span name='color_" +  buttonIndex + "_" + buttonType + "' title='Click to edit!' class='color-string'>" + ((buttonType === 'hex') ? rgb2hex(bgColor) : bgColor) + "</span>";
+		    	var buttonType = button.innerText;
+		    	var bgColor = circleElement.style.backgroundColor;
+
+		    	circleElement.firstChild.innerHTML = buttonType + " <span title='Click to edit!' class='color-string'>" + ((buttonType === 'HEX') ? RGB2Hex(bgColor) : bgColor) + "</span>";
 		    	button.className += " disabled";
-		    	
-		    	var invertedButtonType = (buttonType === 'hex') ? "rgb" : "hex";
-		    	otherButton = document.getElementsByName("button_" + buttonIndex + "_" + invertedButtonType)[0];
+
+		    	var otherButton = infoElement.children[(buttonType === "HEX") ? 2 : 1];
 		    	otherButton.setAttribute("class", otherButton.className.replace(/disabled/, ""));
 		    }
-		}
-
-		//Test
-
-		/* Accept:
-		**   number triplets: xxx,xxx,xxx
-		**   rgb values     : rgb(xxx,xxx,xxx)
-		**   Hex values     : xxxxxx and xxxx
-		**   prefixed hex   : #xxxxxx and #xxx
-		*/
-		function parseColourString(string) {
-
-		  // Tokenise input
-		  var match = string.match(/^\#|^rgb\(|[\d\w]+$|\d{3}/g);
-
-		  // Other variables
-		  var value, values;
-		  var valid = true, double = false, hex = false;
-
-		  // If no matches, return false
-		  //if (!match) return false;
-
-		  hex = (match.length < 3) ? true : false;
-
-		  // If hex value
-		  if (hex) {
-
-		    // Get the value
-		    value = match[match.length-1];
-
-		    // Split into parts, either x,x,x or xx,xx,xx
-		    values = value.length == 3? double = true && value.split('') : value.match(/../g);
-
-		    // Convert to decimal values - if #nnn, double up on values 345 => 334455
-		    values.forEach(function(v,i){values[i] = parseInt(double? ''+v+v : v, 16);});
-
-		  // Otherwise it's rgb, get the values
-		  } else {
-		    values = match.length == 3? match.slice() : match.slice(1);
-		  }
-
-		  // Check that each value is between 0 and 255 inclusive and return the result
-		  values.forEach(function(v) { valid = valid ? v >= 0 && v <= 255 : false; });
-
-		  var type = (hex) ? 'hex' : 'rgb';
-		  var string = (hex) ? ((string.indexOf('#') == -1) ? ('#' + string) : string) : values.toString(); 
-		  return valid && Array(string, type); 
-
-		  // If string is invalid, return false, otherwise return an array of the values
-		  //return valid && values;
 		}
 
 		window.onload = function() {
@@ -140,9 +104,7 @@
 
 		    	// If it's a span...
 		    	if (span && span.tagName.toUpperCase() === "SPAN" && span.className === "color-string") {
-		    		buttonAttributes = span.getAttribute("name").split("_");
-		    		itemIndex = buttonAttributes[1];
-		    		itemType = buttonAttributes[2];
+		    		var buttonType = span.parentElement.innerText.substring(0, 3);
 
 		      		// Hide it
 		      		span.style.display = "none";
@@ -152,8 +114,8 @@
 		      		// Create an input
 		      		input = document.createElement("input");
 		      		input.type = "text";
-		      		input.size = Math.max(text.length / 4 * 3, 4);
-		      		input.maxLength = (itemType === "hex") ? "7" : "16";
+		      		input.size = Math.max(text.length / 4 * 3, 4); //rgb max length 12
+		      		input.maxLength = (buttonType === "HEX") ? "7" : "18";
 		      		input.style.height = "20px";
 		      		input.style.marginTop = "-1.5px";
 		      		span.parentNode.insertBefore(input, span);
@@ -165,10 +127,16 @@
 		        		span.parentNode.removeChild(input);
 		        		// Update the span
 		        		if (input.value.length > 0) {
-		        			var string = parseColourString(input.value);
-		        			if (string != false) document.getElementById(itemIndex).style.background = string[0];
-		        			span.style.color = (string !== false) ? "#000" : "#ff0000";
-		        			span.innerText = (string !== false) ? string[0] : input.value;
+		        			var matchColorsRGB = /^rgb\(\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*,\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*,\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*\)$/;
+						    var matchColorsHex = /^#[0-9a-f]{3}([0-9a-f]{3})?$/;
+						    
+						    if (matchColorsRGB.test(input.value) || matchColorsHex.test(input.value)) {
+						    	span.parentElement.parentElement.style.background = input.value;
+						    	span.style.color = "#000";
+						    } else {
+						    	span.style.color = "#f00";
+						    }
+						    span.innerText = input.value;
 		        			span.style.fontStyle = "italic";
 		        		}
 		        		// Show the span again
